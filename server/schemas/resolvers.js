@@ -9,11 +9,12 @@ const resolvers = {
         const userData = await User.findOne({ _id: context.user._id })
           .select("-__V -password")
           .populate("posts")
-          .populate("subscriptions");
+          .populate("subscriptions")
+          .populate("subscribers");
 
         return userData;
       }
-      
+
       throw new AuthenticationError("Not logged in");
     },
     // get all users
@@ -21,7 +22,8 @@ const resolvers = {
       return User.find()
         .select("-__v -password")
         .populate("posts")
-        .populate("subscriptions");
+        .populate("subscriptions")
+        .populate("subscribers");
     },
     // get a user by username
     user: async (parent, { username }) => {
@@ -29,7 +31,7 @@ const resolvers = {
         .select("-__v -password")
         .populate("posts")
         .populate("subscriptions")
-        .populate("subscribers")
+        .populate("subscribers");
     },
     posts: async (parent, { username }) => {
       const params = username ? { username } : {};
@@ -85,12 +87,20 @@ const resolvers = {
           { new: true }
         ).populate("subscriptions");
 
-        return updatedUser;
+        const updatedCreator = await User.findOneAndUpdate(
+          { _id: subscriptionId },
+          { $addToSet: { subscribers: context.user._id } },
+          { new: true }
+        ).populate("subscribers");
+        console.log(context.user);
+        console.log(subscriptionId);
+        console.log(context.user._id);
+
+        return { updatedUser, updatedCreator };
       }
 
       throw new AuthenticationError("You need to be logged in!");
     },
-    // create function to get users subscribed to YOU and populate "subscribers array"
   },
 };
 

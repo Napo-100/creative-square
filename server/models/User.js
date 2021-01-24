@@ -20,6 +20,11 @@ const userSchema = new Schema(
       required: true,
       minlength: 6,
     },
+    creator: {
+      type: Boolean,
+      required: true
+    },
+
     posts: [
       {
         type: Schema.Types.ObjectId,
@@ -65,7 +70,9 @@ userSchema.virtual("subscriptionCount").get(function () {
   return this.subscriptions.length;
 });
 
-//create virtual to get number of subscribers
+userSchema.virtual("subscriberCount").get(function () {
+  return this.subscribers.length;
+});
 
 const User = model("User", userSchema);
 

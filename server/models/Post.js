@@ -21,6 +21,11 @@ const postSchema = new Schema(
       minlength: 1,
       maxlength: 280,
     },
+    postPaywall: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
     createdAt: {
       type: Date,
       default: Date.now,
