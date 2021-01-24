@@ -22,7 +22,10 @@ const userSchema = new Schema(
     },
     creator: {
       type: Boolean,
-      required: true
+      required: true,
+    },
+    profilePic: {
+      type: String,
     },
 
     posts: [

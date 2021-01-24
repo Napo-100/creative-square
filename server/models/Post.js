@@ -21,6 +21,9 @@ const postSchema = new Schema(
       minlength: 1,
       maxlength: 280,
     },
+    postImage: {
+      type: String,
+    },
     postPaywall: {
       type: Boolean,
       required: true,
