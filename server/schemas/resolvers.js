@@ -10,7 +10,9 @@ const resolvers = {
           .select("-__V -password")
           .populate("posts")
           .populate("subscriptions")
-          .populate("subscribers");
+          .populate("subscribers")
+          .populate("following")
+          .populate("followers");
 
         return userData;
       }
@@ -23,7 +25,9 @@ const resolvers = {
         .select("-__v -password")
         .populate("posts")
         .populate("subscriptions")
-        .populate("subscribers");
+        .populate("subscribers")
+        .populate("following")
+        .populate("followers");
     },
     // get a user by username
     user: async (parent, { username }) => {
@@ -31,7 +35,9 @@ const resolvers = {
         .select("-__v -password")
         .populate("posts")
         .populate("subscriptions")
-        .populate("subscribers");
+        .populate("subscribers")
+        .populate("following")
+        .populate("followers");
     },
     posts: async (parent, { username }) => {
       const params = username ? { username } : {};
@@ -83,17 +89,55 @@ const resolvers = {
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { subscriptions: subscriptionId } },
+          {
+            $addToSet: {
+              subscriptions: subscriptionId,
+              following: subscriptionId,
+            },
+          },
           { new: true }
-        ).populate("subscriptions");
+        )
+          .populate("subscriptions")
+          .populate("following");
 
         const updatedCreator = await User.findOneAndUpdate(
           { _id: subscriptionId },
-          { $addToSet: { subscribers: context.user._id } },
+          {
+            $addToSet: {
+              subscribers: context.user._id,
+              followers: context.user._id,
+            },
+          },
           { new: true }
-        ).populate("subscribers");
+        )
+          .populate("subscribers")
+          .populate("followers");
+
         console.log(context.user);
         console.log(subscriptionId);
+        console.log(context.user._id);
+
+        return { updatedUser, updatedCreator };
+      }
+
+      throw new AuthenticationError("You need to be logged in!");
+    },
+    follow: async (parent, { followId }, context) => {
+      if (context.user) {
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { following: followId } },
+          { new: true }
+        ).populate("following");
+
+        const updatedCreator = await User.findOneAndUpdate(
+          { _id: followId },
+          { $addToSet: { followers: context.user._id } },
+          { new: true }
+        ).populate("followers");
+
+        console.log(context.user);
+        console.log(followId);
         console.log(context.user._id);
 
         return { updatedUser, updatedCreator };

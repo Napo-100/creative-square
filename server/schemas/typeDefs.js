@@ -9,9 +9,13 @@ const typeDefs = gql`
     profilePic: String
     subscriptionCount: Int
     subscriberCount: Int
+    followingCount: Int
+    followerCount: Int
     posts: [Post]
     subscriptions: [User]
     subscribers: [User]
+    following: [User]
+    followers: [User]
   }
   type Post {
     _id: ID
@@ -52,6 +56,7 @@ const typeDefs = gql`
     ): Post
 
     subscribe(subscriptionId: ID!): User
+    follow(followId: ID!): User
   }
   type Auth {
     token: ID!

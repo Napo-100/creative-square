@@ -46,6 +46,18 @@ const userSchema = new Schema(
         ref: "User",
       },
     ],
+    following: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
+    followers: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
   },
   {
     toJSON: {
@@ -75,6 +87,14 @@ userSchema.virtual("subscriptionCount").get(function () {
 
 userSchema.virtual("subscriberCount").get(function () {
   return this.subscribers.length;
+});
+
+userSchema.virtual("followingCount").get(function () {
+  return this.following.length;
+});
+
+userSchema.virtual("followerCount").get(function () {
+  return this.followers.length;
 });
 
 const User = model("User", userSchema);
