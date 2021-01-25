@@ -6,6 +6,7 @@ const typeDefs = gql`
     username: String
     email: String
     creator: Boolean
+    contentType: String
     profilePic: String
     subscriptionCount: Int
     subscriberCount: Int
@@ -45,7 +46,17 @@ const typeDefs = gql`
       password: String!
       profilePic: String
       creator: Boolean!
+      contentType: String
     ): Auth
+
+    updateUser(
+      username: String
+      email: String
+      password: String
+      profilePic: String
+      creator: Boolean
+      contentType: String
+    ): User
 
     addPost(
       postType: String!

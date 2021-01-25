@@ -24,6 +24,9 @@ const userSchema = new Schema(
       type: Boolean,
       required: true,
     },
+    contentType: {
+      type: String,
+    },
     profilePic: {
       type: String,
     },

@@ -53,6 +53,16 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
+    updateUser: async (parent, args, context) => {
+      if (context.user) {
+        const updatedUser = await User.findOneAndUpdate(args)
+        .select("-__v -password")
+        console.log(context.user)
+        console.log(updatedUser)
+        return updatedUser;
+      }
+    },
+
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
 
