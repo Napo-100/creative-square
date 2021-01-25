@@ -55,12 +55,15 @@ const resolvers = {
     },
     updateUser: async (parent, args, context) => {
       if (context.user) {
-        const updatedUser = await User.findOneAndUpdate(args)
-        .select("-__v -password")
-        console.log(context.user)
-        console.log(updatedUser)
+        const updatedUser = await User.findOneAndUpdate(args).select(
+          "-__v -password"
+          );
+        console.log(context.user);
+        console.log(updatedUser);
         return updatedUser;
       }
+
+      throw new AuthenticationError("You need to be logged in!");
     },
 
     login: async (parent, { email, password }) => {
