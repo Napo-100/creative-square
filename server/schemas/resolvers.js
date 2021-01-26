@@ -107,12 +107,15 @@ const resolvers = {
     },
     addComment: async (parent, args, context) => {
       if (context.user) {
+        const user = await User.findById(
+          context.user._id
+        )
         const comment = await Comment.create({
           ...args,
-          username: context.post.username,
+          username: user.username,
         });
         await Post.findByIdAndUpdate(
-          { _id: context.post._id },
+          { _id: post._id },
           { $push: { comments: comment._id } },
           { new: true }
         );
