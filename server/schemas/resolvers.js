@@ -62,11 +62,14 @@ const resolvers = {
     },
     updateUser: async (parent, args, context) => {
       if (context.user) {
-        const updatedUser = await User.findOneAndUpdate(args).select(
-          "-__v -password"
-          );
-        console.log(context.user);
-        console.log(updatedUser);
+        const updatedUser = await User.findByIdAndUpdate(
+          context.user._id,
+          args,
+          { new: true }
+        ).select("-__v -password");
+        // console.log("context user", context.user);
+        // console.log("updated user", updatedUser);
+
         return updatedUser;
       }
 
@@ -91,9 +94,10 @@ const resolvers = {
     },
     addPost: async (parent, args, context) => {
       if (context.user) {
+        const user = await User.findById(context.user._id);
         const post = await Post.create({
           ...args,
-          username: context.user.username,
+          username: user.username,
         });
         await User.findByIdAndUpdate(
           { _id: context.user._id },
@@ -118,7 +122,7 @@ const resolvers = {
     },
     subscribe: async (parent, { subscriptionId }, context) => {
       if (context.user) {
-        const updatedUser = await User.findOneAndUpdate(
+        const updatedUser = await User.findByIdAndUpdate(
           { _id: context.user._id },
           {
             $addToSet: {
@@ -131,7 +135,7 @@ const resolvers = {
           .populate("subscriptions")
           .populate("following");
 
-        const updatedCreator = await User.findOneAndUpdate(
+        const updatedCreator = await User.findByIdAndUpdate(
           { _id: subscriptionId },
           {
             $addToSet: {
@@ -144,9 +148,9 @@ const resolvers = {
           .populate("subscribers")
           .populate("followers");
 
-        console.log(context.user);
-        console.log(subscriptionId);
-        console.log(context.user._id);
+        // console.log(context.user);
+        // console.log(subscriptionId);
+        // console.log(context.user._id);
 
         return { updatedUser, updatedCreator };
       }
@@ -155,21 +159,21 @@ const resolvers = {
     },
     follow: async (parent, { followId }, context) => {
       if (context.user) {
-        const updatedUser = await User.findOneAndUpdate(
+        const updatedUser = await User.findByIdAndUpdate(
           { _id: context.user._id },
           { $addToSet: { following: followId } },
           { new: true }
         ).populate("following");
 
-        const updatedCreator = await User.findOneAndUpdate(
+        const updatedCreator = await User.findByIdAndUpdate(
           { _id: followId },
           { $addToSet: { followers: context.user._id } },
           { new: true }
         ).populate("followers");
 
-        console.log(context.user);
-        console.log(followId);
-        console.log(context.user._id);
+        // console.log(context.user);
+        // console.log(followId);
+        // console.log(context.user._id);
 
         return { updatedUser, updatedCreator };
       }
