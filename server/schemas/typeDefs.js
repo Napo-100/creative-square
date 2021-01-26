@@ -76,9 +76,7 @@ const typeDefs = gql`
       postPaywall: Boolean!
     ): Post
 
-    addComment(
-      commentText: String
-    ) : Comment
+    addComment(postId: ID!, commentText: String): Post
 
     subscribe(subscriptionId: ID!): User
     follow(followId: ID!): User

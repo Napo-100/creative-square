@@ -105,22 +105,14 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
-    addComment: async (parent, args, context) => {
+    addComment: async (parent, { postId, commentText}, context) => {
       if (context.user) {
-        const user = await User.findById(
-          context.user._id
-        )
-        const comment = await Comment.create({
-          ...args,
-          username: user.username,
-        });
-        await Post.findByIdAndUpdate(
-          { _id: post._id },
-          { $push: { comments: comment._id } },
-          { new: true }
+        const updatedPost = await Post.findOneAndUpdate(
+          { _id: postId },
+          { $push: { comments: { commentText, username: context.user.username } } },
+          { new: true, runValidators: true }
         );
-
-        return comment;
+        return updatedPost;
       }
       throw new AuthenticationError("You need to be logged in!");
     },

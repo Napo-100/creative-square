@@ -10,7 +10,6 @@ const commentSchema = new Schema(
     },
     username: {
         type: String,
-        required: true,
     },
     createdAt: {
         type: Date,
@@ -25,6 +24,4 @@ const commentSchema = new Schema(
   }
 );
 
-const Comment = model("Comment", commentSchema);
-
-module.exports = Comment;
+module.exports = commentSchema;
