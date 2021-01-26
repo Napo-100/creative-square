@@ -25,6 +25,14 @@ const typeDefs = gql`
     postLink: String
     postImage: String
     postPaywall: Boolean
+    comments: [Comment]
+    username: String
+    createdAt: String
+  }
+
+  type Comment {
+    _id: ID
+    commentText: String
     username: String
     createdAt: String
   }
@@ -35,6 +43,8 @@ const typeDefs = gql`
     user(username: String!): User
     posts(username: String): [Post]
     post(_id: ID!): Post
+    comments: (username: String): [Comments]
+    comment(_id: ID!): Comment
   }
 
   type Mutation {
@@ -65,6 +75,10 @@ const typeDefs = gql`
       postImage: String
       postPaywall: Boolean!
     ): Post
+
+    addComment(
+      commentText: String
+    ) : Comment
 
     subscribe(subscriptionId: ID!): User
     follow(followId: ID!): User

@@ -1,6 +1,6 @@
 const { AuthenticationError } = require("apollo-server-express");
 const { signToken } = require("../utils/auth");
-const { User, Post } = require("../models");
+const { User, Post, Comment } = require("../models");
 
 const resolvers = {
   Query: {
@@ -45,6 +45,13 @@ const resolvers = {
     },
     post: async (parent, { _id }) => {
       return Post.findOne({ _id });
+    },
+    comments: async (parent, { username }) => {
+      const params = username ? { username } : {};
+      return Comment.find(params).sort({ createdAt: -1 });
+    },
+    comment: async (parent, { _id }) => {
+      return Comment.findOne({ _id });
     },
   },
   Mutation: {
@@ -95,6 +102,22 @@ const resolvers = {
         );
 
         return post;
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
+    addComment: async (parent, args, context) => {
+      if (context.user) {
+        const comment = await Comment.create({
+          ...args,
+          username: context.post.username,
+        });
+        await Post.findByIdAndUpdate(
+          { _id: context.post._id },
+          { $push: { comments: comment._id } },
+          { new: true }
+        );
+
+        return comment;
       }
       throw new AuthenticationError("You need to be logged in!");
     },
