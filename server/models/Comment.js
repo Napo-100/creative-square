@@ -24,4 +24,7 @@ const commentSchema = new Schema(
   }
 );
 
-module.exports = commentSchema;
+const Comment = model("Comment", commentSchema);
+
+module.exports = Comment;
+
