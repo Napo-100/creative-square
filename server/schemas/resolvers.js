@@ -120,6 +120,7 @@ const resolvers = {
         const updatedPost = await Post.findOneAndUpdate(
           { _id: postId },
           { $push: { comments: newComment } },
+
           { new: true, runValidators: true }
         )
         .populate("comments");
