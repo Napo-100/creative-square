@@ -6,17 +6,24 @@ const typeDefs = gql`
     username: String
     email: String
     creator: Boolean
+    firstName: String
+    lastName: String
+    bio: String
+    posts: [Post]
+    pinnedPosts: [Post]
+    pinnedPostCount: Int
+    likedPosts: [Post]
+    likedPostCount: Int
     contentType: String
     profilePic: String
-    subscriptionCount: Int
-    subscriberCount: Int
-    followingCount: Int
-    followerCount: Int
-    posts: [Post]
     subscriptions: [User]
+    subscriptionCount: Int
     subscribers: [User]
+    subscriberCount: Int
     following: [User]
+    followingCount: Int
     followers: [User]
+    followerCount: Int
   }
   type Post {
     _id: ID
@@ -26,6 +33,11 @@ const typeDefs = gql`
     postImage: String
     postPaywall: Boolean
     comments: [Comment]
+    commentCount: Int
+    likes: [User]
+    likeCount: Int
+    pins: [User]
+    pinCount: Int
     username: String
     createdAt: String
   }
@@ -36,6 +48,7 @@ const typeDefs = gql`
     username: String
     createdAt: String
   }
+
   type Query {
     me: User
     users: [User]
@@ -74,6 +87,8 @@ const typeDefs = gql`
       postPaywall: Boolean!
     ): Post
 
+    likePost(postId: ID!): UserAndPost
+
     addComment(postId: ID!, commentText: String): Post
 
     updateComment(commentId: ID!, commentText: String): Comment
@@ -88,6 +103,10 @@ const typeDefs = gql`
   type ConnectedUsers {
     updatedUser: User
     updatedCreator: User
+  }
+  type UserAndPost {
+    updatedPost: Post
+    updatedUser: User
   }
 `;
 

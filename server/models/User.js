@@ -24,14 +24,34 @@ const userSchema = new Schema(
       type: Boolean,
       required: true,
     },
+    firstName: {
+      type: String,
+    },
+    lastName: {
+      type: String,
+    },
+    bio: {
+      type: String,
+    },
     contentType: {
       type: String,
     },
     profilePic: {
       type: String,
     },
-
     posts: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Post",
+      },
+    ],
+    pinnedPosts: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Post",
+      },
+    ],
+    likedPosts: [
       {
         type: Schema.Types.ObjectId,
         ref: "Post",
@@ -87,6 +107,9 @@ userSchema.methods.isCorrectPassword = async function (password) {
 userSchema.virtual("postCount").get(function () {
   return this.posts.length;
 });
+userSchema.virtual("PinnedPostCount").get(function () {
+  return this.pinnedPosts.length;
+});
 
 userSchema.virtual("subscriptionCount").get(function () {
   return this.subscriptions.length;
@@ -102,6 +125,10 @@ userSchema.virtual("followingCount").get(function () {
 
 userSchema.virtual("followerCount").get(function () {
   return this.followers.length;
+});
+
+userSchema.virtual("likedPostCount").get(function () {
+  return this.likedPosts.length;
 });
 
 const User = model("User", userSchema);

@@ -12,7 +12,8 @@ const resolvers = {
           .populate("subscriptions")
           .populate("subscribers")
           .populate("following")
-          .populate("followers");
+          .populate("followers")
+          .populate("likedPosts");
 
         return userData;
       }
@@ -27,7 +28,8 @@ const resolvers = {
         .populate("subscriptions")
         .populate("subscribers")
         .populate("following")
-        .populate("followers");
+        .populate("followers")
+        .populate("likedPosts");
     },
     // get a user by username or id
     user: async (parent, { _id }) => {
@@ -37,14 +39,20 @@ const resolvers = {
         .populate("subscriptions")
         .populate("subscribers")
         .populate("following")
-        .populate("followers");
+        .populate("followers")
+        .populate("likedPosts");
     },
     posts: async (parent, { username }) => {
       const params = username ? { username } : {};
-      return Post.find(params).sort({ createdAt: -1 }).populate("comments");
+      return Post.find(params)
+        .sort({ createdAt: -1 })
+        .populate("comments")
+        .populate("likes");
     },
     post: async (parent, { _id }) => {
-      return (await Post.findOne({ _id })).populated("comments");
+      return (await Post.findOne({ _id }))
+        .populated("comments")
+        .populate("likes");
     },
     comments: async (parent, { username }) => {
       const params = username ? { username } : {};
@@ -136,6 +144,23 @@ const resolvers = {
         );
         return updatedComment;
       }
+    },
+    likePost: async (parent, { postId }, context) => {
+      if (context.user) {
+        const user = await User.findById(context.user._id);
+        const updatedPost = await Post.findByIdAndUpdate(
+          { _id: postId },
+          { $addToSet: { likes: user } },
+          { new: true }
+        ).populate("likes");
+        const updatedUser = await User.findByIdAndUpdate(
+          user._id,
+          { $addToSet: { likedPosts: updatedPost } },
+          { new: true }
+        ).populate("likedPosts");
+        return { updatedPost, updatedUser };
+      }
+      throw new AuthenticationError("You need to be logged in!");
     },
     subscribe: async (parent, { subscriptionId }, context) => {
       if (context.user) {
