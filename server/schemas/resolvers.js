@@ -29,9 +29,9 @@ const resolvers = {
         .populate("following")
         .populate("followers");
     },
-    // get a user by username
-    user: async (parent, { username }) => {
-      return User.findOne({ username })
+    // get a user by username or id
+    user: async (parent, { _id }) => {
+      return User.findById({ _id })
         .select("-__v -password")
         .populate("posts")
         .populate("subscriptions")
@@ -109,35 +109,33 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
-    addComment: async (parent, {postId, commentText}, context) => {
+    addComment: async (parent, { postId, commentText }, context) => {
       if (context.user) {
-        const user = await User.findById(context.user._id)
-        const newComment = await Comment.create(
-        { 
+        const user = await User.findById(context.user._id);
+        const newComment = await Comment.create({
           commentText,
-          username:user.username,
+          username: user.username,
         });
         const updatedPost = await Post.findOneAndUpdate(
           { _id: postId },
           { $push: { comments: newComment } },
 
           { new: true, runValidators: true }
-        )
-        .populate("comments");
-        
+        ).populate("comments");
+
         return updatedPost;
       }
       throw new AuthenticationError("You need to be logged in!");
     },
-    updateComment: async (parent, {commentId, commentText}, context) => {
+    updateComment: async (parent, { commentId, commentText }, context) => {
       if (context.user) {
         const updatedComment = await Comment.findByIdAndUpdate(
-          {_id: commentId},
-          {commentText},
-          {new: true, runValidators: true}
-        )
+          { _id: commentId },
+          { commentText },
+          { new: true, runValidators: true }
+        );
         return updatedComment;
-      }   
+      }
     },
     subscribe: async (parent, { subscriptionId }, context) => {
       if (context.user) {

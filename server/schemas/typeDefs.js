@@ -39,7 +39,7 @@ const typeDefs = gql`
   type Query {
     me: User
     users: [User]
-    user(username: String!): User
+    user(_id: ID!): User
     posts(username: String): [Post]
     post(_id: ID!): Post
     comments(username: String): [Comment]
@@ -59,7 +59,6 @@ const typeDefs = gql`
     ): Auth
 
     updateUser(
-      username: String
       email: String
       password: String
       profilePic: String
@@ -75,19 +74,12 @@ const typeDefs = gql`
       postPaywall: Boolean!
     ): Post
 
-    addComment(
-      postId: ID!
-      commentText: String
-    ): Post
+    addComment(postId: ID!, commentText: String): Post
 
-    updateComment(
-      commentId: ID! 
-      commentText: String
-    ): Comment
+    updateComment(commentId: ID!, commentText: String): Comment
 
     subscribe(subscriptionId: ID!): ConnectedUsers
     follow(followId: ID!): ConnectedUsers
-
   }
   type Auth {
     token: ID!
