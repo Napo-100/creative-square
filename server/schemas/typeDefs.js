@@ -36,7 +36,6 @@ const typeDefs = gql`
     username: String
     createdAt: String
   }
-
   type Query {
     me: User
     users: [User]
@@ -86,12 +85,17 @@ const typeDefs = gql`
       commentText: String
     ): Comment
 
-    subscribe(subscriptionId: ID!): User
-    follow(followId: ID!): User
+    subscribe(subscriptionId: ID!): ConnectedUsers
+    follow(followId: ID!): ConnectedUsers
+
   }
   type Auth {
     token: ID!
     user: User
+  }
+  type ConnectedUsers {
+    updatedUser: User
+    updatedCreator: User
   }
 `;
 
