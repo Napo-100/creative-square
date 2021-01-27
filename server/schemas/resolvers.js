@@ -41,10 +41,10 @@ const resolvers = {
     },
     posts: async (parent, { username }) => {
       const params = username ? { username } : {};
-      return Post.find(params).sort({ createdAt: -1 });
+      return Post.find(params).sort({ createdAt: -1 }).populate("comments");
     },
     post: async (parent, { _id }) => {
-      return Post.findOne({ _id });
+      return (await Post.findOne({ _id })).populated("comments");
     },
     comments: async (parent, { username }) => {
       const params = username ? { username } : {};
@@ -109,17 +109,35 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
-    addComment: async (parent, { postId, commentText }, context) => {
+    addComment: async (parent, {postId, commentText}, context) => {
       if (context.user) {
-        const user = await User.findById(context.user._id);
+        const user = await User.findById(context.user._id)
+        const newComment = await Comment.create(
+        { 
+          commentText,
+          username:user.username,
+        });
         const updatedPost = await Post.findOneAndUpdate(
           { _id: postId },
-          { $push: { comments: { commentText, username: user.username } } },
+          { $push: { comments: newComment } },
+
           { new: true, runValidators: true }
-        );
+        )
+        .populate("comments");
+        
         return updatedPost;
       }
       throw new AuthenticationError("You need to be logged in!");
+    },
+    updateComment: async (parent, {commentId, commentText}, context) => {
+      if (context.user) {
+        const updatedComment = await Comment.findByIdAndUpdate(
+          {_id: commentId},
+          {commentText},
+          {new: true, runValidators: true}
+        )
+        return updatedComment;
+      }   
     },
     subscribe: async (parent, { subscriptionId }, context) => {
       if (context.user) {

@@ -31,7 +31,10 @@ const postSchema = new Schema(
       default: false,
     },
     comments: [
-      commentSchema
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Comment",
+      },
     ],
     createdAt: {
       type: Date,
