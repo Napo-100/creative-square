@@ -1,6 +1,6 @@
 const { AuthenticationError } = require("apollo-server-express");
 const { signToken } = require("../utils/auth");
-const { User, Post } = require("../models");
+const { User, Post, Comment } = require("../models");
 
 const resolvers = {
   Query: {
@@ -46,6 +46,13 @@ const resolvers = {
     post: async (parent, { _id }) => {
       return Post.findOne({ _id });
     },
+    comments: async (parent, { username }) => {
+      const params = username ? { username } : {};
+      return Comment.find(params).sort({ createdAt: -1 });
+    },
+    comment: async (parent, { _id }) => {
+      return Comment.findOne({ _id });
+    },
   },
   Mutation: {
     addUser: async (parent, args) => {
@@ -55,11 +62,14 @@ const resolvers = {
     },
     updateUser: async (parent, args, context) => {
       if (context.user) {
-        const updatedUser = await User.findOneAndUpdate(args).select(
-          "-__v -password"
-          );
-        console.log(context.user);
-        console.log(updatedUser);
+        const updatedUser = await User.findByIdAndUpdate(
+          context.user._id,
+          args,
+          { new: true }
+        ).select("-__v -password");
+        // console.log("context user", context.user);
+        // console.log("updated user", updatedUser);
+
         return updatedUser;
       }
 
@@ -84,9 +94,10 @@ const resolvers = {
     },
     addPost: async (parent, args, context) => {
       if (context.user) {
+        const user = await User.findById(context.user._id);
         const post = await Post.create({
           ...args,
-          username: context.user.username,
+          username: user.username,
         });
         await User.findByIdAndUpdate(
           { _id: context.user._id },
@@ -98,9 +109,21 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
+    addComment: async (parent, { postId, commentText }, context) => {
+      if (context.user) {
+        const user = await User.findById(context.user._id);
+        const updatedPost = await Post.findOneAndUpdate(
+          { _id: postId },
+          { $push: { comments: { commentText, username: user.username } } },
+          { new: true, runValidators: true }
+        );
+        return updatedPost;
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
     subscribe: async (parent, { subscriptionId }, context) => {
       if (context.user) {
-        const updatedUser = await User.findOneAndUpdate(
+        const updatedUser = await User.findByIdAndUpdate(
           { _id: context.user._id },
           {
             $addToSet: {
@@ -113,7 +136,7 @@ const resolvers = {
           .populate("subscriptions")
           .populate("following");
 
-        const updatedCreator = await User.findOneAndUpdate(
+        const updatedCreator = await User.findByIdAndUpdate(
           { _id: subscriptionId },
           {
             $addToSet: {
@@ -126,9 +149,9 @@ const resolvers = {
           .populate("subscribers")
           .populate("followers");
 
-        console.log(context.user);
-        console.log(subscriptionId);
-        console.log(context.user._id);
+        // console.log(context.user);
+        // console.log(subscriptionId);
+        // console.log(context.user._id);
 
         return { updatedUser, updatedCreator };
       }
@@ -137,21 +160,21 @@ const resolvers = {
     },
     follow: async (parent, { followId }, context) => {
       if (context.user) {
-        const updatedUser = await User.findOneAndUpdate(
+        const updatedUser = await User.findByIdAndUpdate(
           { _id: context.user._id },
           { $addToSet: { following: followId } },
           { new: true }
         ).populate("following");
 
-        const updatedCreator = await User.findOneAndUpdate(
+        const updatedCreator = await User.findByIdAndUpdate(
           { _id: followId },
           { $addToSet: { followers: context.user._id } },
           { new: true }
         ).populate("followers");
 
-        console.log(context.user);
-        console.log(followId);
-        console.log(context.user._id);
+        // console.log(context.user);
+        // console.log(followId);
+        // console.log(context.user._id);
 
         return { updatedUser, updatedCreator };
       }
