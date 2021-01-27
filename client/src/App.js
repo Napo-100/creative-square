@@ -5,16 +5,36 @@ import { ApolloProvider } from "@apollo/react-hooks";
 import ApolloClient from "apollo-boost";
 // import "./App.css";
 
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import Nav from "./components/Nav";
+
 const client = new ApolloClient({
-  uri: "/graphql",
+  request: operation => {
+    const token = localStorage.getItem('id_token');
+
+    operation.setContext({
+      headers: {
+        authorization: token ? `Bearer ${token}` : ''
+      }
+    });
+  },
+  uri: '/graphql'
 });
 // Temporary tailwind template for testing
+
 function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-        <div className="m-10 border-2 border-gray-600">
-          This is looking like a great project everyone! Let's crush it!
+        <div className="">
+            <Nav />
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/signup" component={Signup} />
+            </Switch>
         </div>
       </Router>
     </ApolloProvider>
