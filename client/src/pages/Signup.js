@@ -38,7 +38,7 @@ function Signup() {
       <div className="justify-content-center">
         <div className="grid grid-cols-2 gap-4 border border-color-black rounded-xl border-8  m-4 space-x-4 max-w-lg">
           <div className="col-span-2 content-center">
-          <h2 className="bg-black text-white text-center p-3 text-xl font-sans rounded-xl rounded-b-none">Signup</h2>
+          <h2 className="bg-black text-white text-center p-3 text-xl font-sans rounded-xl rounded-b-none">SIGNUP</h2>
             </div>
             <form onSubmit={handleFormSubmit}>
               <div className="">
