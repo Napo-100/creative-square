@@ -40,7 +40,7 @@ function Signup() {
           <div className="col-span-2 content-center">
           <h2 className="bg-black text-white text-center p-3 text-xl font-sans rounded-xl rounded-b-none">SIGNUP</h2>
             </div>
-            <form onSubmit={handleFormSubmit}>
+            <form className="col-span-2 p-3" onSubmit={handleFormSubmit}>
               <div className="">
                 <label htmlFor="firstName">User-Name:</label>
                 <input
