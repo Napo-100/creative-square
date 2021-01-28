@@ -10,7 +10,7 @@ function Nav() {
                 <ul className="">
                     <li className="\">
                     </li>
-                    <li className="mx-1">
+                    <li className="">
                         {/* this is not using the Link component to logout or user and then refresh the application to the start */}
                         <a href="/" onClick={() => Auth.logout()}>
                             Logout
@@ -20,18 +20,18 @@ function Nav() {
             );
         } else {
             return (
-                <ul className="flex-row">
-                    <li className="mx-1">
-                        <Link to="/signup">
-                            Signup
-              </Link>
-                    </li>
-                    <li className="mx-1">
-                        <Link to="/login">
-                            Login
-              </Link>
-                    </li>
-                </ul>
+                    <ul className="">
+                        <li className="">
+                            <Link to="/signup">
+                                Signup
+                            </Link>
+                        </li>
+                        <li className="">
+                            <Link to="/login">
+                                Login
+                            </Link>
+                        </li>
+                    </ul>
             );
         }
     }
@@ -43,7 +43,7 @@ function Nav() {
                     CREATIVE SQUARE
                 </Link>
             </div>
-            <div>
+            <div className="flex justify-end">
                 <nav>
                     {showNavigation()}
                 </nav>
