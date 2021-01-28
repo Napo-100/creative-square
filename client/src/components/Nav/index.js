@@ -37,16 +37,18 @@ function Nav() {
     }
 
     return (
-        <header className="flex-row px-1">
-            <h1>
+        <div className="bg-black text-white flex p-2">
+            <div className="font-sans text-lg font-bold">
                 <Link to="/">
-            CREATIVE SQUARE
-          </Link>
-            </h1>
-            <nav>
-                {showNavigation()}
-            </nav>
-        </header>
+                    CREATIVE SQUARE
+                </Link>
+            </div>
+            <div>
+                <nav>
+                    {showNavigation()}
+                </nav>
+            </div>
+        </div>
     );
 }
 
