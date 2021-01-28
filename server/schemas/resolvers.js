@@ -8,13 +8,17 @@ const resolvers = {
       if (context.user) {
         const userData = await User.findOne({ _id: context.user._id })
           .select("-__V -password")
-          .populate("posts")
+          .populate({
+            path: "posts",
+            populate: {
+              path: "comments likes",
+            },
+          })
           .populate("subscriptions")
           .populate("subscribers")
           .populate("following")
           .populate("followers")
           .populate("likedPosts");
-
         return userData;
       }
 
@@ -24,7 +28,12 @@ const resolvers = {
     users: async () => {
       return User.find()
         .select("-__v -password")
-        .populate("posts")
+        .populate({
+          path: "posts",
+          populate: {
+            path: "comments likes",
+          },
+        })
         .populate("subscriptions")
         .populate("subscribers")
         .populate("following")
@@ -35,28 +44,31 @@ const resolvers = {
     user: async (parent, { _id }) => {
       return User.findById({ _id })
         .select("-__v -password")
-        .populate("posts")
+        .populate({
+          path: "posts",
+          populate: {
+            path: "comments likes",
+          },
+        })
         .populate("subscriptions")
         .populate("subscribers")
         .populate("following")
         .populate("followers")
         .populate("likedPosts");
     },
-    posts: async (parent, { username }) => {
-      const params = username ? { username } : {};
-      return Post.find(params)
+    posts: async () => {
+      return Post.find()
         .sort({ createdAt: -1 })
         .populate("comments")
         .populate("likes");
     },
     post: async (parent, { _id }) => {
-      return (await Post.findOne({ _id }))
-        .populated("comments")
+      return await Post.findById({ _id })
+        .populate("comments")
         .populate("likes");
     },
-    comments: async (parent, { username }) => {
-      const params = username ? { username } : {};
-      return Comment.find(params).sort({ createdAt: -1 });
+    comments: async () => {
+      return Comment.find().sort({ createdAt: -1 });
     },
     comment: async (parent, { _id }) => {
       return Comment.findOne({ _id });
@@ -75,8 +87,6 @@ const resolvers = {
           args,
           { new: true }
         ).select("-__v -password");
-        // console.log("context user", context.user);
-        // console.log("updated user", updatedUser);
 
         return updatedUser;
       }
@@ -105,7 +115,7 @@ const resolvers = {
         const user = await User.findById(context.user._id);
         const post = await Post.create({
           ...args,
-          username: user.username,
+          creator: user.username,
         });
         await User.findByIdAndUpdate(
           { _id: context.user._id },

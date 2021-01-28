@@ -27,6 +27,7 @@ const typeDefs = gql`
   }
   type Post {
     _id: ID
+    creator: String
     postType: String
     postDescription: String
     postLink: String
@@ -38,7 +39,6 @@ const typeDefs = gql`
     likeCount: Int
     pins: [User]
     pinCount: Int
-    username: String
     createdAt: String
   }
 
@@ -53,9 +53,9 @@ const typeDefs = gql`
     me: User
     users: [User]
     user(_id: ID!): User
-    posts(username: String): [Post]
+    posts: [Post]
     post(_id: ID!): Post
-    comments(username: String): [Comment]
+    comments: [Comment]
     comment(_id: ID!): Comment
   }
 
@@ -66,15 +66,15 @@ const typeDefs = gql`
       username: String!
       email: String!
       password: String!
-      profilePic: String
-      creator: Boolean!
-      contentType: String
     ): Auth
 
     updateUser(
       email: String
       password: String
+      firstName: String
+      lastName: String
       profilePic: String
+      bio: String
       creator: Boolean
       contentType: String
     ): User

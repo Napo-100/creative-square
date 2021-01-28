@@ -29,7 +29,7 @@ const postSchema = new Schema(
       required: true,
       default: false,
     },
-    username: {
+    creator: {
       type: String,
       required: true,
     },
