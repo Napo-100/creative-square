@@ -6,6 +6,7 @@ const typeDefs = gql`
     username: String
     email: String
     creator: Boolean
+    creatorType: String
     firstName: String
     lastName: String
     bio: String
@@ -14,7 +15,6 @@ const typeDefs = gql`
     pinnedPostCount: Int
     likedPosts: [Post]
     likedPostCount: Int
-    contentType: String
     profilePic: String
     subscriptions: [User]
     subscriptionCount: Int
@@ -27,7 +27,7 @@ const typeDefs = gql`
   }
   type Post {
     _id: ID
-    creator: String
+    username: String
     postType: String
     postDescription: String
     postLink: String
@@ -62,13 +62,10 @@ const typeDefs = gql`
   type Mutation {
     login(email: String!, password: String!): Auth
 
-    addUser(
-      username: String!
-      email: String!
-      password: String!
-    ): Auth
+    addUser(username: String!, email: String!, password: String!): Auth
 
     updateUser(
+      username: String
       email: String
       password: String
       firstName: String
@@ -76,7 +73,7 @@ const typeDefs = gql`
       profilePic: String
       bio: String
       creator: Boolean
-      contentType: String
+      creatorType: String
     ): User
 
     addPost(
@@ -88,6 +85,8 @@ const typeDefs = gql`
     ): Post
 
     likePost(postId: ID!): UserAndPost
+
+    pinPost(postId: ID!): UserAndPost
 
     addComment(postId: ID!, commentText: String): Post
 
