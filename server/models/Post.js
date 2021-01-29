@@ -3,7 +3,7 @@ const dateFormat = require("../utils/dateFormat");
 
 const postSchema = new Schema(
   {
-    postType: {
+    postMediaType: {
       type: String,
       required: "You must specify a media type",
       minlength: 1,
@@ -12,7 +12,6 @@ const postSchema = new Schema(
 
     postDescription: {
       type: String,
-      required: "You need to describe your post",
       minlength: 1,
       maxlength: 280,
     },
@@ -21,12 +20,14 @@ const postSchema = new Schema(
       minlength: 1,
       maxlength: 280,
     },
-    postImage: {
+    postPrimaryMedia: {
+      type: String,
+    },
+    postSecondaryMedia: {
       type: String,
     },
     postPaywall: {
       type: Boolean,
-      required: true,
       default: false,
     },
     username: {
