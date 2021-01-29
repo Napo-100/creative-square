@@ -1,56 +1,59 @@
-import gql from 'graphql-tag';
+import gql from "graphql-tag";
 
 export const QUERY_USER = gql`
-{
-  user {
-    _id
-    username
-    email
-    creator
-    creatorType
-    firstName
-    lastName
-    bio
-    posts {
+  {
+    user {
       _id
-      postType
-      postDescription
-      postLink
-      postPaywall
-      likeCount
-      createdAt
-    }
-    subscriptionCount
-    subscriptions {
       username
-      _id
+      email
+      creator
+      creatorType
+      firstName
+      lastName
+      bio
+      posts {
+        _id
+        postMediaType
+        postDescription
+        postLink
+        postPrimaryMedia
+        postSecondaryMedia
+        postPaywall
+        likeCount
+        pinCount
+        createdAt
+      }
+      subscriptionCount
+      subscriptions {
+        username
+        _id
+      }
+      subscriberCount
+      subscribers {
+        username
+        _id
+      }
+      followerCount
+      followers {
+        username
+        _id
+      }
+      followingCount
+      following {
+        username
+        _id
+      }
     }
-    subscriberCount
-    subscribers {
-      username
-      _id
-    }
-    followerCount
-    followers {
-      username
-      _id
-    }
-    followingCount
-    following {
-      username
-      _id
-    }
-
   }
-}
 `;
 
 export const QUERY_POST = gql`
   username
-  postType
+  postMediaType
   postDescription
   postLink
-  postImage
+  postPrimaryMedia
+  postSecondaryMedia
   postPaywall
   comments {
     _id
@@ -67,11 +70,11 @@ export const QUERY_POST = gql`
   pins {
     username
   }
-`
+`;
 
 export const QUERY_COMMENT = gql`
   _id
   commentText
   username
   createdAt
-`
+`;

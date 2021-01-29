@@ -28,10 +28,11 @@ const typeDefs = gql`
   type Post {
     _id: ID
     username: String
-    postType: String
+    postMediaType: String
     postDescription: String
     postLink: String
-    postImage: String
+    postPrimaryMedia: String
+    postSecondaryMedia: String
     postPaywall: Boolean
     comments: [Comment]
     commentCount: Int
@@ -77,11 +78,12 @@ const typeDefs = gql`
     ): User
 
     addPost(
-      postType: String!
-      postDescription: String!
+      postMediaType: String!
+      postDescription: String
       postLink: String
-      postImage: String
-      postPaywall: Boolean!
+      postPrimaryMedia: String
+      postSecondaryMedia: String
+      postPaywall: Boolean
     ): Post
 
     likePost(postId: ID!): UserAndPost
