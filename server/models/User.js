@@ -22,7 +22,6 @@ const userSchema = new Schema(
     },
     creator: {
       type: Boolean,
-      required: true,
     },
     firstName: {
       type: String,
@@ -33,7 +32,7 @@ const userSchema = new Schema(
     bio: {
       type: String,
     },
-    contentType: {
+    creatorType: {
       type: String,
     },
     profilePic: {
@@ -107,7 +106,7 @@ userSchema.methods.isCorrectPassword = async function (password) {
 userSchema.virtual("postCount").get(function () {
   return this.posts.length;
 });
-userSchema.virtual("PinnedPostCount").get(function () {
+userSchema.virtual("pinnedPostCount").get(function () {
   return this.pinnedPosts.length;
 });
 

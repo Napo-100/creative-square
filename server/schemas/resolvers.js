@@ -11,14 +11,15 @@ const resolvers = {
           .populate({
             path: "posts",
             populate: {
-              path: "comments likes",
+              path: "comments likes pins",
             },
           })
           .populate("subscriptions")
           .populate("subscribers")
           .populate("following")
           .populate("followers")
-          .populate("likedPosts");
+          .populate("likedPosts")
+          .populate("pinnedPosts");
         return userData;
       }
 
@@ -31,14 +32,15 @@ const resolvers = {
         .populate({
           path: "posts",
           populate: {
-            path: "comments likes",
+            path: "comments likes pins",
           },
         })
         .populate("subscriptions")
         .populate("subscribers")
         .populate("following")
         .populate("followers")
-        .populate("likedPosts");
+        .populate("likedPosts")
+        .populate("pinnedPosts");
     },
     // get a user by username or id
     user: async (parent, { _id }) => {
@@ -47,24 +49,27 @@ const resolvers = {
         .populate({
           path: "posts",
           populate: {
-            path: "comments likes",
+            path: "comments likes pins",
           },
         })
         .populate("subscriptions")
         .populate("subscribers")
         .populate("following")
         .populate("followers")
-        .populate("likedPosts");
+        .populate("likedPosts")
+        .populate("pinnedPosts");
     },
     posts: async () => {
       return Post.find()
         .sort({ createdAt: -1 })
         .populate("comments")
+        .populate("pins")
         .populate("likes");
     },
     post: async (parent, { _id }) => {
       return await Post.findById({ _id })
         .populate("comments")
+        .populate("pins")
         .populate("likes");
     },
     comments: async () => {
@@ -115,7 +120,7 @@ const resolvers = {
         const user = await User.findById(context.user._id);
         const post = await Post.create({
           ...args,
-          creator: user.username,
+          username: user.username,
         });
         await User.findByIdAndUpdate(
           { _id: context.user._id },
@@ -168,6 +173,24 @@ const resolvers = {
           { $addToSet: { likedPosts: updatedPost } },
           { new: true }
         ).populate("likedPosts");
+        return { updatedPost, updatedUser };
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
+
+    pinPost: async (parent, { postId }, context) => {
+      if (context.user) {
+        const user = await User.findById(context.user._id);
+        const updatedPost = await Post.findByIdAndUpdate(
+          { _id: postId },
+          { $addToSet: { pins: user } },
+          { new: true }
+        ).populate("pins");
+        const updatedUser = await User.findByIdAndUpdate(
+          user._id,
+          { $addToSet: { pinnedPosts: updatedPost } },
+          { new: true }
+        ).populate("pinnedPosts");
         return { updatedPost, updatedUser };
       }
       throw new AuthenticationError("You need to be logged in!");
