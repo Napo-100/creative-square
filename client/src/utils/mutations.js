@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import gql from "graphql-tag";
 
 export const LOGIN = gql`
   mutation login($email: String!, $password: String!) {
@@ -37,16 +37,31 @@ export const UPDATE_USER = gql`
         creatorType
       }
   }
-`
+`;
 
 export const ADD_POST = gql`
-  mutation addPost($postType: String!, $postDescription: String!, $postLink: String, $postPaywall: Boolean!, $postImage: String) {
-    addPost(postType: $postType, postDescription: $postDescription, postLink: $postLink, postPaywall: $postPaywall, postImage: $postImage) {
-      postType
+  mutation addPost(
+    $postMediaType: String!
+    $postDescription: String
+    $postLink: String
+    $postPrimaryMedia: String
+    $postSecondaryMedia: String
+    $postPaywall: Boolean
+  ) {
+    addPost(
+      postMediaType: $postMediaType
+      postDescription: $postDescription
+      postLink: $postLink
+      postPrimaryMedia: $postPrimaryMedia
+      postSecondaryMedia: $postSecondaryMedia
+      postPaywall: $postPaywall
+    ) {
+      postMediaType
       postDescription
       postLink
-      postImage
+      postPrimaryMedia
+      postSecondaryMedia
       postPaywall
     }
   }
-`
+`;
