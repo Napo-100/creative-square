@@ -3,7 +3,7 @@ import Auth from "../../utils/auth";
 import { Link } from "react-router-dom";
 
 
-function Nav() {
+function SideBar() {
 
     function showNavigation() {
         if (Auth.loggedIn()) {
@@ -40,11 +40,7 @@ function Nav() {
     const [isClosed, setClosed] = React.useState(false)
     return (
         <div className="bg-black ">
-            <div className="font-sans text-white text-lg flex justify-between p-2 font-bold">
-                <Link to="/">
-                    CREATIVE SQUARE
-                </Link>
-            </div>
+
 
             <div className="flex bg-gray-100">
                 {!isClosed && (
@@ -87,32 +83,9 @@ function Nav() {
                 ) : (
                         <button title="Close Menu" tabIndex="1" onClick={() => setClosed(true)}>X</button>
                     )}
-
-                <div className="w-full">
-                    <ul className="flex flex-row mt-2  border-gray-300 border-b-2 py-2">
-                        <li className="px-5 py-3 border border-l-4 border-black m-l-1 shadow-md">
-                            <a>
-                                ALL
-                        </a>
-                        </li>
-                        <li className="px-5 py-3 border border-l-4 border-black ml-1 shadow-md">
-                            <a>
-                                Photography
-                        </a>
-                        </li>
-                        <li className="px-5 py-3 border border-l-4 border-black ml-1 shadow-md">
-                            <a>
-                                Music
-                        </a>
-                        </li>
-                    </ul>
-                <div className="grid">
-                    <p>Hello</p>
-                </div>
-                </div>
             </div>
         </div>
     );
 }
 
-export default Nav;
+export default SideBar;
