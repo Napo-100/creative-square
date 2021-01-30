@@ -20,33 +20,39 @@ function Nav() {
             );
         } else {
             return (
-                    <ul className="">
-                        <li className="">
-                            <Link to="/signup">
-                                Signup
+                <ul className="">
+                    <li className="">
+                        <Link to="/signup">
+                            Signup
                             </Link>
-                        </li>
-                        <li className="">
-                            <Link to="/login">
-                                Login
+                    </li>
+                    <li className="">
+                        <Link to="/login">
+                            Login
                             </Link>
-                        </li>
-                    </ul>
+                    </li>
+                </ul>
             );
         }
     }
 
     return (
-        <div className="bg-black text-white flex p-2">
-            <div className="font-sans text-lg font-bold">
+        <div className="bg-black text-white">
+            <div className="font-sans text-lg flex justify-between p-2 font-bold">
                 <Link to="/">
                     CREATIVE SQUARE
                 </Link>
             </div>
-            <div className="flex justify-end">
-                <nav>
-                    {showNavigation()}
-                </nav>
+
+            <div className="flex bg-gray-100">
+                <aside className="bg-white w-64 min-h-screen flex flex-col">
+                    <span className="text-black py-2">Your Creative Square</span>
+                </aside>
+                <div className="flex justify-end">
+                    <nav>
+                        {showNavigation()}
+                    </nav>
+                </div>
             </div>
         </div>
     );
