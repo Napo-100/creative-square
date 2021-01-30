@@ -36,7 +36,7 @@ function SideBar() {
   const [isClosed, setClosed] = React.useState(false);
   return (
     <div className="bg-black ">
-      <div className="flex bg-gray-100">
+      <div className="bg-gray-100 sticky top-0">
         {!isClosed && (
           <aside className="bg-white w-80 min-h-screen flex flex-col">
             <h1 className="border border-double border-4 rounded-full bg-black text-white h-24 w-24 flex items-center justify-center py-2 font-bold px-8">

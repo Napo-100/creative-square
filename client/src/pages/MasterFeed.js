@@ -101,7 +101,7 @@ const HomeFeed = () => {
   ]);
 
   return (
-    <div className="grid grid-cols-1 gap-2 md:grid-cols-2 md:gap-3 lg:grid-cols-3 lg:gap-4 xl:grid-cols-4 border-2 border-blue-300 p-2 overflow-scroll">
+    <div className="grid grid-cols-1 gap-2 md:grid-cols-2 md:gap-3 lg:grid-cols-3 lg:gap-4 xl:grid-cols-4 border-2 border-blue-300 p-2">
       {allPosts.map((post) => (
         <div key={post._id} className="hover:bg-indigo-500">
           <article className="hover:shadow-xl group">
