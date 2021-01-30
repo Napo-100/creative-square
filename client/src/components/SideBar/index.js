@@ -23,13 +23,14 @@ function SideBar() {
             return (
                 <ul className="">
                     <li className="">
-                        <Link to="/signup">
-                            Signup
+                    <Link to="/login">
+                            Login
                             </Link>
+
                     </li>
                     <li className="">
-                        <Link to="/login">
-                            Login
+                    <Link to="/signup">
+                            Signup
                             </Link>
                     </li>
                 </ul>
@@ -49,22 +50,8 @@ function SideBar() {
 
                         <div className="border-r flex-grow">
                             <nav>
-                                <ul>
-                                    <li className="p-3">
-                                        <a href="">
-                                            Login
-                                    </a>
-                                    </li>
-                                    <li className="p-3">
-                                        <a href="">
-                                            Signup
-                                    </a>
-                                    </li>
-                                </ul>
+                                {showNavigation()}
                             </nav>
-                            {/* <nav>
-                            {showNavigation()}
-                        </nav> */}
                         </div>
                     </aside>
                 )}
