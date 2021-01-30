@@ -82,9 +82,9 @@ function Signup() {
                   Submit
           </button>
                 <div>
-                  <Link to="/login">
+                  {/* <Link to="/login">
                     ← Go to Login
-      </Link>
+      </Link> */}
                 </div>
               </div>
             </form>

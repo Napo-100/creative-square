@@ -71,9 +71,9 @@ function Login(props) {
                 Login
           </button>
               <div>
-                <Link to="/signup">
+                {/* <Link to="/signup">
                   ← Go to Signup
-                </Link>
+                </Link> */}
               </div>
             </div>
           </form>
