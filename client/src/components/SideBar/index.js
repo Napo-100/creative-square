@@ -10,6 +10,10 @@ function SideBar() {
             return (
                 <ul className="">
                     <li className="\">
+                        CREATE POST
+                        </li>
+                    <li className="\">
+                        UPDATE PROFILE
                     </li>
                     <li className="">
                         {/* this is not using the Link component to logout or user and then refresh the application to the start */}
@@ -23,13 +27,13 @@ function SideBar() {
             return (
                 <ul className="">
                     <li className="">
-                    <Link to="/login">
+                        <Link to="/login">
                             Login
                             </Link>
 
                     </li>
                     <li className="">
-                    <Link to="/signup">
+                        <Link to="/signup">
                             Signup
                             </Link>
                     </li>
