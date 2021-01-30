@@ -44,6 +44,12 @@ const userSchema = new Schema(
         ref: "Post",
       },
     ],
+    featuredPosts: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Post",
+      },
+    ],
     pinnedPosts: [
       {
         type: Schema.Types.ObjectId,

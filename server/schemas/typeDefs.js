@@ -10,7 +10,9 @@ const typeDefs = gql`
     firstName: String
     lastName: String
     bio: String
+    postCount: Int
     posts: [Post]
+    featuredPosts: [Post]
     pinnedPosts: [Post]
     pinnedPostCount: Int
     likedPosts: [Post]
@@ -89,6 +91,9 @@ const typeDefs = gql`
     likePost(postId: ID!): UserAndPost
 
     pinPost(postId: ID!): UserAndPost
+
+    featurePost(postId: ID!): User
+    removeFeaturedPost(postId: ID!): User
 
     addComment(postId: ID!, commentText: String): Post
 
