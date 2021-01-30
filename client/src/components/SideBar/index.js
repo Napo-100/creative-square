@@ -8,18 +8,18 @@ function SideBar() {
     function showNavigation() {
         if (Auth.loggedIn()) {
             return (
-                <ul className="">
-                    <li className="\">
+                <ul className="px-8 ">
+                    <li className="p-2">
                         CREATE POST
-                        </li>
-                    <li className="\">
+                    </li>
+                    <li className="p-2">
                         UPDATE PROFILE
                     </li>
-                    <li className="">
+                    <li className="p-2">
                         {/* this is not using the Link component to logout or user and then refresh the application to the start */}
                         <a href="/" onClick={() => Auth.logout()}>
                             Logout
-              </a>
+                        </a>
                     </li>
                 </ul>
             );
@@ -50,7 +50,7 @@ function SideBar() {
             <div className="flex bg-gray-100">
                 {!isClosed && (
                     <aside className="bg-white w-80 min-h-screen flex flex-col">
-                        <h1 className="text-black py-2 font-bold px-8">Your Creative Square</h1>
+                        <h1 className="border border-double border-4 rounded-full bg-black text-white h-24 w-24 flex items-center justify-center py-2 font-bold px-8">Your Creative Square</h1>
 
                         <div className="border-r flex-grow">
                             <nav>
