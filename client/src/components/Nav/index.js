@@ -74,7 +74,8 @@ function Nav() {
                 )}
                 {isClosed ? (
                     <button id="nav-toggle" className="flex items-center px-3 py-2 border rounded text-gray-500 border-gray-600 hover:text-white hover:border-white"
-                        onClick={() => setClosed(false)}>
+                        onClick={() => setClosed(false)}
+                        title="Open Menu" tabIndex="1">
                         <svg
                             className="fill-current h-3 w-3"
                             viewBox="0 0 20 20"
@@ -84,8 +85,31 @@ function Nav() {
                         </svg>
                     </button>
                 ) : (
-                        <button onClick={() => setClosed(true)}>X</button>
+                        <button title="Close Menu" tabIndex="1" onClick={() => setClosed(true)}>X</button>
                     )}
+
+                <div className="w-full">
+                    <ul className="flex flex-row mt-2  border-gray-300 border-b-2 py-2">
+                        <li className="px-5 py-3 border border-l-4 border-black m-l-1 shadow-md">
+                            <a>
+                                ALL
+                        </a>
+                        </li>
+                        <li className="px-5 py-3 border border-l-4 border-black ml-1 shadow-md">
+                            <a>
+                                Photography
+                        </a>
+                        </li>
+                        <li className="px-5 py-3 border border-l-4 border-black ml-1 shadow-md">
+                            <a>
+                                Music
+                        </a>
+                        </li>
+                    </ul>
+                <div className="grid">
+                    <p>Hello</p>
+                </div>
+                </div>
             </div>
         </div>
     );
