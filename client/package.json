@@ -12,6 +12,7 @@
     "@testing-library/user-event": "^12.6.2",
     "apollo-boost": "^0.4.9",
     "autoprefixer": "^9.8.6",
+    "cloudinary": "^1.23.0",
     "graphql": "^15.4.0",
     "graphql-tag": "^2.11.0",
     "jwt-decode": "^3.1.2",
