@@ -68,12 +68,12 @@ function Login(props) {
             }
             <div className="">
               <button className="border rounded-xl py-1 px-5 bg-blue-700 text-white mt-4 mb-2" type="submit">
-                Submit
+                Login
           </button>
               <div>
-                <Link to="/signup">
+                {/* <Link to="/signup">
                   ← Go to Signup
-                </Link>
+                </Link> */}
               </div>
             </div>
           </form>
