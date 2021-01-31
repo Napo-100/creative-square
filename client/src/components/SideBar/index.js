@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import Auth from "../../utils/auth";
-import Login from "../../pages/Login"
+import Login from "../../pages/Login";
 import Signup from "../../pages/Signup";
 
 function SideBar() {
@@ -8,7 +9,9 @@ function SideBar() {
     if (Auth.loggedIn()) {
       return (
         <ul className="px-8 ">
-          <li className="p-2">CREATE POST</li>
+          <Link to="/postform">
+            <li className="p-2">Add Post</li>
+          </Link>
           <li className="p-2">UPDATE PROFILE</li>
           <li className="p-2">
             {/* this is not using the Link component to logout or user and then refresh the application to the start */}
@@ -22,7 +25,6 @@ function SideBar() {
       return (
         <ul className="">
           <li className="">
-
             <Login />
           </li>
           <li className="">
