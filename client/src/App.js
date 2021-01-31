@@ -15,6 +15,7 @@ import TopBar from "./components/TopBar";
 import SideBar from "./components/SideBar";
 import Header from "./components/Header";
 import AddPost from "./pages/AddPost";
+import SinglePost from "./pages/SinglePost"
 
 const client = new ApolloClient({
   request: (operation) => {
@@ -53,6 +54,7 @@ function App() {
                 />
                 <Route exact path="/masterfeed" component={MasterFeed} />
                 <Route exact path="/postform" component={AddPost} />
+                <Route exact path="/post/:id" component={SinglePost} />
               </Switch>
             </div>
           </div>

@@ -144,6 +144,7 @@ export const QUERY_POST = gql`
       postPrimaryMedia
       postSecondaryMedia
       postPaywall
+      createdAt
       comments {
         _id
         commentText
