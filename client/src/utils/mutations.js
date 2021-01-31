@@ -24,29 +24,8 @@ export const ADD_USER = gql`
 `;
 
 export const UPDATE_USER = gql`
-  mutation updateUser(
-    $username: String
-    $email: String
-    $password: String
-    $firstName: String
-    $lastName: String
-    $profilePic: String
-    $bio: String
-    $creator: Boolean
-    $creatorType: String
-  ) {
-    updateUser(
-      username: $username
-      email: $email
-      password: $password
-      firstName: $firstName
-      lastName: $lastName
-      profilePic: $profilePic
-      bio: $bio
-      creator: $creator
-      creatorType: $creatorType
-    ) {
-      _id
+  mutation updateUser($_id: ID!) {
+    updateUser(_id: $_id) {
       username
       email
       password
@@ -84,6 +63,7 @@ export const ADD_POST = gql`
       postPrimaryMedia
       postSecondaryMedia
       postPaywall
+      commentCount
       comments {
         _id
       }
