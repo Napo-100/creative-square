@@ -63,10 +63,7 @@ export const ADD_POST = gql`
       postPrimaryMedia
       postSecondaryMedia
       postPaywall
-      commentCount
-      comments {
-        _id
-      }
+     
     }
   }
 `;

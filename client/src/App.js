@@ -13,19 +13,20 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import TopBar from "./components/TopBar";
 import SideBar from "./components/SideBar";
-import Header from './components/Header';
+import Header from "./components/Header";
+import AddPost from "./pages/AddPost";
 
 const client = new ApolloClient({
-  request: operation => {
-    const token = localStorage.getItem('id_token');
+  request: (operation) => {
+    const token = localStorage.getItem("id_token");
 
     operation.setContext({
       headers: {
-        authorization: token ? `Bearer ${token}` : ''
-      }
+        authorization: token ? `Bearer ${token}` : "",
+      },
     });
   },
-  uri: '/graphql'
+  uri: "/graphql",
 });
 // Temporary tailwind template for testing
 
@@ -40,14 +41,18 @@ function App() {
             <div className="w-full">
               {Auth.loggedIn() && <Header />}
               <Switch>
-                {Auth.loggedIn() ? 
-                <Route exact path="/" component={FollowFeed} />
-                :
-                <Route exact path="/" component={MasterFeed} />
-              }
-                <Route exact path="/subscriptions" component={SubscriptionFeed} />
+                {Auth.loggedIn() ? (
+                  <Route exact path="/" component={FollowFeed} />
+                ) : (
+                  <Route exact path="/" component={MasterFeed} />
+                )}
+                <Route
+                  exact
+                  path="/subscriptions"
+                  component={SubscriptionFeed}
+                />
                 <Route exact path="/masterfeed" component={MasterFeed} />
-                
+                <Route exact path="/postform" component={AddPost} />
               </Switch>
             </div>
           </div>
