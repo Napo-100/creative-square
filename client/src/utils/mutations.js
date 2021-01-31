@@ -46,6 +46,7 @@ export const UPDATE_USER = gql`
       creator: $creator
       creatorType: $creatorType
     ) {
+      _id
       username
       email
       password
@@ -76,12 +77,16 @@ export const ADD_POST = gql`
       postSecondaryMedia: $postSecondaryMedia
       postPaywall: $postPaywall
     ) {
+      _id
       postMediaType
       postDescription
       postLink
       postPrimaryMedia
       postSecondaryMedia
       postPaywall
+      comments {
+        _id
+      }
     }
   }
 `;
