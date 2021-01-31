@@ -3,17 +3,22 @@ import { Link } from "react-router-dom";
 import Auth from "../../utils/auth";
 import Login from "../../pages/Login";
 import Signup from "../../pages/Signup";
+import Profile from "../../pages/Profile";
+
 
 function SideBar() {
   function showNavigation() {
     if (Auth.loggedIn()) {
       return (
         <ul className="px-8 ">
+            <li>
+                <Profile />
+            </li>
           <Link to="/postform">
-            <li className="p-2">Add Post</li>
+            <li className="border-b-4 hover:bg-gray-300 p-2">Add Post</li>
           </Link>
-          <li className="p-2">UPDATE PROFILE</li>
-          <li className="p-2">
+          <li className="border-b-4 hover:bg-gray-300 p-2">UPDATE PROFILE</li>
+          <li className="border-b-4 hover:bg-gray-300 p-2">
             {/* this is not using the Link component to logout or user and then refresh the application to the start */}
             <a href="/" onClick={() => Auth.logout()}>
               Logout
@@ -37,15 +42,15 @@ function SideBar() {
 
   const [isClosed, setClosed] = React.useState(false);
   return (
-    <div className="bg-black ">
-      <div className="bg-gray-100 sticky top-0">
+    <div className="bg-black">
+      <div className="bg-gray-100 sticky top-0 ">
         {!isClosed && (
-          <aside className="bg-white w-80 min-h-screen flex flex-col">
+          <aside className="bg-white w-80 min-h-screen justify-items-center">
             <h1 className="border border-double border-4 rounded-full bg-black text-white h-24 w-24 flex items-center justify-center py-2 font-bold px-8">
               Your Creative Square
             </h1>
 
-            <div className="border-r flex-grow">
+            <div className="border-r flex-grow ">
               <nav>{showNavigation()}</nav>
             </div>
           </aside>
