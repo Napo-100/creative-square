@@ -46,9 +46,9 @@ function SideBar() {
         <div className="bg-black">
             <div className="bg-gray-100 sticky top-0 ">
                 {!isClosed && (
-                    <aside className="bg-white w-80 min-h-screen">
+                    <aside className="flex flex-col justify-center bg-white w-80 min-h-screen">
                         <div className="px-20 pb-10">
-                            <img src={Logo} className="w-20 pt-5 " alt="Creative Square" />
+                            <img src={Logo} className="pt-5 " alt="Creative Square" />
                         </div>
                         <div className="border-r flex-grow ">
                             <nav>{showNavigation()}</nav>
