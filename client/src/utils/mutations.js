@@ -44,7 +44,7 @@ export const UPDATE_USER = gql`
         creator: $creator
         creatorType: $creatorType
       ) {
-        _id
+      _id
       username
       firstName
       lastName
