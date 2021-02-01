@@ -7,6 +7,7 @@ import ApolloClient from "apollo-boost";
 // import "./App.css";
 
 import MasterFeed from "./pages/MasterFeed";
+import FeaturedFeed from "./pages/FeaturedPosts";
 import FollowFeed from "./pages/FollowFeed";
 import SubscriptionFeed from "./pages/SubscriptionFeed";
 import Login from "./pages/Login";
@@ -53,6 +54,7 @@ function App() {
                   component={SubscriptionFeed}
                 />
                 <Route exact path="/masterfeed" component={MasterFeed} />
+                <Route exact path="/featuredfeed" component={FeaturedFeed} />
                 <Route exact path="/postform" component={AddPost} />
                 <Route exact path="/post/:id" component={SinglePost} />
               </Switch>

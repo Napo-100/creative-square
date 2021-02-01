@@ -26,6 +26,22 @@ const resolvers = {
 
       throw new AuthenticationError("Not logged in");
     },
+    
+    featuredPosts: async (parent, args, context) => {
+      if (context.user) {
+      const postData = await User.findById({ _id: context.user._id})
+        .select('posts')
+        .populate({
+          path: "posts",
+          match: {
+            postIsFeatured: true
+          }
+        });
+        console.log(postData)
+        return postData;
+      }
+      throw new AuthenticationError("Not logged in");
+    },
     // get all users
     users: async () => {
       return User.find()
