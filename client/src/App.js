@@ -8,6 +8,7 @@ import ApolloClient from "apollo-boost";
 
 import MasterFeed from "./pages/MasterFeed";
 import FollowFeed from "./pages/FollowFeed";
+import UpdateUser from "./pages/UpdateUser"
 import SubscriptionFeed from "./pages/SubscriptionFeed";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
@@ -54,6 +55,7 @@ function App() {
                 />
                 <Route exact path="/masterfeed" component={MasterFeed} />
                 <Route exact path="/postform" component={AddPost} />
+                <Route exact path="/edituser" component={UpdateUser} />
                 <Route exact path="/post/:id" component={SinglePost} />
               </Switch>
             </div>
