@@ -18,7 +18,9 @@ function SideBar() {
                     <Link to="/postform">
                         <li className="border-b-4 hover:bg-gray-300 p-2">Add Post</li>
                     </Link>
+                    <Link to="/edituser">
                     <li className="border-b-4 hover:bg-gray-300 p-2">UPDATE PROFILE</li>
+                    </Link>
                     <li className="border-b-4 hover:bg-gray-300 p-2">
                         {/* this is not using the Link component to logout or user and then refresh the application to the start */}
                         <a href="/" onClick={() => Auth.logout()}>

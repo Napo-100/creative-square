@@ -24,18 +24,35 @@ export const ADD_USER = gql`
 `;
 
 export const UPDATE_USER = gql`
-  mutation updateUser($_id: ID!) {
-    updateUser(_id: $_id) {
+  mutation updateUser(
+    $_id: ID!
+    $username: String
+    $firstName: String
+    $lastName: String
+    $profilePic: String
+    $bio: String
+    $creator: Boolean
+    $creatorType: String
+    ) {
+      updateUser(
+        _id: $_id
+        username: $username
+        firstName: $firstName
+        lastName: $lastName
+        profilePic: $profilePic
+        bio: $bio
+        creator: $creator
+        creatorType: $creatorType
+      ) {
+      _id
       username
-      email
-      password
       firstName
       lastName
       profilePic
       bio
       creator
       creatorType
-    }
+      }
   }
 `;
 

@@ -14,7 +14,6 @@ const resolvers = {
               path: "comments likes pins",
             },
           })
-          .populate("featuredPosts")
           .populate("subscriptions")
           .populate("subscribers")
           .populate("following")
@@ -73,7 +72,6 @@ const resolvers = {
         .populate("subscribers")
         .populate("following")
         .populate("followers")
-        .populate("featuredPosts")
         .populate("likedPosts")
         .populate("pinnedPosts");
     },
@@ -150,6 +148,23 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
+    // updatePost: async (parent, args, context) => {
+    //   if (context.user) {
+    //     const updatedPost = await Post.findByIdAndUpdate(
+    //       { _id: postId },
+    //       { ...args },
+    //       { new: true }
+    //     );
+    //     const updatedUser = await User.findByIdAndUpdate(
+    //       { _id: context.user._id },
+    //       { $push: { posts: post._id } },
+    //       { new: true }
+    //     );
+
+    //     return {updatedPost, updatedUser};
+    //   }
+    //   throw new AuthenticationError("You need to be logged in!");
+    // },
     addComment: async (parent, { postId, commentText }, context) => {
       if (context.user) {
         const user = await User.findById(context.user._id);
@@ -213,33 +228,6 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
-
-    featurePost: async (parent, { postId }, context) => {
-      if (context.user) {
-        const featuredPost = await Post.findById(postId);
-        const updatedUser = await User.findByIdAndUpdate(
-          { _id: context.user._id },
-          { $addToSet: { featuredPosts: featuredPost } },
-          { new: true, runValidators: true }
-        ).populate("featuredPosts");
-        return updatedUser;
-      }
-      throw new AuthenticationError("You need to be logged in!");
-    },
-
-    removeFeaturedPost: async (parent, { postId }, context) => {
-      if (context.user) {
-        const removedPost = await Post.findById(postId);
-        const updatedUser = await User.findByIdAndUpdate(
-          { _id: context.user._id },
-          { $pull: { featuredPosts: removedPost._id  } },
-          { new: true }
-        ).populate("featuredPosts");
-        return updatedUser;
-      }
-      throw new AuthenticationError("You need to be logged in!");
-    },
-
     subscribe: async (parent, { subscriptionId }, context) => {
       if (context.user) {
         const updatedUser = await User.findByIdAndUpdate(
@@ -268,6 +256,10 @@ const resolvers = {
           .populate("subscribers")
           .populate("followers");
 
+        // console.log(context.user);
+        // console.log(subscriptionId);
+        // console.log(context.user._id);
+
         return { updatedUser, updatedCreator };
       }
 
@@ -286,6 +278,11 @@ const resolvers = {
           { $addToSet: { followers: context.user._id } },
           { new: true }
         ).populate("followers");
+
+        // console.log(context.user);
+        // console.log(followId);
+        // console.log(context.user._id);
+
         return { updatedUser, updatedCreator };
       }
 
