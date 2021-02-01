@@ -1,19 +1,52 @@
-import React, { useState } from "react";
-import image1 from "../assets/square_Img/square1.png";
+import React from "react";
+import defaultImage from "../assets/square_Img/square1.png";
+import { useQuery } from "@apollo/react-hooks";
+import { QUERY_ME_PROFILE } from "../utils/queries";
 
 function Profile() {
+
+    const { loading, data: userData } = useQuery(QUERY_ME_PROFILE);
+    console.log(userData);
+
+    // const user = data?.me
+    // console.log("this is me ", user);
+
+
+
     return (
         <div className=" mb-5">
-            <div className="border-4 rounded-full border-black p-1 shadow-lg">
-                <img
-                    src={image1}
-                    alt="Profile pic"
-                    className="rounded-full shadow-inner" />
+            
 
+        {loading ? (
+            <div>Loading...</div>
+        ):(
+            <div>
+            <div className="border-4 rounded-full border-black p-1 shadow-lg">
+                
+               {userData.me.profilePic ? (
+                <img
+                src={userData.me.profilePic}
+                alt="Profile pic"
+                className="rounded-full shadow-inner" />
+               ):(
+                <img
+                src={defaultImage}
+                alt="Default pic"
+                className="rounded-full shadow-inner" />
+               )} 
+               
             </div>
             <h2 className="text-center font-bold text-gray-800  antialiased text-3xl">
-                John George
+                    {userData.me.username}
                 </h2>
+                </div>
+        )}
+
+            
+
+
+               
+
         </div>
     )
 

@@ -84,3 +84,34 @@ export const ADD_POST = gql`
     }
   }
 `;
+
+//likePost(postId: ID!): UserAndPost
+export const LIKE_POST = gql `
+mutation likePost($postId: ID!) {
+  likePost(postId: $postId) {
+    updatedPost {
+      _id
+      username
+      postMediaType
+      postDescription
+      postLink
+      postPrimaryMedia
+      postSecondaryMedia
+      postPaywall
+      createdAt
+      likes {
+        username
+      }
+      likeCount
+    }
+    updatedUser {
+      username
+      likedPosts {
+        postDescription
+      }
+      likedPostCount
+    }
+  }
+}
+
+`;

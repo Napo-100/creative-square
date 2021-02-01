@@ -2,6 +2,8 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/react-hooks";
 import { QUERY_POST } from "../utils/queries";
+import ReactionPanel from "../components/PostInteraction";
+
 
 const SinglePost = () => {
   const { id: postId } = useParams();
@@ -22,9 +24,13 @@ const SinglePost = () => {
      
       <div className="flex flex-col md:flex-row overflow-hidden
                                         bg-white rounded-lg shadow-xl  mt-4 w-100 mx-2">
-       
-        <div className="h-64 w-auto md:w-1/2">
+
+        <div className="h-64 w-auto md:w-1/2 relative">
+        
           <img className="inset-0 h-full w-full object-cover object-center" src={post.postPrimaryMedia} />
+          {/* <div class="absolute bottom-0 left-0 ...">
+          <ReactionPanel post ={post}/>
+          </div> */}
         </div>
         
         <div className="w-full py-4 px-6 text-gray-800 flex flex-col justify-between">
@@ -32,11 +38,15 @@ const SinglePost = () => {
           <p className="mt-2">
             
           </p>
+          <div className="flex flex-row">
           <p className="text-sm text-gray-700 uppercase tracking-wide font-semibold mt-2">
             { post.username } &bull; { post.createdAt}
           </p>
+          <ReactionPanel post ={post}/>
+          </div>
         </div>
       </div>
+      
     </div>
     </div>
   );

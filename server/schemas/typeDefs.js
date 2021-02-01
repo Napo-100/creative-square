@@ -36,6 +36,7 @@ const typeDefs = gql`
     postPrimaryMedia: String
     postSecondaryMedia: String
     postPaywall: Boolean
+    postIsFeatured: Boolean
     comments: [Comment]
     commentCount: Int
     likes: [User]
@@ -54,6 +55,7 @@ const typeDefs = gql`
 
   type Query {
     me: User
+    featuredPosts: User
     users: [User]
     user(_id: ID!): User
     posts: [Post]
@@ -85,6 +87,7 @@ const typeDefs = gql`
       postPrimaryMedia: String
       postSecondaryMedia: String
       postPaywall: Boolean
+      postIsFeatured: Boolean
     ): Post
 
     likePost(postId: ID!): UserAndPost

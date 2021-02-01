@@ -3,6 +3,7 @@ import { useQuery } from "@apollo/react-hooks";
 import { QUERY_POSTS } from "../utils/queries";
 import { Link } from "react-router-dom";
 
+
 const MasterFeed = () => {
   const { loading, data } = useQuery(QUERY_POSTS);
   console.log(data);

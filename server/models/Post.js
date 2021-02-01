@@ -30,6 +30,10 @@ const postSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    postIsFeatured: {
+      type: Boolean,
+      default: false,
+    },
     username: {
       type: String,
       required: true,

@@ -59,6 +59,39 @@ export const QUERY_USER = gql`
   }
 `;
 
+export const QUERY_FEATURED_POSTS = gql`
+{
+  featuredPosts{
+  posts {
+    _id
+    username
+    postMediaType
+    postDescription
+    postLink
+    postPrimaryMedia
+    postSecondaryMedia
+    postPaywall
+    postIsFeatured
+    createdAt
+    pinCount
+    pins {
+      username
+    }
+    likes {
+      username
+    }
+    likeCount
+    comments {
+      _id
+      username
+      commentText
+    }
+    commentCount
+  }
+  }
+}
+`
+
 export const QUERY_ME = gql`
   {
     me {
