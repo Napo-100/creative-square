@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useMutation} from "@apollo/react-hooks";
 import { UPDATE_USER } from "../utils/mutations";
-import { QUERY_USER } from "../utils/queries";
+import { QUERY_ME_PROFILE } from "../utils/queries";
 import Auth from "../utils/auth"
 
 const EditUser = () => {
@@ -18,9 +18,9 @@ const EditUser = () => {
   const [updateUser, { error }] = useMutation( UPDATE_USER, {
     update(cache, { data: { updateUser } }) { 
       try {
-        cache.readQuery({ query: QUERY_USER });
+        cache.readQuery({ query: QUERY_ME_PROFILE });
         cache.writeQuery({
-          query: QUERY_USER,
+          query: QUERY_ME_PROFILE,
           data: { user: { updateUser } },
         });
       } catch (err) {
