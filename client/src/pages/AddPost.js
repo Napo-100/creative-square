@@ -8,10 +8,29 @@ const AddPost = () => {
     postMediaType: "",
     postDescription: "",
     postLink: "",
-    postPrimaryMedia: "",
+    // postPrimaryMedia: "",
     postSecondaryMedia: "",
     postPaywall: true,
   });
+  const [image, setImage] = useState("");
+
+  const postDetails = () => {
+    const data = new FormData();
+    data.append("file", image);
+    data.append("upload_preset", "post-image");
+    data.append("cloud_name", process.env.CLOUD_NAME);
+    fetch("https://api.cloudinary.com/v1_1/creative-square/image/upload", {
+      method: "post",
+      body: data,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const [addPost, { error }] = useMutation(ADD_POST, {
     update(cache, { data: { addPost } }) {
@@ -115,14 +134,14 @@ const AddPost = () => {
         <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
           <span className="text-red-400 mr-1">*</span> Upload Image
         </div>
-        <div className="my-2 bg-white p-1 flex border border-gray-200 rounded">
+        <div className="my-2 bg-indigo-400 p-1 flex rounded">
           {" "}
           <input
-            className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
+            className="p-1 appearance-none outline-none w-full text-gray-800"
             name="postPrimaryMedia"
-            type="text"
+            type="file"
             value={formState.postPrimaryMedia}
-            onChange={handleChange}
+            onChange={(e)=>setImage(e.target.files[0])} 
           />{" "}
         </div>
       </div>
@@ -175,6 +194,7 @@ const AddPost = () => {
           className="shadow-md font-medium py-2 px-4 bg-green-500 text-gray-100
                   cursor-pointer bg-teal-600 rounded text-lg tr-mt  absolute text-center w-full"
           type="submit"
+          onClick={() => postDetails()}
         >
           Submit
         </button>
