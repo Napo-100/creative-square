@@ -4,14 +4,44 @@ import { ADD_POST } from "../utils/mutations";
 import { QUERY_POSTS, QUERY_ME } from "../utils/queries";
 
 const AddPost = () => {
+  // const [postMediaType, setPostMediaType] = useState("");
+  // const [postDescription, setPostDescription] = useState("");
+  // const [postLink, setPostLink] = useState("");
+  // const [postPrimaryMedia, setPostPrimaryMedia] = useState("");
+  // const [postSecondaryMedia, setPostSecondaryMedia] = useState("");
+  // const [postPaywall, setPostPaywall] = useState("");
+
+  const [imageUrl, setImageUrl] = useState("");
   const [formState, setFormState] = useState({
     postMediaType: "",
     postDescription: "",
     postLink: "",
     postPrimaryMedia: "",
-    postSecondaryMedia: "",
+    postSecondaryMedia: "none",
     postPaywall: true,
   });
+
+  const [image, setImage] = useState("");
+
+  const postDetails = () => {
+    const data = new FormData();
+    data.append("file", image);
+    data.append("upload_preset", "post-image");
+    data.append("cloud_name", process.env.CLOUD_NAME);
+    fetch("https://api.cloudinary.com/v1_1/creative-square/image/upload", {
+      method: "post",
+      body: data,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setImageUrl(data.secure_url);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    console.log("hi", imageUrl);
+  };
 
   const [addPost, { error }] = useMutation(ADD_POST, {
     update(cache, { data: { addPost } }) {
@@ -34,13 +64,27 @@ const AddPost = () => {
   });
 
   const handleChange = (event) => {
+    console.log("oh yeas", imageUrl);
     const { name, value } = event.target;
-
     setFormState({
       ...formState,
+      postPrimaryMedia: imageUrl,
       [name]: value,
     });
   };
+  // const handleUpload = () => {
+  //   setPostPrimaryMedia(imageUrl);
+  // };
+
+  // const handleChange = (event) => {
+  //   setPostMediaType(event.target.value);
+  //   setPostDescription(event.target.value);
+  //   setPostLink(event.target.value);
+
+  //   setPostPrimaryMedia(imageUrl);
+  //   setPostSecondaryMedia(event.target.value);
+  //   setPostPaywall(event.target.value);
+  // };
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -48,66 +92,134 @@ const AddPost = () => {
     try {
       // add post to database
       await addPost({
-        variables: { ...formState },
+        variables: {
+          ...formState,
+          // postMediaType,
+          // postDescription,
+          // postLink,
+          // postPrimaryMedia,
+          // postSecondaryMedia,
+          // postPaywall,
+        },
       });
     } catch (err) {
       console.error(err);
     }
-   
+    window.alert(formState.postMediaType + " submited");
   };
 
   return (
-    <div>
-      <form className="inline-grid" onSubmit={handleFormSubmit}>
-        <ul>
-          <li className="text-lg font-bold">Post Type</li>
+    <div className="shadow-md flex-auto max-w-sm p-10 pb-20 bg-blue-300">
+      <h2 className="text-2xl text-center">Create a Post!</h2>
+      <div className="w-full">
+        <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+          <span className="text-red-400 mr-1">*</span> Upload Image
+        </div>
+        <div className="my-2 p-1 flex rounded">
+          {" "}
           <input
-            name="postMediaType"
-            type="text"
-            value={formState.postMediaType}
-            onChange={handleChange}
-          ></input>
-          <li className="text-lg font-bold">Post Description</li>
-          <input
-            name="postDescription"
-            type="text"
-            value={formState.postDescription}
-            onChange={handleChange}
-          ></input>
-          <li className="text-lg font-bold">Post Link</li>
-          <input
-            name="postLink"
-            type="text"
-            value={formState.postLink}
-            onChange={handleChange}
-          ></input>
-          <li className="text-lg font-bold">Post image or video</li>
-          <input
+            className="p-1 appearance-none outline-none w-full text-gray-800"
             name="postPrimaryMedia"
-            type="text"
-            value={formState.postPrimaryMedia}
-            onChange={handleChange}
-          ></input>
-          <li className="text-lg font-bold">Post audio file</li>
-          <input
-            name="postSecondaryMedia"
-            type="text"
-            value={formState.postSecondaryMedia}
-            onChange={handleChange}
-          ></input>
-          <li className="text-lg font-bold">Post Paywall?</li>
-
-          <input
-            name="postPaywall"
-            type="text"
-            value={formState.postPaywall}
-            onChange={handleChange}
-          ></input>
-
-          <li>
-            <button type="submit">Submit</button>
-          </li>
-        </ul>
+            type="file"
+            onChange={(e) => setImage(e.target.files[0])}
+          />{" "}
+          <button
+            className="btn bg-green-900 rounded text-gray-200 px-3"
+            type="submit"
+            onClick={() => postDetails()}
+          >
+            upload
+          </button>
+        </div>
+      </div>
+      <form onSubmit={handleFormSubmit}>
+        <div className="w-full">
+          <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+            <span className="text-red-400 mr-1">*</span> Media Type
+          </div>
+          <div className="my-2 bg-white p-1 flex border border-gray-200 rounded">
+            {" "}
+            <select
+              className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
+              name="postMediaType"
+              value={formState.postMediaType}
+              onChange={handleChange}
+            >
+              <option>choose media type...</option>
+              <option>Image</option>
+              <option>Video</option>
+              <option>Audio</option>
+            </select>{" "}
+          </div>
+        </div>
+        <div className="w-full">
+          <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+            <span className="text-red-400 mr-1">*</span> Post Description
+          </div>
+          <div className="my-2 bg-white p-1 flex border border-gray-200 rounded">
+            {" "}
+            <input
+              className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
+              name="postDescription"
+              type="text"
+              value={formState.postDescription}
+              onChange={handleChange}
+            />{" "}
+          </div>
+        </div>
+        <div className="w-full">
+          <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+            <span className="text-red-400 mr-1">*</span> External URL
+          </div>
+          <div className="my-2 bg-white p-1 flex border border-gray-200 rounded">
+            {" "}
+            <input
+              className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
+              name="postLink"
+              type="text"
+              value={formState.postLink}
+              onChange={handleChange}
+            />{" "}
+          </div>
+        </div>
+        <div className="w-full">
+          <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+            <span className="text-red-400 mr-1">*</span> Image
+          </div>
+          <div className="my-2 bg-white p-1 flex border border-gray-200 rounded">
+            {" "}
+            <input
+              className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
+              name="postPrimaryMedia"
+              type="text"
+              value={formState.postPrimaryMedia}
+              onChange={handleChange}
+            />{" "}
+          </div>
+        </div>
+        <div className="w-full">
+          <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+            <span className="text-red-400 mr-1">*</span> post paywall
+          </div>
+          <div className="my-2 bg-white p-1 flex border border-gray-200 rounded">
+            {" "}
+            <input
+              name="postPaywall"
+              type="text"
+              value={formState.postPaywall}
+              onChange={handleChange}
+            />{" "}
+          </div>
+        </div>
+        <div className="mt-6 relative">
+          <button
+            className="shadow-md font-medium py-2 px-4 bg-green-500 text-gray-100
+                  cursor-pointer bg-teal-600 rounded text-lg tr-mt  absolute text-center w-full"
+            type="submit"
+          >
+            Submit
+          </button>
+        </div>
       </form>
     </div>
   );

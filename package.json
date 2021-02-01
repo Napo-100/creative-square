@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/Napo-100/creative-square#readme",
   "dependencies": {
+    "cloudinary": "^1.24.0",
     "if-env": "^1.0.4"
   },
   "devDependencies": {
