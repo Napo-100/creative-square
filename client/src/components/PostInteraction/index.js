@@ -37,22 +37,22 @@ const ReactionPanel = ({post}) => {
     const [likePost, {error}] =  useMutation(LIKE_POST)
 
     return (
-        <div className="container flex flex-col">
+        <div className="container flex flex-row">
             <p  style={{fontSize:"15px", margin: "7px"}} className="flex flex-row" >
                 {post.likeCount} <FcLike style={{fontSize:"8px", margin: "2px"}}/>
             </p>
            <RiMoneyDollarCircleLine style={{fontSize:"25px", margin: "7px"}} className="hover:opacity-30 transform hover:scale-125 motion-reduce:transform-none opacity-50 firstlevel"/>
            <RiChatFollowUpFill style={{fontSize:"25px", margin: "7px"}} className="hover:opacity-30 transform hover:scale-125 motion-reduce:transform-none opacity-50"/>
             <FcLike 
-                style={{fontSize:"15px", margin: "7px"}} 
+                style={{fontSize:"25px", margin: "7px"}} 
                 className="hover:opacity-50 opacity-70  transform hover:scale-125 motion-reduce:transform-none"
                 id = {post._id}
                 onClick={() => likePost({
                     variables: { postId: post._id }
                     })}
             />
-            <AiFillPushpin style={{fontSize:"15px", margin: "7px"}} className="hover:opacity-30 opacity-50 transform hover:scale-125 motion-reduce:transform-none"/>
-            <CgComment style={{fontSize:"15px", margin: "7px"}} className="hover:opacity-30 opacity-50 transform hover:scale-125 motion-reduce:transform-none"/>
+            <AiFillPushpin style={{fontSize:"25px", margin: "7px"}} className="hover:opacity-30 opacity-50 transform hover:scale-125 motion-reduce:transform-none"/>
+            <CgComment style={{fontSize:"25px", margin: "7px"}} className="hover:opacity-30 opacity-50 transform hover:scale-125 motion-reduce:transform-none"/>
         </div>
     )
 
