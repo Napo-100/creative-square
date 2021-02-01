@@ -123,6 +123,8 @@ export const QUERY_ME_PROFILE = gql`
     me {
       _id
       username
+      firstName
+      lastName
       email
       profilePic
       bio
