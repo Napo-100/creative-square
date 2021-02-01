@@ -29,7 +29,7 @@ const AddPost = () => {
     data.append("file", image);
     data.append("upload_preset", "post-image");
     data.append("cloud_name", process.env.CLOUD_NAME);
-    fetch("https://api.cloudinary.com/v1_1/dbnxp1386/image/upload", {
+    fetch("https://api.cloudinary.com/v1_1/creative-square/image/upload", {
       method: "post",
       body: data,
     })

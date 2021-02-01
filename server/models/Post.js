@@ -6,18 +6,14 @@ const postSchema = new Schema(
     postMediaType: {
       type: String,
       required: "You must specify a media type",
-      minlength: 1,
-      maxlength: 280,
     },
 
     postDescription: {
       type: String,
-      minlength: 1,
       maxlength: 280,
     },
     postLink: {
       type: String,
-      minlength: 1,
       maxlength: 280,
     },
     postPrimaryMedia: {
