@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Redirect } from "react-router-dom"
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import { UPDATE_USER } from "../utils/mutations";
 import { QUERY_USER } from "../utils/queries";
@@ -73,6 +74,8 @@ const EditUser = () => {
       await updateUser({
         variables: { ...formState, _id: userId, profilePic: imageUrl },
       });
+      return <Redirect to ="/"/>
+
     } catch (err) {
       console.error(err);
     }

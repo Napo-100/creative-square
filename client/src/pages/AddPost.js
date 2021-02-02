@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom"
 import { useMutation } from "@apollo/react-hooks";
 import { ADD_POST } from "../utils/mutations";
 import { QUERY_POSTS, QUERY_ME } from "../utils/queries";
@@ -10,6 +11,8 @@ const AddPost = () => {
   // const [postPrimaryMedia, setPostPrimaryMedia] = useState("");
   // const [postSecondaryMedia, setPostSecondaryMedia] = useState("");
   // const [postPaywall, setPostPaywall] = useState("");
+
+  let history = useHistory();
 
   const [imageUrl, setImageUrl] = useState("");
   const [formState, setFormState] = useState({
@@ -56,11 +59,11 @@ const AddPost = () => {
         console.error(err);
       }
 
-      const { me } = cache.readQuery({ query: QUERY_ME });
-      cache.writeQuery({
-        query: QUERY_ME,
-        data: { me: { ...me, posts: [addPost, ...me.posts] } },
-      });
+      // const { me } = cache.readQuery({ query: QUERY_ME });
+      // cache.writeQuery({
+      //   query: QUERY_ME,
+      //   data: { me: { ...me, posts: [addPost, ...me.posts] } },
+      // });
     },
   });
 
@@ -85,6 +88,8 @@ const AddPost = () => {
           postPrimaryMedia: imageUrl,
         },
       });
+      return history.push("/")
+
     } catch (err) {
       console.error(err);
     }
