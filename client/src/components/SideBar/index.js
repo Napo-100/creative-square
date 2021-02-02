@@ -13,34 +13,34 @@ function SideBar() {
   console.log(userData);
 
   function showNavigation() {
-      if(loading){
-          return(
-              <div>loading...</div>
-          )
-      }
+    if (loading) {
+      return <div>loading...</div>;
+    }
     if (Auth.loggedIn()) {
       return (
         <ul className="px-8 ">
           <li>
             <Profile />
           </li>
-          <Link to="/postform">
-            <li className="border-b-4 hover:bg-gray-300 p-2">Add Post</li>
-          </Link>
-          {(!userData.me.firstName) &&
-          (!userData.me.lastName) &&
-          (!userData.me.profilePic) ? (
-            <Link to="/completeprofile">
+          {!userData.me.firstName &&
+          !userData.me.lastName &&
+          !userData.me.profilePic ? (
+            <Link to="/finishprofile">
               <li className="border-b-4 hover:bg-gray-300 p-2">
                 Finish your Profile!
               </li>
             </Link>
           ) : (
-            <Link to="/edituser">
-              <li className="border-b-4 hover:bg-gray-300 p-2">EditUser</li>
-            </Link>
+            <div>
+              {/* this link goes to finishprofile temporarily, but will be /edituser when complete */}
+              <Link to="/finishprofile">
+                <li className="border-b-4 hover:bg-gray-300 p-2">EditUser</li>
+              </Link>
+              <Link to="/postform">
+                <li className="border-b-4 hover:bg-gray-300 p-2">Add Post</li>
+              </Link>
+            </div>
           )}
-
           <li className="border-b-4 hover:bg-gray-300 p-2">
             {/* this is not using the Link component to logout or user and then refresh the application to the start */}
             <a href="/" onClick={() => Auth.logout()}>

@@ -69,23 +69,10 @@ const AddPost = () => {
     const { name, value } = event.target;
     setFormState({
       ...formState,
-      postPrimaryMedia: imageUrl,
       [name]: value,
     });
   };
-  // const handleUpload = () => {
-  //   setPostPrimaryMedia(imageUrl);
-  // };
 
-  // const handleChange = (event) => {
-  //   setPostMediaType(event.target.value);
-  //   setPostDescription(event.target.value);
-  //   setPostLink(event.target.value);
-
-  //   setPostPrimaryMedia(imageUrl);
-  //   setPostSecondaryMedia(event.target.value);
-  //   setPostPaywall(event.target.value);
-  // };
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -95,12 +82,7 @@ const AddPost = () => {
       await addPost({
         variables: {
           ...formState,
-          // postMediaType,
-          // postDescription,
-          // postLink,
-          // postPrimaryMedia,
-          // postSecondaryMedia,
-          // postPaywall,
+          postPrimaryMedia: imageUrl,
         },
       });
     } catch (err) {
@@ -132,6 +114,15 @@ const AddPost = () => {
             upload
           </button>
         </div>
+          {imageUrl !== "" && (
+          <img
+            className=""
+            alt="profile-pic-preview"
+            height="300px"
+            width="300px"
+            src={imageUrl}
+          />
+        )}
       </div>
       <form onSubmit={handleFormSubmit}>
         <div className="w-full">
@@ -179,21 +170,6 @@ const AddPost = () => {
               name="postLink"
               type="text"
               value={formState.postLink}
-              onChange={handleChange}
-            />{" "}
-          </div>
-        </div>
-        <div className="w-full">
-          <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
-            <span className="text-red-400 mr-1">*</span> Image
-          </div>
-          <div className="my-2 bg-white p-1 flex border border-gray-200 rounded">
-            {" "}
-            <input
-              className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
-              name="postPrimaryMedia"
-              type="text"
-              value={formState.postPrimaryMedia}
               onChange={handleChange}
             />{" "}
           </div>
