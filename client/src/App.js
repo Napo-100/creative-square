@@ -57,7 +57,7 @@ function App() {
                 <Route exact path="/masterfeed" component={MasterFeed} />
                 <Route exact path="/featuredfeed" component={FeaturedFeed} />
                 <Route exact path="/postform" component={AddPost} />
-                <Route exact path="/edituser" component={UpdateUser} />
+                <Route exact path="/completeprofile" component={UpdateUser} />
                 <Route exact path="/post/:id" component={SinglePost} />
               </Switch>
             </div>

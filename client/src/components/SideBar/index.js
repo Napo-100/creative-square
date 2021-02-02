@@ -5,59 +5,79 @@ import Login from "../../pages/Login";
 import Signup from "../../pages/Signup";
 import Profile from "../../pages/Profile";
 import Logo from "../../assets/logo.png";
-
+import { useQuery } from "@apollo/react-hooks";
+import { QUERY_ME_PROFILE } from "../../utils/queries";
 
 function SideBar() {
-    function showNavigation() {
-        if (Auth.loggedIn()) {
-            return (
-                <ul className="px-8 ">
-                    <li>
-                        <Profile />
-                    </li>
-                    <Link to="/postform">
-                        <li className="border-b-4 hover:bg-gray-300 p-2">Add Post</li>
-                    </Link>
-                    <Link to="/edituser">
-                    <li className="border-b-4 hover:bg-gray-300 p-2">UPDATE PROFILE</li>
-                    </Link>
-                    <li className="border-b-4 hover:bg-gray-300 p-2">
-                        {/* this is not using the Link component to logout or user and then refresh the application to the start */}
-                        <a href="/" onClick={() => Auth.logout()}>
-                            Logout
-            </a>
-                    </li>
-                </ul>
-            );
-        } else {
-            return (
-                <ul className="">
-                    <li className="">
-                        <Login />
-                    </li>
-                    <li className="">
-                        <Signup />
-                    </li>
-                </ul>
-            );
-        }
-    }
+  const { loading, data: userData } = useQuery(QUERY_ME_PROFILE);
+  console.log(userData);
 
-    const [isClosed, setClosed] = React.useState(false);
-    return (
-        <div className="bg-black">
-            <div className="bg-gray-100 sticky top-0 ">
-                {!isClosed && (
-                    <aside className="flex flex-col justify-center bg-white w-80 min-h-screen">
-                        <div className="px-20 pb-10">
-                            <img src={Logo} className="pt-5 " alt="Creative Square" />
-                        </div>
-                        <div className="border-r flex-grow ">
-                            <nav>{showNavigation()}</nav>
-                        </div>
-                    </aside>
-                )}
-                {/* {isClosed ? (
+  function showNavigation() {
+      if(loading){
+          return(
+              <div>loading...</div>
+          )
+      }
+    if (Auth.loggedIn()) {
+      return (
+        <ul className="px-8 ">
+          <li>
+            <Profile />
+          </li>
+          <Link to="/postform">
+            <li className="border-b-4 hover:bg-gray-300 p-2">Add Post</li>
+          </Link>
+          {(!userData.me.firstName) &&
+          (!userData.me.lastName) &&
+          (!userData.me.profilePic) ? (
+            <Link to="/completeprofile">
+              <li className="border-b-4 hover:bg-gray-300 p-2">
+                Finish your Profile!
+              </li>
+            </Link>
+          ) : (
+            <Link to="/edituser">
+              <li className="border-b-4 hover:bg-gray-300 p-2">EditUser</li>
+            </Link>
+          )}
+
+          <li className="border-b-4 hover:bg-gray-300 p-2">
+            {/* this is not using the Link component to logout or user and then refresh the application to the start */}
+            <a href="/" onClick={() => Auth.logout()}>
+              Logout
+            </a>
+          </li>
+        </ul>
+      );
+    } else {
+      return (
+        <ul className="">
+          <li className="">
+            <Login />
+          </li>
+          <li className="">
+            <Signup />
+          </li>
+        </ul>
+      );
+    }
+  }
+
+  const [isClosed, setClosed] = React.useState(false);
+  return (
+    <div className="bg-black">
+      <div className="bg-gray-100 sticky top-0 ">
+        {!isClosed && (
+          <aside className="flex flex-col justify-center bg-white w-80 min-h-screen">
+            <div className="px-20 pb-10">
+              <img src={Logo} className="pt-5 " alt="Creative Square" />
+            </div>
+            <div className="border-r flex-grow ">
+              <nav>{showNavigation()}</nav>
+            </div>
+          </aside>
+        )}
+        {/* {isClosed ? (
           <button
             id="nav-toggle"
             className="flex items-center px-3 py-2 border rounded text-gray-500 border-gray-600 hover:text-white hover:border-white"
@@ -82,9 +102,9 @@ function SideBar() {
             X
           </button>
         )} */}
-            </div>
-        </div>
-    );
+      </div>
+    </div>
+  );
 }
 
 export default SideBar;
