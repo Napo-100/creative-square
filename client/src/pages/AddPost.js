@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useMutation } from "@apollo/react-hooks";
 import { ADD_POST } from "../utils/mutations";
 import { QUERY_POSTS, QUERY_ME } from "../utils/queries";
+import { Link } from "react-router-dom";
 
 const AddPost = () => {
   // const [postMediaType, setPostMediaType] = useState("");
