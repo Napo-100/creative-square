@@ -115,11 +115,7 @@ const resolvers = {
             { username: originalUser.username },
             { $set: { username: updatedUser.username } }
           );
-          console.log("updated posts ", updatedPosts);
-          console.log("args.username ", args.username);
-          console.log("original.username ", originalUser.username);
-          console.log("updated.username ", updatedUser.username);
-          console.log(updatedPosts);
+          return { updatedUser, updatedPosts };
         }
         return updatedUser;
       }
