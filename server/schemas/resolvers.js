@@ -25,18 +25,18 @@ const resolvers = {
 
       throw new AuthenticationError("Not logged in");
     },
-    
+
     featuredPosts: async (parent, args, context) => {
       if (context.user) {
-      const postData = await User.findById({ _id: context.user._id})
-        .select('posts')
-        .populate({
-          path: "posts",
-          match: {
-            postIsFeatured: true
-          }
-        });
-        console.log(postData)
+        const postData = await User.findById({ _id: context.user._id })
+          .select("posts")
+          .populate({
+            path: "posts",
+            match: {
+              postIsFeatured: true,
+            },
+          });
+        console.log(postData);
         return postData;
       }
       throw new AuthenticationError("Not logged in");
@@ -103,12 +103,24 @@ const resolvers = {
     },
     updateUser: async (parent, args, context) => {
       if (context.user) {
+        const originalUser = await User.findById(context.user._id);
         const updatedUser = await User.findByIdAndUpdate(
           context.user._id,
           args,
           { new: true }
         ).select("-__v -password");
-
+        console.log(updatedUser.username);
+        if (originalUser.username !== updatedUser.username) {
+          const updatedPosts = await Post.updateMany(
+            { username: originalUser.username },
+            { $set: { username: updatedUser.username } }
+          );
+          console.log("updated posts ", updatedPosts);
+          console.log("args.username ", args.username);
+          console.log("original.username ", originalUser.username);
+          console.log("updated.username ", updatedUser.username);
+          console.log(updatedPosts);
+        }
         return updatedUser;
       }
 
