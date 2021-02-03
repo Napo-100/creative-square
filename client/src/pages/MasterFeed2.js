@@ -12,12 +12,12 @@ const MasterFeed2 = () => {
   console.log("these are posts ", posts);
 
   return (
-    <div>
+    <div className="flex flex-col justify-center">
         {posts.map((post) => (
-          <div key={post._id} className="pl-12 flex flex-col">
+          <div key={post._id} className="mx-auto flex flex-col">
               
         
-        <div className="px-12 pt-4">
+        <div className="px-12 pt-12">
 
         <div className="max-w-lg border-4">
           <div
