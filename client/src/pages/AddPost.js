@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { useMutation } from "@apollo/react-hooks";
 import { ADD_POST } from "../utils/mutations";
 import { QUERY_POSTS, QUERY_ME } from "../utils/queries";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const AddPost = () => {
+  const history = useHistory();
   // const [postMediaType, setPostMediaType] = useState("");
   // const [postDescription, setPostDescription] = useState("");
   // const [postLink, setPostLink] = useState("");
@@ -74,7 +75,6 @@ const AddPost = () => {
     });
   };
 
-
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
@@ -86,10 +86,12 @@ const AddPost = () => {
           postPrimaryMedia: imageUrl,
         },
       });
+      window.alert(formState.postMediaType + " submited");
+      //when /myposts page exists, update return.
+      return history.push("/");
     } catch (err) {
       console.error(err);
     }
-    window.alert(formState.postMediaType + " submited");
   };
 
   return (
@@ -99,9 +101,19 @@ const AddPost = () => {
           <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
         </div>
 
-        <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+        <span
+          class="hidden sm:inline-block sm:align-middle sm:h-screen"
+          aria-hidden="true"
+        >
+          &#8203;
+        </span>
 
-        <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+        <div
+          class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="modal-headline"
+        >
           <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
             <div class="sm:flex sm:items-start">
               <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
@@ -158,7 +170,8 @@ const AddPost = () => {
                   </div>
                   <div className="w-full">
                     <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
-                      <span className="text-red-400 mr-1">*</span> Post Description
+                      <span className="text-red-400 mr-1">*</span> Post
+                      Description
                     </div>
                     <div className="my-2 bg-white p-1 flex border border-gray-200 rounded">
                       {" "}
@@ -201,11 +214,17 @@ const AddPost = () => {
                     </div>
                   </div>
                   <div className="mt-6 relative">
-                    <button type="submit" className="mb-1 w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">
+                    <button
+                      type="submit"
+                      className="mb-1 w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
+                    >
                       ADD POST
-                        </button>
+                    </button>
                     <Link to="/">
-                      <button type="cancel" className="mt-4 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                      <button
+                        type="cancel"
+                        className="mt-4 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                      >
                         Cancel
                       </button>
                     </Link>
