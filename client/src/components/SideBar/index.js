@@ -18,35 +18,38 @@ function SideBar() {
     }
     if (Auth.loggedIn()) {
       return (
-        <ul className="px-8 ">
+        <ul className="flex flex-row sm:flex-col sm:px-8 ">
           <li>
             <Profile />
           </li>
           {!userData.me.firstName &&
-          !userData.me.lastName &&
-          !userData.me.profilePic ? (
-            <Link to="/finishprofile">
-              <li className="border-b-4 hover:bg-gray-300 p-2">
-                Finish your Profile!
-              </li>
-            </Link>
-          ) : (
-            <div>
-              {/* this link goes to finishprofile temporarily, but will be /edituser when complete */}
+            !userData.me.lastName &&
+            !userData.me.profilePic ? (
               <Link to="/finishprofile">
-                <li className="border-b-4 hover:bg-gray-300 p-2">EditUser</li>
+                <li className=" border-b-4 hover:bg-gray-300 p-2">
+                  Finish your Profile!
+              </li>
               </Link>
-              <Link to="/postform">
-                <li className="border-b-4 hover:bg-gray-300 p-2">Add Post</li>
-              </Link>
-            </div>
-          )}
-          <li className="border-b-4 hover:bg-gray-300 p-2">
-            {/* this is not using the Link component to logout or user and then refresh the application to the start */}
-            <a href="/" onClick={() => Auth.logout()}>
-              Logout
-            </a>
-          </li>
+            ) : (
+              <div>
+                {/* this link goes to finishprofile temporarily, but will be /edituser when complete */}
+                <Link to="/finishprofile">
+                  <li className="text-xs sm:text-lg sm:border-b-4 hover:bg-gray-300 p-2">EditUser</li>
+                </Link>
+                <Link to="/postform">
+                  <li className="text-xs sm:text-lg sm:border-b-4 hover:bg-gray-300 p-2">Add Post</li>
+                </Link>
+                <li className="text-xs sm:text-lg sm:border-b-4 hover:bg-gray-300 p-2">
+                  {/* this is not using the Link component to logout or user and then refresh the application to the start */}
+                  <a href="/" onClick={() => Auth.logout()}>
+                    Logout
+                      </a>
+                </li>
+              </div>
+
+
+            )}
+
         </ul>
       );
     } else {
@@ -66,13 +69,13 @@ function SideBar() {
   const [isClosed, setClosed] = React.useState(false);
   return (
     <div className="">
-      <div className="sticky top-0 shadow-md">
+      <div className="sm:sticky sm:top-0 shadow-md">
         {!isClosed && (
-          <aside className="flex flex-col justify-center w-80 min-h-screen">
-            <div className="px-20 pb-10">
+          <aside className="flex sm:flex-col flex-row justify-center w-80 sm:min-h-screen">
+            <div className="px-10 sm:px-20 pb-10 w-auto">
               <img src={Logo} className="pt-5 " alt="Creative Square" />
             </div>
-            <div className="border-r flex-grow ">
+            <div className="border-r sm:flex-grow ">
               <nav>{showNavigation()}</nav>
             </div>
           </aside>

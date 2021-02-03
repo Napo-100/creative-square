@@ -8,12 +8,12 @@ function Profile() {
   console.log(userData);
 
   return (
-    <div className=" mb-5">
+    <div className="mb-5">
       {loading ? (
         <div>Loading...</div>
       ) : (
         <div>
-          <div className="border-4 rounded-full border-black p-1 shadow-lg">
+          <div className="border-2 sm:border-4 rounded-full border-black p-1 sm:shadow-lg">
             {userData.me.profilePic ? (
               <img
                 src={userData.me.profilePic}
@@ -28,7 +28,7 @@ function Profile() {
               />
             )}
           </div>
-          <h2 className="text-center font-bold text-gray-800  antialiased text-3xl">
+          <h2 className="text-center font-bold text-gray-800  antialiased sm:text-3xl">
             {userData.me.username}
           </h2>
         </div>

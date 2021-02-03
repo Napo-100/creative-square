@@ -4,26 +4,26 @@ import Auth from "../../../src/utils/auth";
 
 const Header = () => {
   return (
-    <div className="sticky top-0 bg-white z-10 flex flex-row flex-wrap flex-grow">
+    <div className="sticky top-0 bg-white z-10 flex flex-row flex-wrap justify-center sm:justify-start flex-grow">
       {Auth.loggedIn() ? (
-        <ul className="border-gray-300  py-2">
+        <ul className="text-sm sm:text-lg sm:font-black border-gray-300  py-2">
           <Link to="/">
-            <button className="border-b-4 hover:bg-blue-100 p-2 px-5 py-3 border-black shadow-md w-52">
+            <button className="text-xs sm:text-lg sm:font-bold border-b-2 sm:border-b-4 hover:bg-blue-100 p-2 sm:px-5 py-3 border-black shadow-md sm:w-52">
               Home Feed
           </button>
           </Link>
           <Link to="/subscriptions">
-            <button className="border-b-4 hover:bg-red-100 p-2 px-5 py-3 border-black shadow-md ml-1 w-52">
+            <button className="text-xs sm:text-lg sm:font-bold border-b-2 sm:border-b-4 hover:bg-red-100 p-2 sm:px-5 py-3 border-black shadow-md ml-1 sm:w-52">
               Subscriptions
           </button>
           </Link>
           <Link to="/masterfeed">
-            <button className="border-b-4 hover:bg-gray-300 p-2 px-5 py-3 border-black shadow-md ml-1 w-52">
+            <button className="text-xs sm:text-lg sm:font-bold border-b-2 sm:border-b-4 hover:bg-gray-300 p-2 sm:px-5 py-3 border-black shadow-md ml-1 sm:w-52">
               All posts
           </button>
           </Link>
           <Link to="/featuredfeed">
-            <button className="border-b-4 hover:bg-gray-300 p-2 px-5 py-3 border-black shadow-md ml-1 w-52">
+            <button className="text-xs sm:text-lg sm:font-bold border-b-2 sm:border-b-4 hover:bg-gray-300 p-2 sm:px-5 py-3 border-black shadow-md ml-1 sm:w-52">
               Featured posts
           </button>
           </Link>
