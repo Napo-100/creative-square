@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useQuery } from "@apollo/react-hooks";
-import { QUERY_ME_POSTS } from "../utils/queries";
+import { QUERY_ME } from "../utils/queries";
 import { Link } from "react-router-dom";
 
 
 const HomeFeed = () => {
-  const { loading, data } = useQuery(QUERY_ME_POSTS);
+  const { loading, data } = useQuery(QUERY_ME);
   console.log(data);
 
   const posts = data?.me.posts || [];

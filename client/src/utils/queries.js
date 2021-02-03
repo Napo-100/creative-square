@@ -146,6 +146,19 @@ export const QUERY_ME = gql`
       following {
         username
         _id
+        posts {
+          _id
+          postMediaType
+          postDescription
+          postLink
+          postPrimaryMedia
+          postSecondaryMedia
+          postPaywall
+          likeCount
+          pinCount
+          createdAt
+        }
+
       }
     }
   }
@@ -154,6 +167,7 @@ export const QUERY_ME = gql`
 export const QUERY_ME_POSTS = gql`
   {
     me {
+      username
       posts {
         _id
         postMediaType
@@ -169,6 +183,30 @@ export const QUERY_ME_POSTS = gql`
     }
   }
 `;
+
+export const QUERY_FOLLOWING_POSTS = gql`
+query {
+  me {
+    _id
+    username
+    firstName
+    email
+    subscriptions {
+      username
+    }
+    following {
+      username
+      posts {
+        _id
+        postDescription
+      }
+    }
+  }
+}
+`;
+
+
+
 
 export const QUERY_ME_PROFILE = gql`
   {

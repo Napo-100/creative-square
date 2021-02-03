@@ -12,7 +12,7 @@ const Header = () => {
           <Link to="/following">Following</Link>
         </li>
         <li className="border-b-4 hover:bg-gray-300 p-2 px-5 py-3 border-black shadow-md ml-1">
-          <Link to="/">All posts</Link>
+          <Link to="/homefeed">My Posts</Link>
         </li>
         <li className="border-b-4 hover:bg-gray-300 p-2 px-5 py-3 border-black shadow-md ml-1">
           <Link to="/featuredfeed">Featured posts</Link>

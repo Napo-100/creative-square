@@ -16,7 +16,12 @@ const resolvers = {
           })
           .populate("subscriptions")
           .populate("subscribers")
-          .populate("following")
+          .populate({
+            path: "following",
+            populate: {
+              path: "posts",
+            },
+          })
           .populate("followers")
           .populate("likedPosts")
           .populate("pinnedPosts");
