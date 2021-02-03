@@ -7,6 +7,7 @@ import AddImagePost from "../components/AddImagePost";
 import AddVideoPost from "../components/AddVideoPost";
 
 const UploadMediaForm = () => {
+    console.log(process.env.CLOUD_NAME)
   //   const history = useHistory();
 
   const [postMediaType, setPostMediaType] = useState("Choose Media Type...");
@@ -93,7 +94,17 @@ const UploadMediaForm = () => {
                 </div>
               </div>
             </div>
-            {postMediaType.postMediaType === "Choose Media Type..." && (
+            {!postMediaType.postMediaType  && (
+              <Link to="/">
+                <button
+                  type="cancel"
+                  className="mt-4 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                >
+                  Cancel
+                </button>
+              </Link>
+            )}
+            {postMediaType.postMediaType ==="Choose Media Type..."  && (
               <Link to="/">
                 <button
                   type="cancel"
