@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 const Header = () => {
   return (
 
-    <div className="sticky top-0 bg-transparent z-50">
+    <div className="sticky top-0 bg-transparent z-10 bg-gray-100">
       <section className="h-40 p-2">
-      <input class="w-full h-16 px-3 rounded mb-8 focus:outline-none focus:shadow-outline text-xl px-8 shadow-xl" type="search" placeholder="Search..."/>
       
-      <ul className="flex flex-row space-x-8 border-gray-300">
+      <input class="w-1/3 h-16 px-3 rounded mb-8 focus:outline-none focus:shadow-outline text-xl px-8 shadow-xl" type="search" placeholder="Search..."/>
+      <ul className="flex flex-row space-x-8 border-gray-300 z-10">
         <li className="bg-purple-300 rounded-full border-b-4 hover:bg-blue-100 p-2 px-5 py-3 border-black shadow-md ml-1">
           <Link to="/">For You Grid</Link>
         </li>
