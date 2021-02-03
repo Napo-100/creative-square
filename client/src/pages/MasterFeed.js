@@ -27,8 +27,9 @@ const MasterFeed = () => {
               {/* <a href={post.postLink} target="_blank" rel="noreferrer"> */}
               {/* make link to single post page */}
               <Link to={`/post/${post._id}`}>
-                <span className="block h-64 shadow leading-snug flex flex-wrap content-center">
-                  {post.postMediaType === "Audio " && (
+                {/* <span className="block h-64 shadow leading-snug flex flex-wrap content-center"> */}
+                <span className="block h-64 relative rounded shadow leading-snug">
+                  {post.postMediaType === "Image" && (
                     <img
                       src={post.postPrimaryMedia}
                       className="object-cover h-full w-max rounded-lg"
