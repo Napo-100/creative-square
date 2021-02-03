@@ -9,7 +9,7 @@ const Header = () => {
       
       <ul className="flex flex-row space-x-8 border-gray-300">
         <li className="bg-purple-300 rounded-full border-b-4 hover:bg-blue-100 p-2 px-5 py-3 border-black shadow-md ml-1">
-          <Link to="/">For You</Link>
+          <Link to="/">For You Grid</Link>
         </li>
         <li className="bg-purple-300 rounded-full border-b-4 hover:bg-blue-100 p-2 px-5 py-3 border-black shadow-md ml-1">
           <Link to="/following">Following</Link>
@@ -19,6 +19,9 @@ const Header = () => {
         </li>
         <li className="bg-purple-300 rounded-full border-b-4 hover:bg-blue-100 p-2 px-5 py-3 border-black shadow-md ml-1">
           <Link to="/featuredfeed">Featured posts</Link>
+        </li>
+        <li className="bg-purple-300 rounded-full border-b-4 hover:bg-blue-100 p-2 px-5 py-3 border-black shadow-md ml-1">
+          <Link to="/masterfeed2">For You Singles</Link>
         </li>
       </ul>
       
