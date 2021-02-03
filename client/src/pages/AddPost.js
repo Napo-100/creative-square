@@ -6,12 +6,6 @@ import { Link, useHistory } from "react-router-dom";
 
 const AddPost = () => {
   const history = useHistory();
-  // const [postMediaType, setPostMediaType] = useState("");
-  // const [postDescription, setPostDescription] = useState("");
-  // const [postLink, setPostLink] = useState("");
-  // const [postPrimaryMedia, setPostPrimaryMedia] = useState("");
-  // const [postSecondaryMedia, setPostSecondaryMedia] = useState("");
-  // const [postPaywall, setPostPaywall] = useState("");
 
   const [imageUrl, setImageUrl] = useState("");
   const [formState, setFormState] = useState({
@@ -19,7 +13,7 @@ const AddPost = () => {
     postDescription: "",
     postLink: "",
     postPrimaryMedia: "",
-    postSecondaryMedia: "none",
+    postSecondaryMedia: "",
     postPaywall: true,
   });
 
@@ -114,41 +108,41 @@ const AddPost = () => {
           aria-modal="true"
           aria-labelledby="modal-headline"
         >
-          <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-            <div class="sm:flex sm:items-start">
-              <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                <h2 className="text-2xl text-center">Create a Post!</h2>
-                <div className="w-full">
-                  <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
-                    <span className="text-red-400 mr-1">*</span> Upload Image
+          <form onSubmit={handleFormSubmit}>
+            <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+              <div class="sm:flex sm:items-start">
+                <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                  <h2 className="text-2xl text-center">Create a Post!</h2>
+                  <div className="w-full">
+                    <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+                      <span className="text-red-400 mr-1">*</span> Upload Image
+                    </div>
+                    <div className="my-2 p-1 flex rounded">
+                      {" "}
+                      <input
+                        className="p-1 appearance-none outline-none w-full text-gray-800"
+                        name="postPrimaryMedia"
+                        type="file"
+                        onChange={(e) => setImage(e.target.files[0])}
+                      />{" "}
+                      <button
+                        className="btn bg-green-900 rounded text-gray-200 px-3"
+                        type="submit"
+                        onClick={() => postDetails()}
+                      >
+                        Upload
+                      </button>
+                    </div>
+                    {imageUrl !== "" && (
+                      <img
+                        className=""
+                        alt="profile-pic-preview"
+                        height="300px"
+                        width="300px"
+                        src={imageUrl}
+                      />
+                    )}
                   </div>
-                  <div className="my-2 p-1 flex rounded">
-                    {" "}
-                    <input
-                      className="p-1 appearance-none outline-none w-full text-gray-800"
-                      name="postPrimaryMedia"
-                      type="file"
-                      onChange={(e) => setImage(e.target.files[0])}
-                    />{" "}
-                    <button
-                      className="btn bg-green-900 rounded text-gray-200 px-3"
-                      type="submit"
-                      onClick={() => postDetails()}
-                    >
-                      Upload
-                    </button>
-                  </div>
-                  {imageUrl !== "" && (
-                    <img
-                      className=""
-                      alt="profile-pic-preview"
-                      height="300px"
-                      width="300px"
-                      src={imageUrl}
-                    />
-                  )}
-                </div>
-                <form onSubmit={handleFormSubmit}>
                   <div className="w-full">
                     <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
                       <span className="text-red-400 mr-1">*</span> Media Type
@@ -229,10 +223,10 @@ const AddPost = () => {
                       </button>
                     </Link>
                   </div>
-                </form>
+                </div>
               </div>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>
