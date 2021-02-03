@@ -15,40 +15,203 @@ const SinglePost = () => {
   const post = data?.post || {};
   console.log(post);
 
+
+  //create styling
+  const hideScrollBar = {
+    overflow: "none"
+  };
+
+
+
   if (loading) {
     return <div>Loading...</div>;
   }
   return (
-    <div>
-      <div className="container w-100 lg:w-4/5 mx-auto flex flex-col">
-     
-      <div className="flex flex-col md:flex-row overflow-hidden
-                                        bg-white rounded-lg shadow-xl  mt-4 w-100 mx-2">
+    //   <div>
+    //   <div className="container w-100 lg:w-4/5 mx-auto flex flex-col">
 
-        <div className="h-64 w-auto md:w-1/2 relative">
-        
-          <img className="inset-0 h-full w-full object-cover object-center" src={post.postPrimaryMedia} />
-          {/* <div class="absolute bottom-0 left-0 ...">
-          <ReactionPanel post ={post}/>
-          </div> */}
-        </div>
-        
-        <div className="w-full py-4 px-6 text-gray-800 flex flex-col justify-between">
-          <h3 className="font-semibold text-lg leading-tight truncate">{ post.postDescription }</h3>
-          <p className="mt-2">
-            
-          </p>
-          <div className="flex flex-row">
-          <p className="text-sm text-gray-700 uppercase tracking-wide font-semibold mt-2">
-            { post.username } &bull; { post.createdAt}
-          </p>
-          <ReactionPanel post ={post}/>
+    //   <div className="flex flex-col md:flex-row overflow-hidden
+    //                                     bg-white rounded-lg shadow-xl  mt-4 w-100 mx-2">
+
+    //     <div className="h-max w-max md:w-1/2 relative rounded bg-gradient-to-r from-gray-100 to-gray-200">
+
+    //       <img className="inset-0 h-full w-full object-contain object-center" src={post.postPrimaryMedia} />
+    //       {/* <div class="absolute bottom-0 left-0 ...">
+    //       <ReactionPanel post ={post}/>
+    //       </div> */}
+    //     </div>
+
+    //     <div className="w-full py-4 px-6 text-gray-800 flex flex-col justify-between">
+    //       <h3 className="font-semibold text-lg leading-tight truncate">{ post.postDescription }</h3>
+    //       <p className="mt-2">
+
+    //       </p>
+    //       <div className="flex flex-row">
+    //       <p className="text-sm text-gray-700 uppercase tracking-wide font-semibold mt-2">
+    //         { post.username } &bull; { post.createdAt}
+    //       </p>
+    //       <ReactionPanel post ={post}/>
+    //       </div>
+    //     </div>
+    //   </div>
+
+    // </div>
+    // </div>
+
+    //<style>
+    // .hide-scroll-bar {
+    //   -ms-overflow-style: none;
+    //   scrollbar-width: none;
+    // }
+    // .hide-scroll-bar::-webkit-scrollbar {
+    //   display: none;
+    // }
+    //     </style>
+
+
+    //className="flex flex-row"
+    <div className="flex flex-col">
+      <div className="p-12">
+
+        <div className="max-w-lg border-4">
+          <div
+            class="grid grid-cols-1 grid-rows-7 grid-flow-row overflow-hidden rounded-lg shadow-md bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out"
+          >
+            <div class="col-span-3 row-span-4 p-1 m-1 justify-center">
+              <a href="#">
+                <img
+                  src={post.postPrimaryMedia}
+                  alt="Placeholder"
+                  class="rounded-t-xl object-contain w-max max-h-96"
+                />
+              </a>
+            </div>
+            <ul
+              style={{ overflow: "hidden" }}
+              class="flex flex-row pl-2 text-gray-600 overflow-x-scroll hide-scroll-bar">
+
+              <ReactionPanel post={post} />
+
+            </ul>
+
+            <div class="col-span-3 row-span-1">
+              <div class="flex align-bottom flex-col leading-none p-2 md:p-4">
+                <div class="flex flex-row justify-between items-center">
+                  <a
+                    class="flex items-center no-underline hover:underline text-black"
+                    href="#"
+                  >
+                    <img
+                      alt="Placeholder"
+                      style={{ height: "32px", width: "32px" }}
+                      class="block rounded-full"
+                      src="https://picsum.photos/640/400/?random"
+                    />
+                    <span class="ml-2 text-sm"> {post.username} </span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-span-3 row-span-1">
+              <header
+                class="flex items-center justify-between leading-tight p-2 md:p-4"
+              >
+                <p class="text-sm">
+
+                  {post.postDescription}
+
+                </p>
+
+              </header>
+            </div>
+
+            <div class="col-span-3 row-span-1">
+              <p class="text-grey-darker text-xs p-2 md:p-4">{post.createdAt}</p>
+
+              {/* <ul
+       style={{overflow: "hidden"}}
+        class="flex flex-row pl-2 text-gray-600 overflow-x-scroll hide-scroll-bar"
+      >
+        <li class="py-1">
+          <div
+            class="transition duration-300 ease-in-out rounded-2xl mr-1 px-2 py-1 hover:bg-blue-200 text-gray-500 hover:text-gray-800"
+          >
+            <a class="" href="#">#hogehoge</a>
+          </div>
+        </li>
+        <li class="py-1">
+          <div
+            class="transition duration-300 ease-in-out rounded-2xl mr-1 px-2 py-1 hover:bg-blue-200 text-gray-500 hover:text-gray-800"
+          >
+            <a class="" href="#">#fugafuga</a>
+          </div>
+        </li>
+
+        <li class="py-1">
+          <div
+            class="transition duration-300 ease-in-out rounded-2xl mr-1 px-2 py-1 hover:bg-blue-200 text-gray-500 hover:text-gray-800"
+          >
+            <a class="" href="#">#foofoo</a>
+          </div>
+        </li>
+        <li class="py-1">
+          <div
+            class="transition duration-300 ease-in-out rounded-2xl mr-1 px-2 py-1 hover:bg-blue-200 text-gray-500 hover:text-gray-800"
+          >
+            <a class="" href="#">#barbarbar</a>
+          </div>
+        </li>
+        <li class="py-1">
+          <div
+            class="transition duration-300 ease-in-out rounded-2xl mr-1 px-2 py-1 hover:bg-blue-200 text-gray-500 hover:text-gray-800"
+          >
+            <a class="" href="#">#hogefugafoo</a>
+          </div>
+        </li>
+      </ul> */}
+            </div>
           </div>
         </div>
       </div>
-      
+
+
+      <div>
+
+
+
+      </div>
+
+      <section className="rounded-b-lg ml-3 max-w-lg pl-12">
+        
+
+          <form action="/" accept-charset="UTF-8" method="post"><input type="hidden" />
+            <textarea className="ml-4 w-full shadow-inner p-4 border-0 mb-4 rounded-lg focus:shadow-outline text-2xl" placeholder="Ask questions here." cols="6" rows="3" id="comment_content" spellcheck="false"></textarea>
+            <button className="ml-4 font-bold py-2 px-4 w-full bg-purple-400 text-lg text-white shadow-md rounded-lg ">Comment </button>
+          </form>
+
+          <div id="task-comments" class="pt-4"></div>
+
+          <div class="bg-white rounded-lg p-3 flex flex-col justify-center items-center md:items-start shadow-lg mb-4">
+          <div class="flex flex-row justify-center mr-2">
+
+          <h3 class="text-purple-600 font-semibold text-lg text-center md:text-left ">@Shanel</h3>
+          
+          </div>
+
+          <p style={{width:"90%"}} class="text-gray-600 text-lg text-center md:text-left ">Hi good morning will it be the entire house. </p>
+
+
+          </div>
+
+        
+      </section>
+
     </div>
-    </div>
+
+
+
+
   );
 };
 

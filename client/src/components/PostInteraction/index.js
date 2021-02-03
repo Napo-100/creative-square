@@ -49,27 +49,39 @@ const ReactionPanel = ({post}) => {
 
 
     return (
-        <div className="container flex flex-row">
+        <div className="flex flex-row mx-auto">
             
-            <p  style={{fontSize:"15px", margin: "7px"}} className="flex flex-row" >
+            <p  style={{fontSize:"15px"}} className="mx-3 my-1 flex flex-row absolute top-0 right-0 ..." >
                 {post.likeCount} <FcLike style={{fontSize:"8px", margin: "2px"}}/>
             </p>
-           <RiMoneyDollarCircleLine style={{fontSize:"25px", margin: "7px"}} className="hover:opacity-30 transform hover:scale-125 motion-reduce:transform-none opacity-50 firstlevel"/>
-           <RiChatFollowUpFill style={{fontSize:"25px", margin: "7px"}} className="hover:opacity-30 transform hover:scale-125 motion-reduce:transform-none opacity-50"/>
+           <RiMoneyDollarCircleLine style={{fontSize:"25px"}} className="mx-3 my-1 hover:opacity-30 transform hover:scale-125 motion-reduce:transform-none opacity-50 firstlevel"/>
+           <RiChatFollowUpFill style={{fontSize:"25px"}} className="mx-3 my-1 hover:opacity-30 transform hover:scale-125 motion-reduce:transform-none opacity-50"/>
+            <div className="relative text-center">
             <FcLike 
-                style={{fontSize:"25px", margin: "7px"}} 
-                className="hover:opacity-50 opacity-70  transform hover:scale-125 motion-reduce:transform-none"
+                style={{fontSize:"25px"}} 
+                className="hover:opacity-50 opacity-70 mx-3 my-1 transform hover:scale-125 motion-reduce:transform-none"
                 id = {post._id}
                 onClick={() => handleLike()}
             />
+              <p  style={{fontSize:"15px", top: "-2px"}} className="text-red-900 flex flex-row absolute top-0 right-0 ..." >
+               {post.likeCount} <FcLike style={{fontSize:"8px", margin: "2px"}}/>
+            </p>
+            </div>
+            <div className="relative text-center">
             <AiFillPushpin 
-                style={{fontSize:"25px", margin: "7px"}} 
-                className="hover:opacity-30 opacity-50 transform hover:scale-125 motion-reduce:transform-none"
+                style={{fontSize:"25px"}} 
+                className="hover:opacity-30 mx-3 my-1 opacity-50 transform hover:scale-125 motion-reduce:transform-none"
                 onClick={() => handlePin()}    
             />
-            <CgComment style={{fontSize:"25px", margin: "7px"}} className="hover:opacity-30 opacity-50 transform hover:scale-125 motion-reduce:transform-none"/>
-            
+             <p  style={{fontSize:"15px", top: "-2px"}} className="text-red-900 flex flex-row absolute top-0 right-0 ..." >
+               {post.pinCount} <AiFillPushpin style={{fontSize:"8px", margin: "2px"}}/>
+            </p>
+            </div>
+            <CgComment style={{fontSize:"25px"}} className="mx-3 my-1 hover:opacity-30 opacity-50 transform hover:scale-125 motion-reduce:transform-none"/>
+
+
         </div>
+        
         
     )
 

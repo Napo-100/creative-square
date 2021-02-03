@@ -36,11 +36,11 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <Router>
+      <Router> 
         <div>
           {/* <TopBar /> */}
           <div className="flex">
-            <SideBar />
+            <SideBar/>
             <div className="w-full">
               {Auth.loggedIn() && <Header />}
               <Switch>
