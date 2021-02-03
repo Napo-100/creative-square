@@ -42,7 +42,7 @@ function App() {
           <div className="flex">
             <SideBar />
             <div className="w-full">
-              {Auth.loggedIn() && <Header />}
+              <Header />
               <Switch>
                 {Auth.loggedIn() ? (
                   <Route exact path="/" component={FollowFeed} />

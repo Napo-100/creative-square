@@ -1,31 +1,40 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Auth from "../../../src/utils/auth";
 
 const Header = () => {
   return (
-    <div className="sticky top-0 bg-white z-10">
-      <ul className="flex flex-row border-gray-300 py-2">
-        <Link to="/">
-          <button className="border-b-4 hover:bg-blue-100 p-2 px-5 py-3 border-black shadow-md">
-            Home Feed
+    <div className="sticky top-0 bg-white z-10 flex flex-row flex-wrap flex-grow">
+      {Auth.loggedIn() ? (
+        <ul className="border-gray-300  py-2">
+          <Link to="/">
+            <button className="border-b-4 hover:bg-blue-100 p-2 px-5 py-3 border-black shadow-md w-52">
+              Home Feed
           </button>
-        </Link>
-        <Link to="/subscriptions">
-          <button className="border-b-4 hover:bg-red-100 p-2 px-5 py-3 border-black shadow-md ml-1">
-            Subscriptions
+          </Link>
+          <Link to="/subscriptions">
+            <button className="border-b-4 hover:bg-red-100 p-2 px-5 py-3 border-black shadow-md ml-1 w-52">
+              Subscriptions
           </button>
-        </Link>
-        <Link to="/masterfeed">
-          <button className="border-b-4 hover:bg-gray-300 p-2 px-5 py-3 border-black shadow-md ml-1">
-            All posts
+          </Link>
+          <Link to="/masterfeed">
+            <button className="border-b-4 hover:bg-gray-300 p-2 px-5 py-3 border-black shadow-md ml-1 w-52">
+              All posts
           </button>
-        </Link>
-        <Link to="/featuredfeed">
-          <button className="border-b-4 hover:bg-gray-300 p-2 px-5 py-3 border-black shadow-md ml-1">
-            Featured posts
+          </Link>
+          <Link to="/featuredfeed">
+            <button className="border-b-4 hover:bg-gray-300 p-2 px-5 py-3 border-black shadow-md ml-1 w-52">
+              Featured posts
           </button>
-        </Link>
-      </ul>
+          </Link>
+        </ul>
+      ) : (
+          <div>
+            <ul className="flex flex-row border-gray-300 flex-nowrap py-2 h-10">
+            
+          </ul>
+          </div>
+        )}
     </div>
   );
 };

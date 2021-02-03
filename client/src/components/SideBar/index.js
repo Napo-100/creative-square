@@ -65,10 +65,10 @@ function SideBar() {
 
   const [isClosed, setClosed] = React.useState(false);
   return (
-    <div className="bg-black">
-      <div className="bg-gray-100 sticky top-0 ">
+    <div className="">
+      <div className="sticky top-0 shadow-md">
         {!isClosed && (
-          <aside className="flex flex-col justify-center bg-white w-80 min-h-screen">
+          <aside className="flex flex-col justify-center w-80 min-h-screen">
             <div className="px-20 pb-10">
               <img src={Logo} className="pt-5 " alt="Creative Square" />
             </div>
