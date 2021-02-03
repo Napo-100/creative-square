@@ -22,7 +22,7 @@ function Profile() {
               />
             ) : (
               <img
-                src={defaultImage}
+                src="https://picsum.photos/640/400/?random"
                 alt="Default pic"
                 className="rounded-full shadow-inner"
               />

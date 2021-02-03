@@ -41,6 +41,7 @@ const resolvers = {
       }
       throw new AuthenticationError("Not logged in");
     },
+
     // get all users
     users: async () => {
       return User.find()

@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery, useMutation } from "@apollo/react-hooks";
 import { QUERY_POST } from "../utils/queries";
 import ReactionPanel from "../components/PostInteraction";
+import CommentForm from "../components/CommentForm";
+
+
 
 
 const SinglePost = () => {
@@ -16,59 +19,12 @@ const SinglePost = () => {
   console.log(post);
 
 
-  //create styling
-  const hideScrollBar = {
-    overflow: "none"
-  };
-
-
 
   if (loading) {
     return <div>Loading...</div>;
   }
   return (
-    //   <div>
-    //   <div className="container w-100 lg:w-4/5 mx-auto flex flex-col">
-
-    //   <div className="flex flex-col md:flex-row overflow-hidden
-    //                                     bg-white rounded-lg shadow-xl  mt-4 w-100 mx-2">
-
-    //     <div className="h-max w-max md:w-1/2 relative rounded bg-gradient-to-r from-gray-100 to-gray-200">
-
-    //       <img className="inset-0 h-full w-full object-contain object-center" src={post.postPrimaryMedia} />
-    //       {/* <div class="absolute bottom-0 left-0 ...">
-    //       <ReactionPanel post ={post}/>
-    //       </div> */}
-    //     </div>
-
-    //     <div className="w-full py-4 px-6 text-gray-800 flex flex-col justify-between">
-    //       <h3 className="font-semibold text-lg leading-tight truncate">{ post.postDescription }</h3>
-    //       <p className="mt-2">
-
-    //       </p>
-    //       <div className="flex flex-row">
-    //       <p className="text-sm text-gray-700 uppercase tracking-wide font-semibold mt-2">
-    //         { post.username } &bull; { post.createdAt}
-    //       </p>
-    //       <ReactionPanel post ={post}/>
-    //       </div>
-    //     </div>
-    //   </div>
-
-    // </div>
-    // </div>
-
-    //<style>
-    // .hide-scroll-bar {
-    //   -ms-overflow-style: none;
-    //   scrollbar-width: none;
-    // }
-    // .hide-scroll-bar::-webkit-scrollbar {
-    //   display: none;
-    // }
-    //     </style>
-
-
+   
     //className="flex flex-row"
     <div className="flex flex-col">
       <div className="p-12">
@@ -184,13 +140,15 @@ const SinglePost = () => {
 
       <section className="rounded-b-lg ml-3 max-w-lg pl-12">
         
-
-          <form action="/" accept-charset="UTF-8" method="post"><input type="hidden" />
+      <CommentForm postId={postId} />
+          {/* <form action="/" accept-charset="UTF-8" method="post"><input type="hidden" />
             <textarea className="ml-4 w-full shadow-inner p-4 border-0 mb-4 rounded-lg focus:shadow-outline text-2xl" placeholder="Ask questions here." cols="6" rows="3" id="comment_content" spellcheck="false"></textarea>
             <button className="ml-4 font-bold py-2 px-4 w-full bg-purple-400 text-lg text-white shadow-md rounded-lg ">Comment </button>
-          </form>
+          </form> */}
 
-          <div id="task-comments" class="pt-4"></div>
+
+
+         
 
           <div class="bg-white rounded-lg p-3 flex flex-col justify-center items-center md:items-start shadow-lg mb-4">
           <div class="flex flex-row justify-center mr-2">

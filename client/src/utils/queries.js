@@ -151,6 +151,25 @@ export const QUERY_ME = gql`
   }
 `;
 
+export const QUERY_ME_POSTS = gql`
+  {
+    me {
+      posts {
+        _id
+        postMediaType
+        postDescription
+        postLink
+        postPrimaryMedia
+        postSecondaryMedia
+        postPaywall
+        likeCount
+        pinCount
+        createdAt
+      }
+    }
+  }
+`;
+
 export const QUERY_ME_PROFILE = gql`
   {
     me {
@@ -237,4 +256,15 @@ export const QUERY_COMMENT = gql`
     username
     createdAt
   }
+`;
+
+export const QUERY_COMMENTS = gql`
+  query {
+    comments{
+    _id
+    commentText
+    username
+    createdAt
+  }
+}
 `;

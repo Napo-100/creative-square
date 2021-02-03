@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { useQuery } from "@apollo/react-hooks";
-import { QUERY_POSTS } from "../utils/queries";
+import { QUERY_ME_POSTS } from "../utils/queries";
 import { Link } from "react-router-dom";
 
 
-const MasterFeed = () => {
-  const { loading, data } = useQuery(QUERY_POSTS);
+const HomeFeed = () => {
+  const { loading, data } = useQuery(QUERY_ME_POSTS);
   console.log(data);
 
-  const posts = data?.posts || [];
+  const posts = data?.me.posts || [];
   console.log("these are posts ", posts);
 
   return (
@@ -38,4 +38,4 @@ const MasterFeed = () => {
   );
 };
 
-export default MasterFeed;
+export default HomeFeed;

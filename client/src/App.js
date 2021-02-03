@@ -44,17 +44,12 @@ function App() {
             <div className="w-full">
               {Auth.loggedIn() && <Header />}
               <Switch>
-                {Auth.loggedIn() ? (
-                  <Route exact path="/" component={FollowFeed} />
-                ) : (
-                  <Route exact path="/" component={MasterFeed} />
-                )}
                 <Route
                   exact
                   path="/subscriptions"
                   component={SubscriptionFeed}
                 />
-                <Route exact path="/masterfeed" component={MasterFeed} />
+                <Route exact path="/" component={MasterFeed} />
                 <Route exact path="/featuredfeed" component={FeaturedFeed} />
                 <Route exact path="/postform" component={AddPost} />
                 <Route exact path="/finishprofile" component={FinishProfile} />
