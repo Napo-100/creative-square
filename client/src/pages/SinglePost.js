@@ -28,7 +28,7 @@ const SinglePost = () => {
    
     //className="flex flex-row"
     <div className="flex flex-col">
-      <div className="p-12">
+      <div className="px-12 pt-4">
 
         <div className="max-w-lg border-4">
           <div

@@ -67,14 +67,14 @@ return(
 <form action="/" accept-charset="UTF-8" method="post" onSubmit={handleFormSubmit}><input type="hidden" />
   <textarea
     
-    className="ml-4 w-full shadow-inner p-4 border-0 mb-4 rounded-lg focus:shadow-outline text-2xl" 
+    className="ml-4 w-full shadow-inner p-4 border-0 mb-4 rounded-lg shadow-lg focus:outline-none focus:shadow-outline hover:shadow-xl text-2xl px-8" 
     placeholder="Tell me I'm beautiful here." 
     value= {commentText}
     cols="6" rows="3" id="comment_content" 
     spellcheck="false"
     onChange={handleChange}>
 </textarea>
-  <button className="ml-4 font-bold py-2 px-4 w-full bg-purple-400 text-lg text-white shadow-md rounded-lg " type="submit">Comment </button>
+  <button className="ml-4 font-bold py-2 px-4 w-full bg-purple-400 hover:bg-purple-500 text-lg text-white shadow-md rounded-lg " type="submit">Comment </button>
 </form>
 
 )
