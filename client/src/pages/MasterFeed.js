@@ -3,13 +3,16 @@ import { useQuery } from "@apollo/react-hooks";
 import { QUERY_POSTS } from "../utils/queries";
 import { Link } from "react-router-dom";
 
-
 const MasterFeed = () => {
   const { loading, data } = useQuery(QUERY_POSTS);
   console.log(data);
 
   const posts = data?.posts || [];
   console.log("these are posts ", posts);
+
+  if (loading) {
+    return <div>loading...</div>;
+  }
 
   return (
     <div className="container pt-3">
@@ -22,11 +25,20 @@ const MasterFeed = () => {
               {/* make link to single post page */}
               <Link to={`/post/${post._id}`}>
                 <span className="block h-64 relative rounded shadow leading-snug">
-                  <img
-                    src={post.postPrimaryMedia}
-                    className="w-full h-full rounded absolute"
-                    alt="post"
-                  />
+                  {post.postMediaType === "Image" && (
+                    <img
+                      src={post.postPrimaryMedia}
+                      className="w-full h-full rounded absolute"
+                      alt="post"
+                    />
+                  )}
+                  {post.postMediaType === "Video" && (
+                    <iframe
+                      src={post.postPrimaryMedia}
+                      className="w-full h-full rounded absolute"
+                      alt="post"
+                    />
+                  )}
                 </span>
               </Link>
               {/* </a> */}

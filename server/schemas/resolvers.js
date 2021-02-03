@@ -16,7 +16,12 @@ const resolvers = {
           })
           .populate("subscriptions")
           .populate("subscribers")
-          .populate("following")
+          .populate({
+            path: "following",
+            populate: {
+              path: "posts",
+            },
+          })
           .populate("followers")
           .populate("likedPosts")
           .populate("pinnedPosts");
@@ -287,9 +292,9 @@ const resolvers = {
           { new: true }
         ).populate("followers");
 
-        // console.log(context.user);
-        // console.log(followId);
-        // console.log(context.user._id);
+        console.log(context.user);
+        console.log(followId);
+        console.log(context.user._id);
 
         return { updatedUser, updatedCreator };
       }
