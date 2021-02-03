@@ -109,7 +109,7 @@ const AddPost = () => {
                 <div className="w-full">
                   <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
                     <span className="text-red-400 mr-1">*</span> Upload Image
-        </div>
+                  </div>
                   <div className="my-2 p-1 flex rounded">
                     {" "}
                     <input
@@ -123,8 +123,8 @@ const AddPost = () => {
                       type="submit"
                       onClick={() => postDetails()}
                     >
-                      upload
-          </button>
+                      Upload
+                    </button>
                   </div>
                   {imageUrl !== "" && (
                     <img
@@ -140,7 +140,7 @@ const AddPost = () => {
                   <div className="w-full">
                     <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
                       <span className="text-red-400 mr-1">*</span> Media Type
-          </div>
+                    </div>
                     <div className="my-2 bg-white p-1 flex border border-gray-200 rounded">
                       {" "}
                       <select
@@ -159,7 +159,7 @@ const AddPost = () => {
                   <div className="w-full">
                     <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
                       <span className="text-red-400 mr-1">*</span> Post Description
-          </div>
+                    </div>
                     <div className="my-2 bg-white p-1 flex border border-gray-200 rounded">
                       {" "}
                       <input
@@ -174,7 +174,7 @@ const AddPost = () => {
                   <div className="w-full">
                     <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
                       <span className="text-red-400 mr-1">*</span> External URL
-          </div>
+                    </div>
                     <div className="my-2 bg-white p-1 flex border border-gray-200 rounded">
                       {" "}
                       <input
@@ -189,7 +189,7 @@ const AddPost = () => {
                   <div className="w-full">
                     <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
                       <span className="text-red-400 mr-1">*</span> post paywall
-          </div>
+                    </div>
                     <div className="my-2 bg-white p-1 flex border border-gray-200 rounded">
                       {" "}
                       <input
