@@ -77,8 +77,12 @@ const ReactionPanel = ({post}) => {
                {post.pinCount} <AiFillPushpin style={{fontSize:"8px", margin: "2px"}}/>
             </p>
             </div>
+            <a className="relative text-center" href="#comment-section">
             <CgComment style={{fontSize:"25px"}} className="mx-3 my-1 hover:opacity-30 opacity-50 transform hover:scale-125 motion-reduce:transform-none"/>
-
+            <p  style={{fontSize:"15px", top: "-2px"}} className="text-red-900 flex flex-row absolute top-0 right-0 ..." >
+               {post.comments.length} 
+            </p>
+            </a>
 
         </div>
         

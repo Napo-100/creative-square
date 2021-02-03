@@ -4,6 +4,7 @@ import { useQuery, useMutation } from "@apollo/react-hooks";
 import { QUERY_POST } from "../utils/queries";
 import ReactionPanel from "../components/PostInteraction";
 import CommentForm from "../components/CommentForm";
+import CommentList from "../components/CommentList";
 
 
 
@@ -132,35 +133,12 @@ const SinglePost = () => {
       </div>
 
 
-      <div>
 
-
-
-      </div>
-
-      <section className="rounded-b-lg ml-3 max-w-lg pl-12">
+      <section className="rounded-b-lg ml-3 max-w-lg pl-12 pt-12" id="comment-section">
         
       <CommentForm postId={postId} />
-          {/* <form action="/" accept-charset="UTF-8" method="post"><input type="hidden" />
-            <textarea className="ml-4 w-full shadow-inner p-4 border-0 mb-4 rounded-lg focus:shadow-outline text-2xl" placeholder="Ask questions here." cols="6" rows="3" id="comment_content" spellcheck="false"></textarea>
-            <button className="ml-4 font-bold py-2 px-4 w-full bg-purple-400 text-lg text-white shadow-md rounded-lg ">Comment </button>
-          </form> */}
-
-
-
+      <CommentList comments={post.comments} />
          
-
-          <div class="bg-white rounded-lg p-3 flex flex-col justify-center items-center md:items-start shadow-lg mb-4">
-          <div class="flex flex-row justify-center mr-2">
-
-          <h3 class="text-purple-600 font-semibold text-lg text-center md:text-left ">@Shanel</h3>
-          
-          </div>
-
-          <p style={{width:"90%"}} class="text-gray-600 text-lg text-center md:text-left ">Hi good morning will it be the entire house. </p>
-
-
-          </div>
 
         
       </section>

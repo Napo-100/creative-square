@@ -9,7 +9,7 @@ import { QUERY_COMMENTS, QUERY_POST } from "../../utils/queries";
 const CommentForm = ({postId}) => {
 
     const [commentText, setText] = useState('');
-    const [characterCount, setCharacterCount] = useState(0);
+    
 
 
 
@@ -40,7 +40,7 @@ const CommentForm = ({postId}) => {
 const handleChange = event => {
     if (event.target.value.length <= 280) {
       setText(event.target.value);
-      setCharacterCount(event.target.value.length);
+      
     }
   };
      // submit form
@@ -54,26 +54,29 @@ const handleChange = event => {
 
       // clear form value
       setText('');
-      setCharacterCount(0);
+   
 
     } catch (e) {
       console.error(e);
     }
-    window.alert("This comment has been added successfully")
   };
 
 
 return(
+   
 <form action="/" accept-charset="UTF-8" method="post" onSubmit={handleFormSubmit}><input type="hidden" />
-  <textarea 
+  <textarea
+    
     className="ml-4 w-full shadow-inner p-4 border-0 mb-4 rounded-lg focus:shadow-outline text-2xl" 
     placeholder="Tell me I'm beautiful here." 
+    value= {commentText}
     cols="6" rows="3" id="comment_content" 
     spellcheck="false"
     onChange={handleChange}>
 </textarea>
   <button className="ml-4 font-bold py-2 px-4 w-full bg-purple-400 text-lg text-white shadow-md rounded-lg " type="submit">Comment </button>
 </form>
+
 )
 };
 
