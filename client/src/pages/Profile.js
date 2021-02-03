@@ -22,7 +22,7 @@ function Profile() {
               />
             ) : (
               <img
-                src={defaultImage}
+                src="https://picsum.photos/640/400/?random"
                 alt="Default pic"
                 className="rounded-full shadow-inner"
               />
@@ -31,6 +31,9 @@ function Profile() {
           <h2 className="text-center font-bold text-gray-800  antialiased text-3xl">
             {userData.me.username}
           </h2>
+          <p className="flex flex-wrap content-center text-center p-2">
+          "{userData.me.bio}"
+          </p>
         </div>
       )}
     </div>

@@ -18,7 +18,7 @@ function SideBar() {
     }
     if (Auth.loggedIn()) {
       return (
-        <ul className="px-8 ">
+        <ul className="px-8">
           <li>
             <Profile />
           </li>

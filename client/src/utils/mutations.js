@@ -113,5 +113,47 @@ mutation likePost($postId: ID!) {
     }
   }
 }
+`;
 
+//likePost(postId: ID!): UserAndPost
+export const PIN_POST = gql `
+mutation pinPost($postId: ID!) {
+  pinPost(postId: $postId) {
+    updatedPost {
+      _id
+      username
+      postMediaType
+      postDescription
+      postLink
+      postPrimaryMedia
+      postSecondaryMedia
+      postPaywall
+      createdAt
+      pins {
+        username
+      }
+      pinCount
+    }
+    updatedUser {
+      username
+      pinnedPosts {
+        postDescription
+      }
+      pinnedPostCount
+    }
+  }
+}
+`;
+
+export const ADD_COMMENT = gql`
+  mutation addComment($postId: ID!, $commentText: String!) {
+    addComment(postId: $postId, commentText: $commentText) {
+      comments{
+        _id
+        commentText
+        username
+        createdAt
+      }
+    }
+  }
 `;

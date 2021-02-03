@@ -7,7 +7,9 @@ import ApolloClient from "apollo-boost";
 // import "./App.css";
 
 import MasterFeed from "./pages/MasterFeed";
+import MasterFeed2 from "./pages/MasterFeed2";
 import FeaturedFeed from "./pages/FeaturedPosts";
+import HomeFeed from "./pages/HomeFeed";
 import FollowFeed from "./pages/FollowFeed";
 import FinishProfile from "./pages/FinishProfile"
 import SubscriptionFeed from "./pages/SubscriptionFeed";
@@ -37,27 +39,28 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <Router>
+      <Router> 
         <div>
           {/* <TopBar /> */}
           <div className="flex">
-            <SideBar />
+            <SideBar/>
             <div className="w-full">
               {Auth.loggedIn() && <Header />}
               <Switch>
-                {Auth.loggedIn() ? (
-                  <Route exact path="/" component={FollowFeed} />
-                ) : (
-                  <Route exact path="/" component={MasterFeed} />
-                )}
                 <Route
                   exact
                   path="/subscriptions"
                   component={SubscriptionFeed}
                 />
-                <Route exact path="/masterfeed" component={MasterFeed} />
+                <Route exact path="/" component={MasterFeed} />
+                <Route exact path="/masterfeed2" component={MasterFeed2} />
                 <Route exact path="/featuredfeed" component={FeaturedFeed} />
+
+                <Route exact path="/homefeed" component={HomeFeed} />
+                <Route exact path="/following" component={FollowFeed} />
+
                 <Route exact path="/postform" component={UploadMediaForm} />
+
                 <Route exact path="/finishprofile" component={FinishProfile} />
                 <Route exact path="/post/:id" component={SinglePost} />
               </Switch>
