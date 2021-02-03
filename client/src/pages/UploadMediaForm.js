@@ -3,7 +3,8 @@ import { useMutation } from "@apollo/react-hooks";
 import { ADD_POST } from "../utils/mutations";
 import { QUERY_POSTS, QUERY_ME } from "../utils/queries";
 import { Link, useHistory } from "react-router-dom";
-import AddPost from "./AddPost";
+import AddImagePost from "../components/AddImagePost";
+import AddVideoPost from "../components/AddVideoPost";
 
 const UploadMediaForm = () => {
   //   const history = useHistory();
@@ -21,24 +22,6 @@ const UploadMediaForm = () => {
     });
   };
 
-  //   const handleFormSubmit = async (event) => {
-  //     event.preventDefault();
-
-  //     try {
-  //       // add post to database
-  //       await addPost({
-  //         variables: {
-  //           ...formState,
-  //           postPrimaryMedia: imageUrl,
-  //         },
-  //       });
-  //       window.alert(formState.postMediaType + " submited");
-  //       //when /myposts page exists, update return.
-  //       return history.push("/");
-  //     } catch (err) {
-  //       console.error(err);
-  //     }
-  //   };
   console.log(postMediaType);
   return (
     <div class="fixed z-10 inset-0 overflow-y-auto">
@@ -74,7 +57,8 @@ const UploadMediaForm = () => {
                   </h2>
                   <div className="w-full">
                     <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
-                      <span className="text-red-400 mr-1">*</span> Select Media Type
+                      <span className="text-red-400 mr-1">*</span> Select Media
+                      Type
                     </div>
                     <div className="my-2 bg-white p-1 flex border border-gray-200 rounded">
                       {" "}
@@ -90,12 +74,26 @@ const UploadMediaForm = () => {
                         <option>Audio</option>
                       </select>{" "}
                     </div>
+                    {postMediaType.postMediaType === "Image" && (
+                      <AddImagePost
+                        postMediaType={postMediaType.postMediaType}
+                      />
+                    )}
+                    {postMediaType.postMediaType === "Video" && (
+                      <AddVideoPost
+                        postMediaType={postMediaType.postMediaType}
+                      />
+                    )}
+                    {postMediaType.postMediaType === "Audio" && (
+                      <AddImagePost
+                        postMediaType={postMediaType.postMediaType}
+                      />
+                    )}
                   </div>
-                  {postMediaType.postMediaType === "Image" && <AddPost />}
                 </div>
               </div>
             </div>
-            {postMediaType === "Choose Media Type..." && (
+            {postMediaType.postMediaType === "Choose Media Type..." && (
               <Link to="/">
                 <button
                   type="cancel"

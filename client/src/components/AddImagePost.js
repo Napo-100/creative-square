@@ -4,12 +4,12 @@ import { ADD_POST } from "../utils/mutations";
 import { QUERY_POSTS, QUERY_ME } from "../utils/queries";
 import { Link, useHistory } from "react-router-dom";
 
-const AddPost = () => {
+const AddImagePost = (postMediaType) => {
   const history = useHistory();
-
+  let mediaType = postMediaType.postMediaType;
   const [imageUrl, setImageUrl] = useState("");
-  const [formState, setFormState] = useState({
-    postMediaType: "Image",
+  const [imageFormState, setimageFormState] = useState({
+    postMediaType: mediaType,
     postDescription: "",
     postLink: "",
     postPrimaryMedia: "",
@@ -20,7 +20,7 @@ const AddPost = () => {
   const [image, setImage] = useState("");
 
   // NOTE: Changed to mine for now to test but make sure that it is fixed by the end of it
-  const postDetails = () => {
+  const postImageDetails = () => {
     const data = new FormData();
     data.append("file", image);
     data.append("upload_preset", "post-image");
@@ -63,8 +63,8 @@ const AddPost = () => {
   const handleChange = (event) => {
     console.log("oh yeas", imageUrl);
     const { name, value } = event.target;
-    setFormState({
-      ...formState,
+    setimageFormState({
+      ...imageFormState,
       [name]: value,
     });
   };
@@ -76,11 +76,11 @@ const AddPost = () => {
       // add post to database
       await addPost({
         variables: {
-          ...formState,
+          ...imageFormState,
           postPrimaryMedia: imageUrl,
         },
       });
-      window.alert(formState.postMediaType + " submited");
+      // window.alert(imageFormState.postMediaType + " submited");
       //when /myposts page exists, update return.
       return history.push("/");
     } catch (err) {
@@ -108,7 +108,7 @@ const AddPost = () => {
               <button
                 className="btn bg-green-900 rounded text-gray-200 px-3"
                 type="submit"
-                onClick={() => postDetails()}
+                onClick={() => postImageDetails()}
               >
                 Upload
               </button>
@@ -117,8 +117,8 @@ const AddPost = () => {
               <img
                 className=""
                 alt="profile-pic-preview"
-                height="300px"
-                width="300px"
+                height="200px"
+                width="200px"
                 src={imageUrl}
               />
             )}
@@ -134,7 +134,7 @@ const AddPost = () => {
                   className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
                   name="postDescription"
                   type="text"
-                  value={formState.postDescription}
+                  value={imageFormState.postDescription}
                   onChange={handleChange}
                 />{" "}
               </div>
@@ -149,7 +149,7 @@ const AddPost = () => {
                   className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
                   name="postLink"
                   type="text"
-                  value={formState.postLink}
+                  value={imageFormState.postLink}
                   onChange={handleChange}
                 />{" "}
               </div>
@@ -163,7 +163,7 @@ const AddPost = () => {
                 <input
                   name="postPaywall"
                   type="text"
-                  value={formState.postPaywall}
+                  value={imageFormState.postPaywall}
                   onChange={handleChange}
                 />{" "}
               </div>
@@ -191,4 +191,4 @@ const AddPost = () => {
   );
 };
 
-export default AddPost;
+export default AddImagePost;

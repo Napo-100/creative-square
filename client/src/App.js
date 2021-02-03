@@ -16,7 +16,7 @@ import Signup from "./pages/Signup";
 import TopBar from "./components/TopBar";
 import SideBar from "./components/SideBar";
 import Header from "./components/Header";
-import AddPost from "./pages/AddPost";
+import AddPost from "./components/AddImagePost";
 import SinglePost from "./pages/SinglePost"
 import UploadMediaForm from "./pages/UploadMediaForm"
 
