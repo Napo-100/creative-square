@@ -18,8 +18,9 @@ import Signup from "./pages/Signup";
 import TopBar from "./components/TopBar";
 import SideBar from "./components/SideBar";
 import Header from "./components/Header";
-import AddPost from "./pages/AddPost";
+import AddPost from "./components/AddImagePost";
 import SinglePost from "./pages/SinglePost"
+import UploadMediaForm from "./pages/UploadMediaForm"
 
 const client = new ApolloClient({
   request: (operation) => {
@@ -54,9 +55,12 @@ function App() {
                 <Route exact path="/" component={MasterFeed} />
                 <Route exact path="/masterfeed2" component={MasterFeed2} />
                 <Route exact path="/featuredfeed" component={FeaturedFeed} />
+
                 <Route exact path="/homefeed" component={HomeFeed} />
                 <Route exact path="/following" component={FollowFeed} />
-                <Route exact path="/postform" component={AddPost} />
+
+                <Route exact path="/postform" component={UploadMediaForm} />
+
                 <Route exact path="/finishprofile" component={FinishProfile} />
                 <Route exact path="/post/:id" component={SinglePost} />
               </Switch>

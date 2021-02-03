@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
+
     <div className="sticky top-0 bg-transparent z-50">
       <section className="h-40 p-2">
       <input class="w-full h-16 px-3 rounded mb-8 focus:outline-none focus:shadow-outline text-xl px-8 shadow-xl" type="search" placeholder="Search..."/>

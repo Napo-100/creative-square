@@ -218,6 +218,7 @@ export const QUERY_ME_PROFILE = gql`
       email
       profilePic
       bio
+      creator
       creatorType
       subscriberCount
       followerCount
