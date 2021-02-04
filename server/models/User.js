@@ -20,7 +20,43 @@ const userSchema = new Schema(
       required: true,
       minlength: 6,
     },
+    creator: {
+      type: Boolean,
+    },
+    firstName: {
+      type: String,
+    },
+    lastName: {
+      type: String,
+    },
+    bio: {
+      type: String,
+    },
+    creatorType: {
+      type: String,
+    },
+    profilePic: {
+      type: String,
+    },
     posts: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Post",
+      },
+    ],
+    featuredPosts: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Post",
+      },
+    ],
+    pinnedPosts: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Post",
+      },
+    ],
+    likedPosts: [
       {
         type: Schema.Types.ObjectId,
         ref: "Post",
@@ -33,6 +69,18 @@ const userSchema = new Schema(
       },
     ],
     subscribers: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
+    following: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
+    followers: [
       {
         type: Schema.Types.ObjectId,
         ref: "User",
@@ -61,11 +109,32 @@ userSchema.methods.isCorrectPassword = async function (password) {
   return bcrypt.compare(password, this.password);
 };
 
+userSchema.virtual("postCount").get(function () {
+  return this.posts.length;
+});
+userSchema.virtual("pinnedPostCount").get(function () {
+  return this.pinnedPosts.length;
+});
+
 userSchema.virtual("subscriptionCount").get(function () {
   return this.subscriptions.length;
 });
 
-//create virtual to get number of subscribers
+userSchema.virtual("subscriberCount").get(function () {
+  return this.subscribers.length;
+});
+
+userSchema.virtual("followingCount").get(function () {
+  return this.following.length;
+});
+
+userSchema.virtual("followerCount").get(function () {
+  return this.followers.length;
+});
+
+userSchema.virtual("likedPostCount").get(function () {
+  return this.likedPosts.length;
+});
 
 const User = model("User", userSchema);
 
