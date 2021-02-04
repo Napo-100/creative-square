@@ -10,6 +10,7 @@ const resolvers = {
           .select("-__V -password")
           .populate({
             path: "posts",
+            options: { sort: [{ createdAt: -1 }] },
             populate: {
               path: "comments likes pins",
             },
