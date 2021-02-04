@@ -66,9 +66,9 @@ function SideBar() {
   return (
     <div>
       <div className="bg-gray-100 sticky top-0 ">
-      <div className=" p-2 ml-2 flex flex-wrap content-center sm:hidden">
-            <img src={Logo} className="pt-5 w-10" alt="Creative Square" />
-            <h3>CREATIVE SQUARE</h3>
+      <div className=" p-1 ml-2 flex flex-wrap content-center justify-center items-center sm:hidden">
+            <img src={Logo} className="sm:pt-5 w-10" alt="Creative Square" />
+            <p className="ml-2 font-bold text-xl">CREATIVE SQUARE</p>
           </div>
         <aside className="flex flex-row sm:flex-col sm:justify-center bg-white sm:w-80 sm:min-h-screen pt-5 sm:pt-0">
           <div className=" p-2 ml-2 sm:px-20 sm:pb-10 hidden sm:flex">
