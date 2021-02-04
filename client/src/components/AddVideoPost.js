@@ -89,9 +89,9 @@ const AddVideoPost = (postMediaType) => {
   };
 
   return (
-    <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-      <div class="sm:flex sm:items-start">
-        <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+    <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+      <div className="sm:flex sm:items-start">
+        <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
           <h2 className="text-2xl text-center">Create a Post!</h2>
           <div className="w-full">
             <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
