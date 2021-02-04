@@ -11,7 +11,7 @@ import MasterFeed2 from "./pages/MasterFeed2";
 import FeaturedFeed from "./pages/FeaturedPosts";
 import HomeFeed from "./pages/HomeFeed";
 import FollowFeed from "./pages/FollowFeed";
-import FinishProfile from "./pages/FinishProfile"
+import FinishProfile from "./pages/FinishProfile";
 import SubscriptionFeed from "./pages/SubscriptionFeed";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
@@ -19,8 +19,9 @@ import TopBar from "./components/TopBar";
 import SideBar from "./components/SideBar";
 import Header from "./components/Header";
 import AddPost from "./components/AddImagePost";
-import SinglePost from "./pages/SinglePost"
-import UploadMediaForm from "./pages/UploadMediaForm"
+import SinglePost from "./pages/SinglePost";
+import UploadMediaForm from "./pages/UploadMediaForm";
+import ScrollToTop from "./components/ScrollToTop";
 
 const client = new ApolloClient({
   request: (operation) => {
@@ -39,13 +40,14 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <Router> 
+      <Router>
         <div>
           {/* <TopBar /> */}
           <div className="flex flex-col sm:flex-row">
-            <SideBar/>
+            <SideBar />
             <div className="w-full">
               {Auth.loggedIn() && <Header />}
+              <ScrollToTop />
               <Switch>
                 <Route
                   exact
