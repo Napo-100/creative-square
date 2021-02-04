@@ -67,8 +67,6 @@ const Header = () => {
         </div>
       </span>
       <div className="sticky top-0 bg-white z-10 flex flex-row flex-wrap justify-center sm:justify-start flex-grow hidden sm:flex">
-
-
         <ul className="text-sm sm:text-lg sm:font-black border-gray-300  py-2">
           <Link to="/">
             <button className="text-xs sm:text-lg sm:font-bold border-b-2 sm:border-b-4 hover:bg-blue-100 p-2 sm:px-5 py-3 border-black shadow-md sm:w-50">
@@ -97,6 +95,7 @@ const Header = () => {
           </Link>
         </ul>
       </div>
+
     </div>
   );
 };
