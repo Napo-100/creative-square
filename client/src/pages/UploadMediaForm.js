@@ -12,7 +12,6 @@ const UploadMediaForm = () => {
 
   const [postMediaType, setPostMediaType] = useState("Choose Media Type...");
 
-  // NOTE: Changed to mine for now to test but make sure that it is fixed by the end of it
 
   const handleChange = (event) => {
     event.preventDefault();

@@ -30,11 +30,11 @@ function Login(props) {
   return (
     <div>
       <div className="justify-content-center">
-        <div className="grid grid-cols-2 gap-4 border border-color-black rounded-xl border-8  m-4 space-x-4 max-w-lg">
+        <div className="grid grid-cols-2 gap-4 rounded-xl m-4 space-x-4 max-w-lg">
           <div className="col-span-2 content-center">
-            <h2 className="bg-black text-white text-center p-3 text-xl font-sans rounded-xl rounded-b-none">LOGIN</h2>
+            <h2 className=" text-center p-3 text-xl font-sans rounded-xl rounded-b-none">LOGIN</h2>
           </div>
-          <form className="col-span-2 p-3" onSubmit={handleFormSubmit}>
+          <form className="col-span-2 " onSubmit={handleFormSubmit}>
             <div>
               <p className="w-full" htmlFor="email">Email address:</p>
             </div>
