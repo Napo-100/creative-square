@@ -6,6 +6,9 @@ import ReactionPanel from "../components/PostInteraction";
 import CommentForm from "../components/CommentForm";
 import CommentList from "../components/CommentList";
 
+
+
+
 const SinglePost = () => {
   const { id: postId } = useParams();
 
@@ -27,15 +30,21 @@ const SinglePost = () => {
           <div className="grid grid-cols-1 grid-rows-7 grid-flow-row overflow-hidden rounded-lg shadow-md bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out">
             <div className="col-span-3 row-span-4 p-1 m-1 justify-center">
               {post.postMediaType === "Video" && (
-                <div className="flex justify-center">
-                  <a href="#">
+                <div className="flex justify-center bg-gray-900 rounded-lg">
+                  {/* <a href="#">
                     <iframe
                       src={post.postPrimaryMedia}
                       className="rounded h-96"
                       style={{ width: "32rem" }}
                       alt="post"
                     />
-                  </a>
+                  </a> */}
+
+                  <video max-width="100%" max-height="100%" border-style="hidden" controls className="rounded h-96">
+                    <source src={post.postPrimaryMedia} type="video/mp4" />
+                    <source src={post.postPrimaryMedia} type="video/ogg" />
+                  Your browser does not support the video tag.
+                  </video>
                 </div>
               )}
               {post.postMediaType === "Image" && (
