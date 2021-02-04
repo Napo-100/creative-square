@@ -7,7 +7,6 @@ import AddImagePost from "../components/AddImagePost";
 import AddVideoPost from "../components/AddVideoPost";
 
 const UploadMediaForm = () => {
-    console.log(process.env.CLOUD_NAME)
   //   const history = useHistory();
 
   const [postMediaType, setPostMediaType] = useState("Choose Media Type...");

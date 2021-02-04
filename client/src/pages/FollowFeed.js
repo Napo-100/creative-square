@@ -6,10 +6,10 @@ import { Link } from "react-router-dom";
 
 const FollowFeed = () => {
   const { loading, data } = useQuery(QUERY_ME);
-//   console.log("query following data: " + userData);
+  console.log("query following data: " ,data);
 
 const following = data?.me.following || [];
-    // console.log("these are posts ", following[1].username);
+    console.log("these are posts ", following[1].username);
 
   return (
     <div className="container pt-3">

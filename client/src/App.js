@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Auth from "../src/utils/auth";
 
-import { ApolloProvider } from "@apollo/react-hooks";
+import { ApolloProvider, InMemoryCache } from "@apollo/react-hooks";
 import ApolloClient from "apollo-boost";
 // import "./App.css";
 
