@@ -23,7 +23,7 @@ const HomeFeed = () => {
               {/* <a href={post.postLink} target="_blank" rel="noreferrer"> */}
               {/* make link to single post page */}
               <Link to={`/post/${post._id}`}>
-                <span className="block h-64 shadow leading-snug flex flex-wrap content-center">
+                <span className="block h-64 relative rounded shadow leading-snug flex justify-center">
                   {post.postMediaType === "Image" && (
                     <img
                       src={post.postPrimaryMedia}
@@ -32,11 +32,11 @@ const HomeFeed = () => {
                     />
                   )}
                   {post.postMediaType === "Video" && (
-                    <iframe
-                      src={post.postPrimaryMedia}
-                      className="w-full h-full rounded"
-                      alt="post"
-                    />
+                    <video max-width="100%" max-height="100%" controls autoplay muted className="object-cover rounded-lg">
+                    <Link to={`/post/${post._id}`}></Link>
+                    <source src={post.postPrimaryMedia} type="video/mp4"/>
+                   </video>
+
                   )}
                 </span>
               </Link>

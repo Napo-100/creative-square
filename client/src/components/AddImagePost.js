@@ -3,7 +3,7 @@ import { useMutation } from "@apollo/react-hooks";
 import { ADD_POST } from "../utils/mutations";
 import { QUERY_POSTS, QUERY_ME } from "../utils/queries";
 import { Link, useHistory } from "react-router-dom";
-
+import ReactLoading from 'react-loading';
 
 const AddImagePost = (postMediaType) => {
   const history = useHistory();
@@ -22,6 +22,8 @@ const AddImagePost = (postMediaType) => {
 
   // NOTE: Changed to mine for now to test but make sure that it is fixed by the end of it
   const postImageDetails = () => {
+    const loadingBar = document.getElementById("loadingBar")
+    loadingBar.style.visibility="visible"
     const data = new FormData();
     data.append("file", image);
     data.append("upload_preset", "post-image");
@@ -33,6 +35,7 @@ const AddImagePost = (postMediaType) => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
+        loadingBar.style.visibility="hidden"
         setImageUrl(data.secure_url);
       })
       .catch((err) => {
@@ -113,15 +116,15 @@ const AddImagePost = (postMediaType) => {
                 Upload
               </button>
             </div>
-            {imageUrl !== "" && (
+            {imageUrl !== "" ? (
               <img
-                className=""
+                className="preview-img"
                 alt="profile-pic-preview"
                 height="200px"
                 width="200px"
                 src={imageUrl}
               />
-            )}
+            ):(<div id="loadingBar" style={{visibility:"hidden"}}><ReactLoading type={"bars"} color={"grey"}/></div>)}
           </div>
           <form onSubmit={handleFormSubmit}>
             <div className="w-full">

@@ -3,6 +3,8 @@ import { useMutation } from "@apollo/react-hooks";
 import { ADD_POST } from "../utils/mutations";
 import { QUERY_POSTS, QUERY_ME } from "../utils/queries";
 import { Link, useHistory } from "react-router-dom";
+import ReactLoading from 'react-loading';
+
 
 const AddVideoPost = (postMediaType) => {
   const history = useHistory();
@@ -21,6 +23,8 @@ const AddVideoPost = (postMediaType) => {
 
   // NOTE: Changed to mine for now to test but make sure that it is fixed by the end of it
   const postVideoDetails = () => {
+    const loadingBar = document.getElementById("loadingBar")
+    loadingBar.style.visibility="visible"
     const data = new FormData();
     data.append("file", video);
     data.append("upload_preset", "post-video");
@@ -32,6 +36,7 @@ const AddVideoPost = (postMediaType) => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
+        loadingBar.style.visibility="hidden"
         setVideoUrl(data.secure_url);
       })
       .catch((err) => {
@@ -112,7 +117,7 @@ const AddVideoPost = (postMediaType) => {
                 Upload
               </button>
             </div>
-            {videoUrl !== "" && (
+            {videoUrl !== "" ? (
               <iframe
                 className=""
                 alt="profile-pic-preview"
@@ -120,8 +125,9 @@ const AddVideoPost = (postMediaType) => {
                 width="200px"
                 src={videoUrl}
                 autoplay
+                muted
               />
-            )}
+            ):(<div id="loadingBar" style={{visibility:"hidden"}}><ReactLoading type={"bars"} color={"grey"} /></div>)}
           </div>
           <form onSubmit={handleFormSubmit}>
             <div className="w-full">
