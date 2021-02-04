@@ -42,7 +42,7 @@ function App() {
       <Router> 
         <div>
           {/* <TopBar /> */}
-          <div className="flex">
+          <div className="flex flex-col sm:flex-row">
             <SideBar/>
             <div className="w-full">
               {Auth.loggedIn() && <Header />}
