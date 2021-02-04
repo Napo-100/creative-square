@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Header = () => {
   return (
     <div>
-<input className="w-1/3 h-16 px-3 rounded mb-8 focus:outline-none focus:shadow-outline text-xl px-8 shadow-xl" type="search" placeholder="Search..." />
+<input className="sm:w-1/3 h-16 px-3 rounded mb-8 focus:outline-none focus:shadow-outline text-xl px-8 shadow-xl" type="search" placeholder="Search..." />
     <div className="sticky top-0 bg-white z-10 flex flex-row flex-wrap justify-center sm:justify-start flex-grow">
 
       
