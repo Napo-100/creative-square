@@ -18,35 +18,36 @@ function SideBar() {
     }
     if (Auth.loggedIn()) {
       return (
-        <ul className="px-8">
+        <ul className="sm:flex sm:flex-row sm:flex sm:flex-col px-8">
           <li>
             <Profile />
           </li>
           {!userData.me.firstName &&
-          !userData.me.lastName &&
-          !userData.me.profilePic ? (
-            <Link to="/finishprofile">
-              <li className="border-b-4 hover:bg-gray-300 p-2">
-                Finish your Profile!
-              </li>
-            </Link>
-          ) : (
-            <div>
-              {/* this link goes to finishprofile temporarily, but will be /edituser when complete */}
+            !userData.me.lastName &&
+            !userData.me.profilePic ? (
               <Link to="/finishprofile">
-                <li className="border-b-4 hover:bg-gray-300 p-2">EditUser</li>
+                <li className="border-b-4 hover:bg-gray-300 p-2">
+                  Finish your Profile!
+              </li>
               </Link>
-              <Link to="/postform">
-                <li className="border-b-4 hover:bg-gray-300 p-2">Add Post</li>
-              </Link>
-            </div>
-          )}
-          <li className="border-b-4 hover:bg-gray-300 p-2">
-            {/* this is not using the Link component to logout or user and then refresh the application to the start */}
-            <a href="/" onClick={() => Auth.logout()}>
-              Logout
-            </a>
-          </li>
+            ) : (
+              <div className="flex flex-row flex-grow justify-center sm:flex sm:flex-col">
+                {/* this link goes to finishprofile temporarily, but will be /edituser when complete */}
+                <Link to="/finishprofile">
+                  <li className="flex-grow border-b-4 hover:bg-gray-300 p-2 w-20 sm:w-full">EditUser</li>
+                </Link>
+                <Link to="/postform">
+                  <li className="flex-grow border-b-4 hover:bg-gray-300 p-2 w-20 sm:w-full ml-2 sm:ml-0">Add Post</li>
+                </Link>
+                <button className="text-left border-b-4 hover:bg-gray-300 p-2 w-20 sm:w-full ml-2 sm:ml-0">
+                  {/* this is not using the Link component to logout or user and then refresh the application to the start */}
+                  <a href="/" onClick={() => Auth.logout()}>
+                    Logout
+                  </a>
+                </button>
+              </div>
+            )}
+
         </ul>
       );
     } else {
@@ -62,46 +63,21 @@ function SideBar() {
       );
     }
   }
-
-  const [isClosed, setClosed] = React.useState(false);
   return (
-    <div className="bg-black">
+    <div>
       <div className="bg-gray-100 sticky top-0 ">
-        {!isClosed && (
-          <aside className="flex flex-col justify-center bg-white w-80 min-h-screen">
-            <div className="px-20 pb-10">
-              <img src={Logo} className="pt-5 " alt="Creative Square" />
-            </div>
-            <div className="border-r flex-grow ">
-              <nav>{showNavigation()}</nav>
-            </div>
-          </aside>
-        )}
-        {/* {isClosed ? (
-          <button
-            id="nav-toggle"
-            className="flex items-center px-3 py-2 border rounded text-gray-500 border-gray-600 hover:text-white hover:border-white"
-            onClick={() => setClosed(false)}
-            title="Open Menu"
-            tabIndex="1"
-          >
-            <svg
-              className="fill-current h-3 w-3"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
-            </svg>
-          </button>
-        ) : (
-          <button
-            title="Close Menu"
-            tabIndex="1"
-            onClick={() => setClosed(true)}
-          >
-            X
-          </button>
-        )} */}
+      <div className=" p-1 ml-2 flex flex-wrap content-center justify-center items-center sm:hidden">
+            <img src={Logo} className="sm:pt-5 w-10" alt="Creative Square" />
+            <p className="ml-2 font-bold text-xl">CREATIVE SQUARE</p>
+          </div>
+        <aside className="flex flex-row sm:flex-col sm:justify-center bg-white sm:w-80 sm:min-h-screen pt-5 sm:pt-0">
+          <div className=" p-2 ml-2 sm:px-20 sm:pb-10 hidden sm:flex">
+            <img src={Logo} className="pt-5" alt="Creative Square" />
+          </div>
+          <div className="border-r sm:flex-grow ">
+            <nav>{showNavigation()}</nav>
+          </div>
+        </aside>
       </div>
     </div>
   );

@@ -13,12 +13,13 @@ function Profile() {
         <div>Loading...</div>
       ) : (
         <div>
-          <div className="border-4 rounded-full border-black p-1 shadow-lg">
+          <div className="flex flex-row content-center justify-center items-center align-center sm:block">
+          <div className="border-2 sm:border-4 rounded-full border-black p-1 shadow-lg">
             {userData.me.profilePic ? (
               <img
                 src={userData.me.profilePic}
                 alt="Profile pic"
-                className="rounded-full shadow-inner"
+                className="rounded-full w-20 sm:w-full shadow-inner"
               />
             ) : (
               <img
@@ -28,10 +29,11 @@ function Profile() {
               />
             )}
           </div>
-          <h2 className="text-center font-bold text-gray-800  antialiased text-3xl">
+          <h2 className="ml-5 sm:ml-0 text-center font-bold text-gray-800  antialiased text-3xl">
             {userData.me.username}
           </h2>
-          <p className="flex flex-wrap content-center text-center p-2">
+          </div>
+          <p className="hidden sm:flex flex-wrap content-center text-center p-2">
           "{userData.me.bio}"
           </p>
         </div>
