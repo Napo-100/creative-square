@@ -98,6 +98,7 @@ const typeDefs = gql`
     removeFeaturedPost(postId: ID!): User
 
     addComment(postId: ID!, commentText: String): Post
+    
 
     updateComment(commentId: ID!, commentText: String): Comment
 
