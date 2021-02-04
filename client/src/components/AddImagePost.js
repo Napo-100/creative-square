@@ -4,6 +4,7 @@ import { ADD_POST } from "../utils/mutations";
 import { QUERY_POSTS, QUERY_ME } from "../utils/queries";
 import { Link, useHistory } from "react-router-dom";
 
+
 const AddImagePost = (postMediaType) => {
   const history = useHistory();
   let mediaType = postMediaType.postMediaType;
