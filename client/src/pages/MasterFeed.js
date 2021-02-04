@@ -38,11 +38,24 @@ const MasterFeed = () => {
                   )}
 
                   {post.postMediaType === "Video" && (
-                    <iframe
-                      src={post.postPrimaryMedia}
-                      className="w-full h-full rounded absolute"
-                      alt="post"
-                    />
+                    // <iframe
+                    //   src={post.postPrimaryMedia}
+                    //   className="w-full h-full rounded absolute"
+                    //   alt="post"
+                    // />
+                    <figure className="object-cover block h-64 shadow leading-snug flex flex-wrap content-center">
+                      <video controls muted autoplay>  
+                      <Link to={`/post/${post._id}`}></Link>
+                        <source src={post.postPrimaryMedia}
+                          type="video/webm" />
+
+                        <source src={post.postPrimaryMedia}
+                          type="video/mp4/" />
+
+                          Sorry, your browser doesn't support embedded videos.
+                          </video>
+                    </figure>
+
                   )}
                 </span>
               </Link>

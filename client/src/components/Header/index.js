@@ -27,7 +27,7 @@ const Header = () => {
       </ul>
      
       </section>
-     
+    
     </div>
   );
 };
