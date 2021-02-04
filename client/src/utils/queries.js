@@ -179,6 +179,10 @@ export const QUERY_ME_POSTS = gql`
         likeCount
         pinCount
         createdAt
+        comments {
+          _id
+          commentText
+        }
       }
     }
   }

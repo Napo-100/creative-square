@@ -80,9 +80,8 @@ const AddVideoPost = (postMediaType) => {
           postPrimaryMedia: videoUrl,
         },
       });
-    //   window.alert(videoFormState.postMediaType + " submited");
-      //when /myposts page exists, update return.
-      return history.push("/");
+      
+      return history.push("/homefeed");
     } catch (err) {
       console.error(err);
     }
@@ -122,7 +121,6 @@ const AddVideoPost = (postMediaType) => {
                 src={videoUrl}
                 autoplay
               />
-                
             )}
           </div>
           <form onSubmit={handleFormSubmit}>

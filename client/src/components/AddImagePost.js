@@ -80,9 +80,8 @@ const AddImagePost = (postMediaType) => {
           postPrimaryMedia: imageUrl,
         },
       });
-      // window.alert(imageFormState.postMediaType + " submited");
-      //when /myposts page exists, update return.
-      return history.push("/");
+     
+      return history.push("/homefeed");
     } catch (err) {
       console.error(err);
     }

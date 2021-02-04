@@ -36,7 +36,6 @@ const MasterFeed = () => {
                       alt="post"
                     />
                   )}
-
                   {post.postMediaType === "Video" && (
                     <iframe
                       src={post.postPrimaryMedia}
