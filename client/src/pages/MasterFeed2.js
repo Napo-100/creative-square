@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { QUERY_POSTS } from "../utils/queries";
-import { Link } from "react-router-dom";
 import ReactionPanel from "../components/PostInteraction";
 
 const MasterFeed2 = () => {
