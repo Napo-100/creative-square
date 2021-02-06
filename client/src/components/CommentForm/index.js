@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/react-hooks";
 import { ADD_COMMENT } from "../../utils/mutations";
-// import { QUERY_COMMENTS, QUERY_POST, QUERY_ME } from "../../utils/queries";
+
 
 const CommentForm = ({ postId }) => {
   const [commentText, setText] = useState("");

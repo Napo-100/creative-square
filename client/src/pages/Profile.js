@@ -1,11 +1,7 @@
-import React, { useEffect } from "react";
-// import defaultImage from "../assets/square_Img/square1.png";
-// import { useQuery } from "@apollo/react-hooks";
-// import { QUERY_ME_PROFILE } from "../utils/queries";
+import React from "react";
+
 
 function Profile({ userData }) {
-  // const { loading, data: userData } = useQuery(QUERY_ME_PROFILE);
-  console.log(userData);
 
   return (
     <div>

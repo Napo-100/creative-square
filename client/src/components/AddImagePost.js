@@ -38,13 +38,14 @@ const AddImagePost = (postMediaType) => {
       .catch((err) => {
         console.log(err);
       });
-    console.log("hi", imageUrl);
   };
 
   const [addPost, { error }] = useMutation(ADD_POST, {
     update(cache, { data: { addPost } }) {
+      
       try {
-        const { posts } = cache.readQuery({ query: QUERY_POSTS });
+        const posts  = cache.readQuery({ query: QUERY_POSTS });
+        console.log(posts)
         cache.writeQuery({
           query: QUERY_POSTS,
           data: { posts: [addPost, ...posts] },

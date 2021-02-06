@@ -5,10 +5,8 @@ import { Link } from "react-router-dom";
 
 const MasterFeed = () => {
   const { loading, data } = useQuery(QUERY_POSTS);
-  console.log(data);
 
   const posts = data?.posts || [];
-  console.log("these are posts ", posts);
 
   if (loading) {
     return <div>loading...</div>;

@@ -271,10 +271,6 @@ const resolvers = {
           .populate("subscribers")
           .populate("followers");
 
-        // console.log(context.user);
-        // console.log(subscriptionId);
-        // console.log(context.user._id);
-
         return { updatedUser, updatedCreator };
       }
 
@@ -293,10 +289,6 @@ const resolvers = {
           { $addToSet: { followers: context.user._id } },
           { new: true }
         ).populate("followers");
-
-        console.log(context.user);
-        console.log(followId);
-        console.log(context.user._id);
 
         return { updatedUser, updatedCreator };
       }

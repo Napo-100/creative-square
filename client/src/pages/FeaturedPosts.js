@@ -6,10 +6,8 @@ import { Link } from "react-router-dom";
 
 const FeaturedFeed = () => {
     const { loading, data } = useQuery(QUERY_FEATURED_POSTS);
-    console.log(data);
   
     const posts = data?.featuredPosts.posts || [];
-    console.log("these are posts ", posts);
   
     return (
       <div className="container pt-3">

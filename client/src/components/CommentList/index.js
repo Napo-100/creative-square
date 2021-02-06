@@ -2,7 +2,6 @@ import React from "react";
 
 
 const CommentList = ({ comments }) => {
-  console.log(comments);
   if (!comments.length) {
     return <div></div>;
   }
