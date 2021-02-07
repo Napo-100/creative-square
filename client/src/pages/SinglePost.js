@@ -1,13 +1,11 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import { QUERY_POST } from "../utils/queries";
 import ReactionPanel from "../components/PostInteraction";
 import CommentForm from "../components/CommentForm";
 import CommentList from "../components/CommentList";
-
-
-
+import Auth from "../utils/auth";
 
 const SinglePost = () => {
   const { id: postId } = useParams();
@@ -40,10 +38,16 @@ const SinglePost = () => {
                     />
                   </a> */}
 
-                  <video max-width="100%" max-height="100%" border-style="hidden" controls className="rounded h-96">
+                  <video
+                    max-width="100%"
+                    max-height="100%"
+                    border-style="hidden"
+                    controls
+                    className="rounded h-96"
+                  >
                     <source src={post.postPrimaryMedia} type="video/mp4" />
                     <source src={post.postPrimaryMedia} type="video/ogg" />
-                  Your browser does not support the video tag.
+                    Your browser does not support the video tag.
                   </video>
                 </div>
               )}
@@ -59,13 +63,14 @@ const SinglePost = () => {
                 </div>
               )}
             </div>
-
-            <ul
-              style={{ overflow: "hidden" }}
-              className="flex flex-row pl-2 text-gray-600 overflow-x-scroll hide-scroll-bar"
-            >
-              <ReactionPanel post={post} />
-            </ul>
+            {Auth.loggedIn() && (
+              <ul
+                style={{ overflow: "hidden" }}
+                className="flex flex-row pl-2 text-gray-600 overflow-x-scroll hide-scroll-bar"
+              >
+                <ReactionPanel post={post} />
+              </ul>
+            )}
 
             <div className="col-span-3 row-span-1">
               <div className="flex align-bottom flex-col leading-none p-2 md:p-4">
@@ -100,14 +105,26 @@ const SinglePost = () => {
           </div>
         </div>
       </div>
-
-      <section
-        className="rounded-b-lg ml-3 max-w-lg pl-12 pt-12"
-        id="comment-section"
-      >
-        <CommentForm postId={postId} />
-        <CommentList comments={post.comments} />
-      </section>
+      {Auth.loggedIn() ? (
+        <section
+          className="rounded-b-lg ml-3 max-w-lg pl-12 pt-12"
+          id="comment-section"
+        >
+          <CommentForm postId={postId} />
+          <CommentList comments={post.comments} />
+        </section>
+      ) : (
+        <div className="ml-3 max-w-lg pl-12">
+          <Link to="/">
+            <button
+              type="cancel"
+              className="border rounded-xl py-1 px-8 bg-blue-700 text-white mt-4 mb-2 ml-2"
+            >
+              Back
+            </button>
+          </Link>
+        </div>
+      )}
     </div>
   );
 };
