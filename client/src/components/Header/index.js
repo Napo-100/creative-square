@@ -12,25 +12,10 @@ const Header = () => {
           type="search"
           placeholder="Search..."
         /> */}
-        <ul className="flex flex-row space-x-8 mx-auto border-gray-300">
+        <ul className="flex flex-row text-sm lg:text-lg md:space-x-4 lg:space-x-8 lg:mx-auto border-gray-300">
           <Link to="/">
             <li className="bg-purple-300 rounded-full border-b-4 hover:bg-blue-100 p-2 px-5 py-3 border-black shadow-md ml-1">
               For You Grid
-            </li>
-          </Link>
-          <Link to="/following">
-            <li className="bg-purple-300 rounded-full border-b-4 hover:bg-blue-100 p-2 px-5 py-3 border-black shadow-md ml-1">
-              Following
-            </li>
-          </Link>
-          <Link to="/homefeed">
-            <li className="bg-purple-300 rounded-full border-b-4 hover:bg-blue-100 p-2 px-5 py-3 border-black shadow-md ml-1">
-              My Posts
-            </li>
-          </Link>
-          <Link to="/featuredfeed">
-            <li className="bg-purple-300 rounded-full border-b-4 hover:bg-blue-100 p-2 px-5 py-3 border-black shadow-md ml-1">
-              Featured posts
             </li>
           </Link>
           <Link to="/masterfeed2">
@@ -38,6 +23,23 @@ const Header = () => {
               For You Singles
             </li>
           </Link>
+             {/* commented out until functionality added */}
+          {/* <Link to="/following">
+            <li className="bg-purple-300 rounded-full border-b-4 hover:bg-blue-100 p-2 px-5 py-3 border-black shadow-md ml-1">
+              Following
+            </li>
+          </Link> */}
+          <Link to="/homefeed">
+            <li className="bg-purple-300 rounded-full border-b-4 hover:bg-blue-100 p-2 px-5 py-3 border-black shadow-md ml-1">
+              My Posts
+            </li>
+          </Link>
+          {/* commented out until functionality added */}
+          {/* <Link to="/featuredfeed">
+            <li className="bg-purple-300 rounded-full border-b-4 hover:bg-blue-100 p-2 px-5 py-3 border-black shadow-md ml-1">
+              Featured posts
+            </li>
+          </Link> */}
         </ul>
       </section>
     </div>
