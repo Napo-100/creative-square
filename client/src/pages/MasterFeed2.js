@@ -52,19 +52,20 @@ const MasterFeed2 = () => {
                   </div>
                 )}
                 {post.postMediaType === "Audio" && (
-                  <span>
+                  <div className="col-span-3 row-span-4 p-1 m-1 block justify-center">
                     <a href={`/post/${post._id}`}>
                       <img
                         src={post.postSecondaryMedia}
-                        className="object-cover h-56 w-max rounded-lg"
+                        className="rounded-t-xl object-contain w-max max-h-96"
                         alt="post"
                       />
                     </a>
+                    
                     <audio controls className="h-8 w-full">
                       {" "}
                       <source src={post.postPrimaryMedia} type="audio/mpeg" />
                     </audio>
-                  </span>
+                  </div>
                 )}
                 <ul
                   style={{ overflow: "hidden" }}
