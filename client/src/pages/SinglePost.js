@@ -1,13 +1,11 @@
-import React, { useState } from "react";
-import { useParams } from "react-router-dom";
-import { useQuery, useMutation } from "@apollo/react-hooks";
+import React from "react";
+import { useParams, Link } from "react-router-dom";
+import { useQuery } from "@apollo/react-hooks";
 import { QUERY_POST } from "../utils/queries";
 import ReactionPanel from "../components/PostInteraction";
 import CommentForm from "../components/CommentForm";
 import CommentList from "../components/CommentList";
-
-
-
+import Auth from "../utils/auth";
 
 const SinglePost = () => {
   const { id: postId } = useParams();
@@ -17,7 +15,6 @@ const SinglePost = () => {
   });
 
   const post = data?.post || {};
-  console.log(post);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -31,19 +28,16 @@ const SinglePost = () => {
             <div className="col-span-3 row-span-4 p-1 m-1 justify-center">
               {post.postMediaType === "Video" && (
                 <div className="flex justify-center bg-gray-900 rounded-lg">
-                  {/* <a href="#">
-                    <iframe
-                      src={post.postPrimaryMedia}
-                      className="rounded h-96"
-                      style={{ width: "32rem" }}
-                      alt="post"
-                    />
-                  </a> */}
-
-                  <video max-width="100%" max-height="100%" border-style="hidden" controls className="rounded h-96">
+                  <video
+                    max-width="100%"
+                    max-height="100%"
+                    border-style="hidden"
+                    controls
+                    className="rounded h-96"
+                  >
                     <source src={post.postPrimaryMedia} type="video/mp4" />
                     <source src={post.postPrimaryMedia} type="video/ogg" />
-                  Your browser does not support the video tag.
+                    Your browser does not support the video tag.
                   </video>
                 </div>
               )}
@@ -58,14 +52,29 @@ const SinglePost = () => {
                   </a>
                 </div>
               )}
+              {post.postMediaType === "Audio" && (
+                <span>
+                  <img
+                    src={post.postSecondaryMedia}
+                    className="object-cover h-56 w-max rounded-lg"
+                    alt="post"
+                  />
+                  <audio controls className="h-8 w-full">
+                    {" "}
+                    <Link to={`/post/${post._id}`}></Link>
+                    <source src={post.postPrimaryMedia} type="audio/mpeg" />
+                  </audio>
+                </span>
+              )}
             </div>
-
-            <ul
-              style={{ overflow: "hidden" }}
-              className="flex flex-row pl-2 text-gray-600 overflow-x-scroll hide-scroll-bar"
-            >
-              <ReactionPanel post={post} />
-            </ul>
+            {Auth.loggedIn() && (
+              <ul
+                style={{ overflow: "hidden" }}
+                className="flex flex-row pl-2 text-gray-600 overflow-x-scroll hide-scroll-bar"
+              >
+                <ReactionPanel post={post} />
+              </ul>
+            )}
 
             <div className="col-span-3 row-span-1">
               <div className="flex align-bottom flex-col leading-none p-2 md:p-4">
@@ -100,14 +109,26 @@ const SinglePost = () => {
           </div>
         </div>
       </div>
-
-      <section
-        className="rounded-b-lg ml-3 max-w-lg pl-12 pt-12"
-        id="comment-section"
-      >
-        <CommentForm postId={postId} />
-        <CommentList comments={post.comments} />
-      </section>
+      {Auth.loggedIn() ? (
+        <section
+          className="rounded-b-lg ml-3 max-w-lg pl-12 pt-12"
+          id="comment-section"
+        >
+          <CommentForm postId={postId} />
+          <CommentList comments={post.comments} />
+        </section>
+      ) : (
+        <div className="ml-3 max-w-lg pl-12">
+          <Link to="/">
+            <button
+              type="cancel"
+              className="border rounded-xl py-1 px-8 bg-blue-700 text-white mt-4 mb-2 ml-2"
+            >
+              Back
+            </button>
+          </Link>
+        </div>
+      )}
     </div>
   );
 };

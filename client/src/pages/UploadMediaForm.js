@@ -1,15 +1,11 @@
 import React, { useState } from "react";
-import { useMutation } from "@apollo/react-hooks";
-import { ADD_POST } from "../utils/mutations";
-import { QUERY_POSTS, QUERY_ME } from "../utils/queries";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import AddImagePost from "../components/AddImagePost";
 import AddVideoPost from "../components/AddVideoPost";
+import AddAudioPost from "../components/AddAudioPost";
 
 const UploadMediaForm = () => {
-    console.log(process.env.CLOUD_NAME)
-  //   const history = useHistory();
-
+    
   const [postMediaType, setPostMediaType] = useState("Choose Media Type...");
 
 
@@ -22,7 +18,6 @@ const UploadMediaForm = () => {
     });
   };
 
-  console.log(postMediaType);
   return (
     <div className="fixed z-10 inset-0 overflow-y-auto">
       <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
@@ -85,7 +80,7 @@ const UploadMediaForm = () => {
                       />
                     )}
                     {postMediaType.postMediaType === "Audio" && (
-                      <AddImagePost
+                      <AddAudioPost
                         postMediaType={postMediaType.postMediaType}
                       />
                     )}

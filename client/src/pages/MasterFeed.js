@@ -1,14 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { QUERY_POSTS } from "../utils/queries";
 import { Link } from "react-router-dom";
 
 const MasterFeed = () => {
   const { loading, data } = useQuery(QUERY_POSTS);
-  console.log(data);
 
   const posts = data?.posts || [];
-  console.log("these are posts ", posts);
 
   if (loading) {
     return <div>loading...</div>;
@@ -37,19 +35,30 @@ const MasterFeed = () => {
                     />
                   )}
                   {post.postMediaType === "Video" && (
-                    // <iframe
-                    //   src={post.postPrimaryMedia}
-                    //   className="w-full h-full rounded absolute"
-                    //   alt="post"
-                    //   muted
-                    // />
-                    <video max-width="100%" max-height="100%" controls autoplay muted className="object-cover rounded-lg">
+                    <video
+                      max-width="100%"
+                      max-height="100%"
+                      controls
+                      muted
+                      className="object-cover rounded-lg"
+                    >
                       <Link to={`/post/${post._id}`}></Link>
-                    <source src={post.postPrimaryMedia} type="video/mp4"/>
-                </video>
-
-
-                    
+                      <source src={post.postPrimaryMedia} type="video/mp4" />
+                    </video>
+                  )}
+                  {post.postMediaType === "Audio" && (
+                    <span>
+                      <img
+                        src={post.postSecondaryMedia}
+                        className="object-cover h-56 w-max rounded-lg"
+                        alt="post"
+                      />
+                      <audio controls className="h-8 w-full">
+                        {" "}
+                        <Link to={`/post/${post._id}`}></Link>
+                        <source src={post.postPrimaryMedia} type="audio/mpeg" />
+                      </audio>
+                    </span>
                   )}
                 </span>
               </Link>

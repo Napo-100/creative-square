@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useMutation } from '@apollo/react-hooks';
-import { Link } from "react-router-dom";
+
 import { LOGIN } from "../utils/mutations"
 import Auth from "../utils/auth";
 
@@ -44,7 +44,6 @@ function Login(props) {
                 placeholder="youremail@test.com"
                 name="email"
                 type="email"
-                id="email"
                 onChange={handleChange}
               />
             </div>
@@ -57,7 +56,6 @@ function Login(props) {
                 placeholder="******"
                 name="password"
                 type="password"
-                id="pwd"
                 onChange={handleChange}
               />
             </div>

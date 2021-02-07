@@ -33,17 +33,17 @@ export const UPDATE_USER = gql`
     $bio: String
     $creator: Boolean
     $creatorType: String
+  ) {
+    updateUser(
+      _id: $_id
+      username: $username
+      firstName: $firstName
+      lastName: $lastName
+      profilePic: $profilePic
+      bio: $bio
+      creator: $creator
+      creatorType: $creatorType
     ) {
-      updateUser(
-        _id: $_id
-        username: $username
-        firstName: $firstName
-        lastName: $lastName
-        profilePic: $profilePic
-        bio: $bio
-        creator: $creator
-        creatorType: $creatorType
-      ) {
       _id
       username
       firstName
@@ -52,7 +52,7 @@ export const UPDATE_USER = gql`
       bio
       creator
       creatorType
-      }
+    }
   }
 `;
 
@@ -80,75 +80,74 @@ export const ADD_POST = gql`
       postPrimaryMedia
       postSecondaryMedia
       postPaywall
-     
     }
   }
 `;
 
 //likePost(postId: ID!): UserAndPost
-export const LIKE_POST = gql `
-mutation likePost($postId: ID!) {
-  likePost(postId: $postId) {
-    updatedPost {
-      _id
-      username
-      postMediaType
-      postDescription
-      postLink
-      postPrimaryMedia
-      postSecondaryMedia
-      postPaywall
-      createdAt
-      likes {
+export const LIKE_POST = gql`
+  mutation likePost($postId: ID!) {
+    likePost(postId: $postId) {
+      updatedPost {
+        _id
         username
-      }
-      likeCount
-    }
-    updatedUser {
-      username
-      likedPosts {
+        postMediaType
         postDescription
+        postLink
+        postPrimaryMedia
+        postSecondaryMedia
+        postPaywall
+        createdAt
+        likes {
+          username
+        }
+        likeCount
       }
-      likedPostCount
+      updatedUser {
+        username
+        likedPosts {
+          postDescription
+        }
+        likedPostCount
+      }
     }
   }
-}
 `;
 
 //likePost(postId: ID!): UserAndPost
-export const PIN_POST = gql `
-mutation pinPost($postId: ID!) {
-  pinPost(postId: $postId) {
-    updatedPost {
-      _id
-      username
-      postMediaType
-      postDescription
-      postLink
-      postPrimaryMedia
-      postSecondaryMedia
-      postPaywall
-      createdAt
-      pins {
+export const PIN_POST = gql`
+  mutation pinPost($postId: ID!) {
+    pinPost(postId: $postId) {
+      updatedPost {
+        _id
         username
-      }
-      pinCount
-    }
-    updatedUser {
-      username
-      pinnedPosts {
+        postMediaType
         postDescription
+        postLink
+        postPrimaryMedia
+        postSecondaryMedia
+        postPaywall
+        createdAt
+        pins {
+          username
+        }
+        pinCount
       }
-      pinnedPostCount
+      updatedUser {
+        username
+        pinnedPosts {
+          postDescription
+        }
+        pinnedPostCount
+      }
     }
   }
-}
 `;
 
 export const ADD_COMMENT = gql`
   mutation addComment($postId: ID!, $commentText: String!) {
     addComment(postId: $postId, commentText: $commentText) {
-      comments{
+      comments {
         _id
         commentText
         username
