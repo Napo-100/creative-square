@@ -15,7 +15,6 @@ const SinglePost = () => {
   });
 
   const post = data?.post || {};
- 
 
   if (loading) {
     return <div>Loading...</div>;
@@ -29,15 +28,6 @@ const SinglePost = () => {
             <div className="col-span-3 row-span-4 p-1 m-1 justify-center">
               {post.postMediaType === "Video" && (
                 <div className="flex justify-center bg-gray-900 rounded-lg">
-                  {/* <a href="#">
-                    <iframe
-                      src={post.postPrimaryMedia}
-                      className="rounded h-96"
-                      style={{ width: "32rem" }}
-                      alt="post"
-                    />
-                  </a> */}
-
                   <video
                     max-width="100%"
                     max-height="100%"
@@ -61,6 +51,20 @@ const SinglePost = () => {
                     />
                   </a>
                 </div>
+              )}
+              {post.postMediaType === "Audio" && (
+                <span>
+                  <img
+                    src={post.postSecondaryMedia}
+                    className="object-cover h-56 w-max rounded-lg"
+                    alt="post"
+                  />
+                  <audio controls className="h-8 w-full">
+                    {" "}
+                    <Link to={`/post/${post._id}`}></Link>
+                    <source src={post.postPrimaryMedia} type="audio/mpeg" />
+                  </audio>
+                </span>
               )}
             </div>
             {Auth.loggedIn() && (

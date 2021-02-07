@@ -5,10 +5,8 @@ import { Link } from "react-router-dom";
 
 const HomeFeed = () => {
   const { loading, data } = useQuery(QUERY_ME);
- 
 
   const posts = data?.me.posts || [];
-
 
   return (
     <div className="container pt-3">
@@ -32,11 +30,31 @@ const HomeFeed = () => {
                     />
                   )}
                   {post.postMediaType === "Video" && (
-                    <video max-width="100%" max-height="100%" controls autoplay muted className="object-cover rounded-lg">
-                    <Link to={`/post/${post._id}`}></Link>
-                    <source src={post.postPrimaryMedia} type="video/mp4"/>
-                   </video>
-
+                    <video
+                      max-width="100%"
+                      max-height="100%"
+                      controls
+                      autoplay
+                      muted
+                      className="object-cover rounded-lg"
+                    >
+                      <Link to={`/post/${post._id}`}></Link>
+                      <source src={post.postPrimaryMedia} type="video/mp4" />
+                    </video>
+                  )}
+                  {post.postMediaType === "Audio" && (
+                    <span>
+                      <img
+                        src={post.postSecondaryMedia}
+                        className="object-cover h-56 w-max rounded-lg"
+                        alt="post"
+                      />
+                      <audio controls className="h-8 w-full">
+                        {" "}
+                        <Link to={`/post/${post._id}`}></Link>
+                        <source src={post.postPrimaryMedia} type="audio/mpeg" />
+                      </audio>
+                    </span>
                   )}
                 </span>
               </Link>

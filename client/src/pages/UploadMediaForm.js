@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import AddImagePost from "../components/AddImagePost";
 import AddVideoPost from "../components/AddVideoPost";
+import AddAudioPost from "../components/AddAudioPost";
 
 const UploadMediaForm = () => {
     
@@ -79,7 +80,7 @@ const UploadMediaForm = () => {
                       />
                     )}
                     {postMediaType.postMediaType === "Audio" && (
-                      <AddImagePost
+                      <AddAudioPost
                         postMediaType={postMediaType.postMediaType}
                       />
                     )}
