@@ -52,11 +52,7 @@ const ReactionPanel = ({post}) => {
     
     return (
         <div className="flex flex-row mx-auto">
-            
-            <p  style={{fontSize:"15px"}} className="mx-3 my-1 flex flex-row absolute top-0 right-0 ..." >
-                {post.likeCount} <FcLike style={{fontSize:"8px", margin: "2px"}}/>
-            </p>
-         
+                     
            <RiMoneyDollarCircleLine 
            style={{fontSize:"25px"}} 
            className="mx-3 my-1 hover:opacity-30 transform hover:scale-125 motion-reduce:transform-none opacity-50 firstlevel"

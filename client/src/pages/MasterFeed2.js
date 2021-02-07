@@ -12,10 +12,10 @@ const MasterFeed2 = () => {
   console.log("these are posts ", posts);
 
   return (
-    <div className="mt-6">
+    <div className="mt-4 lg:mt-6">
       {posts.map((post) => (
-        <div key={post._id} className="pl-12 flex flex-col">
-          <div className="px-12 pt-4">
+        <div key={post._id} className="lg:pl-12 flex flex-col">
+          <div className="px-4 lg:px-12 pt-4">
             <div className="max-w-lg border-4">
               <div className="grid grid-cols-1 grid-rows-7 grid-flow-row overflow-hidden rounded-lg shadow-md bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out">
                 {post.postMediaType === "Image" && (
