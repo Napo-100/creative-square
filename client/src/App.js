@@ -62,6 +62,7 @@ function App() {
                 <Route exact path="/following" component={FollowFeed} />
 
                 <Route exact path="/postform" component={UploadMediaForm} />
+                <Route exact path="/signup" component={Signup} />
 
                 <Route exact path="/finishprofile" component={FinishProfile} />
                 <Route exact path="/post/:id" component={SinglePost} />

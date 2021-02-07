@@ -72,14 +72,20 @@ function SideBar() {
                 )}
               </ul>
             ) : (
-              <ul className="">
+              <div>
                 <li className="">
                   <Login />
                 </li>
-                <li className="">
-                  <Signup />
-                </li>
-              </ul>
+
+                <div className="text-center p-3 text-xl font-sans rounded-xl rounded-b-none">
+                  Not already signed up?
+                  <Link to="/signup">
+                    <div className="text-2xl text-blue-800 hover:text-blue-400 p-2">
+                      click here to get started!
+                    </div>
+                  </Link>
+                </div>
+              </div>
             )}
           </div>
         </aside>
