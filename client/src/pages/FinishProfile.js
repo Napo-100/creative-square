@@ -20,7 +20,6 @@ const EditUser = () => {
   // The image will then be ready to append prior to upload to cloudinary cloud service
   const [imageUrl, setImageUrl] = useState("");
 
-  // NOTE: Changed to mine for now to test but make sure that it is fixed by the end of it
   const profilePicUpload = () => {
     const data = new FormData();
     data.append("file", image);
