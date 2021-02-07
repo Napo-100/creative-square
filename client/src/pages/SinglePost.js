@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { useParams, Link } from "react-router-dom";
-import { useQuery, useMutation } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/react-hooks";
 import { QUERY_POST } from "../utils/queries";
 import ReactionPanel from "../components/PostInteraction";
 import CommentForm from "../components/CommentForm";
@@ -15,7 +15,7 @@ const SinglePost = () => {
   });
 
   const post = data?.post || {};
-  console.log(post);
+ 
 
   if (loading) {
     return <div>Loading...</div>;

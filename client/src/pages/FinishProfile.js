@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useMutation, useQuery } from "@apollo/react-hooks";
+import { useMutation } from "@apollo/react-hooks";
 import { UPDATE_USER } from "../utils/mutations";
 import { QUERY_ME_PROFILE } from "../utils/queries";
 import Auth from "../utils/auth";
@@ -31,18 +31,15 @@ const EditUser = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setImageUrl(data.secure_url);
       })
       .catch((err) => {
         console.log(err);
       });
-    console.log("hi", imageUrl);
   };
 
   const [updateUser, { error }] = useMutation(UPDATE_USER, {
     update(cache, { data: { updateUser } }) {
-      console.log(updateUser);
       // Currently will get the data correctly but will not update current user
       try {
         cache.readQuery({ query: QUERY_ME_PROFILE });

@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import Auth from "../../utils/auth";
 import Login from "../../pages/Login";
-import Signup from "../../pages/Signup";
 import Profile from "../../pages/Profile";
 import Logo from "../../assets/logo.png";
 import { useQuery } from "@apollo/react-hooks";
@@ -10,7 +9,7 @@ import { QUERY_ME_PROFILE } from "../../utils/queries";
 
 function SideBar() {
   const { loading, data: userData } = useQuery(QUERY_ME_PROFILE);
-  console.log(userData);
+  
 
   if (loading) {
     return <div>loading...</div>;

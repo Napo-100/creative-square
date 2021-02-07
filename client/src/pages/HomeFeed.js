@@ -5,10 +5,10 @@ import { Link } from "react-router-dom";
 
 const HomeFeed = () => {
   const { loading, data } = useQuery(QUERY_ME);
-  console.log(data);
+ 
 
   const posts = data?.me.posts || [];
-  console.log("these are posts ", posts);
+
 
   return (
     <div className="container pt-3">

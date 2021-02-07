@@ -1,15 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { QUERY_POSTS } from "../utils/queries";
-import { Link } from "react-router-dom";
 import ReactionPanel from "../components/PostInteraction";
 
 const MasterFeed2 = () => {
   const { loading, data } = useQuery(QUERY_POSTS);
-  console.log(data);
+  
 
   const posts = data?.posts || [];
-  console.log("these are posts ", posts);
+  
 
   return (
     <div className="mt-4 lg:mt-6">

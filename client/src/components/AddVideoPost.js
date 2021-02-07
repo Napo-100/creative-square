@@ -35,14 +35,12 @@ const AddVideoPost = (postMediaType) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         loadingBar.style.visibility="hidden"
         setVideoUrl(data.secure_url);
       })
       .catch((err) => {
         console.log(err);
       });
-    console.log("hi", videoUrl);
   };
 
   const [addPost, { error }] = useMutation(ADD_POST, {
@@ -66,7 +64,6 @@ const AddVideoPost = (postMediaType) => {
   });
 
   const handleChange = (event) => {
-    console.log("oh yeas", videoUrl);
     const { name, value } = event.target;
     setVideoFormState({
       ...videoFormState,

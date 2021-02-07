@@ -1,13 +1,12 @@
 import React, {useState} from "react";
-import { Link } from "react-router-dom";
 import { FcLike } from "react-icons/fc";
 import { AiFillPushpin } from "react-icons/ai";
 import { CgComment } from "react-icons/cg";
 import { RiChatFollowUpFill } from "react-icons/ri";
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
 
-import Auth from "../../utils/auth";
-import { useMutation, useQuery } from "@apollo/react-hooks";
+
+import { useMutation } from "@apollo/react-hooks";
 import { LIKE_POST, PIN_POST } from "../../utils/mutations"
 
 import Modal from 'react-modal'
