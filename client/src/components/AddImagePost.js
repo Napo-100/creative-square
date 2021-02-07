@@ -3,7 +3,7 @@ import { useMutation } from "@apollo/react-hooks";
 import { ADD_POST } from "../utils/mutations";
 import { QUERY_POSTS, QUERY_ME } from "../utils/queries";
 import { Link, useHistory } from "react-router-dom";
-import ReactLoading from 'react-loading';
+import ReactLoading from "react-loading";
 
 const AddImagePost = (postMediaType) => {
   const history = useHistory();
@@ -20,28 +20,25 @@ const AddImagePost = (postMediaType) => {
 
   const [image, setImage] = useState("");
 
-  // NOTE: Changed to mine for now to test but make sure that it is fixed by the end of it
+  
   const postImageDetails = () => {
-    const loadingBar = document.getElementById("loadingBar")
-    loadingBar.style.visibility="visible"
+    const loadingBar = document.getElementById("loadingBar");
+    loadingBar.style.visibility = "visible";
     const data = new FormData();
     data.append("file", image);
     data.append("upload_preset", "post-image");
-    data.append("cloud_name", process.env.CLOUD_NAME);
     fetch("https://api.cloudinary.com/v1_1/creative-square/image/upload", {
       method: "post",
       body: data,
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-        loadingBar.style.visibility="hidden"
+        loadingBar.style.visibility = "hidden";
         setImageUrl(data.secure_url);
       })
       .catch((err) => {
         console.log(err);
       });
-    console.log("hi", imageUrl);
   };
 
   const [addPost, { error }] = useMutation(ADD_POST, {
@@ -55,17 +52,19 @@ const AddImagePost = (postMediaType) => {
       } catch (err) {
         console.error(err);
       }
-
-      const { me } = cache.readQuery({ query: QUERY_ME });
-      cache.writeQuery({
-        query: QUERY_ME,
-        data: { me: { ...me, posts: [addPost, ...me.posts] } },
-      });
+      try {
+        const { me } = cache.readQuery({ query: QUERY_ME });
+        cache.writeQuery({
+          query: QUERY_ME,
+          data: { me: { ...me, posts: [addPost, ...me.posts] } },
+        });
+      } catch (err) {
+        console.log(err);
+      }
     },
   });
 
   const handleChange = (event) => {
-    console.log("oh yeas", imageUrl);
     const { name, value } = event.target;
     setimageFormState({
       ...imageFormState,
@@ -84,7 +83,7 @@ const AddImagePost = (postMediaType) => {
           postPrimaryMedia: imageUrl,
         },
       });
-     
+
       return history.push("/homefeed");
     } catch (err) {
       console.error(err);
@@ -124,7 +123,11 @@ const AddImagePost = (postMediaType) => {
                 width="200px"
                 src={imageUrl}
               />
-            ):(<div id="loadingBar" style={{visibility:"hidden"}}><ReactLoading type={"bars"} color={"grey"}/></div>)}
+            ) : (
+              <div id="loadingBar" style={{ visibility: "hidden" }}>
+                <ReactLoading type={"bars"} color={"grey"} />
+              </div>
+            )}
           </div>
           <form onSubmit={handleFormSubmit}>
             <div className="w-full">

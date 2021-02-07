@@ -3,14 +3,13 @@ import { useMutation } from "@apollo/react-hooks";
 import { ADD_POST } from "../utils/mutations";
 import { QUERY_POSTS, QUERY_ME } from "../utils/queries";
 import { Link, useHistory } from "react-router-dom";
-import ReactLoading from 'react-loading';
+import ReactLoading from "react-loading";
 
-
-const AddVideoPost = (postMediaType) => {
+const AddAudioPost = (postMediaType) => {
   const history = useHistory();
   let mediaType = postMediaType.postMediaType;
-  const [videoUrl, setVideoUrl] = useState("");
-  const [videoFormState, setVideoFormState] = useState({
+  const [audioUrl, setAudioUrl] = useState("");
+  const [audioFormState, setAudioFormState] = useState({
     postMediaType: mediaType,
     postDescription: "",
     postLink: "",
@@ -19,15 +18,15 @@ const AddVideoPost = (postMediaType) => {
     postPaywall: true,
   });
 
-  const [video, setVideo] = useState("");
+  const [audio, setAudio] = useState("");
 
   // NOTE: Changed to mine for now to test but make sure that it is fixed by the end of it
-  const postVideoDetails = () => {
-    const loadingBar = document.getElementById("loadingBar")
-    loadingBar.style.visibility="visible"
+  const postAudioDetails = () => {
+    const loadingBar = document.getElementById("loadingBar");
+    loadingBar.style.visibility = "visible";
     const data = new FormData();
-    data.append("file", video);
-    data.append("upload_preset", "post-video");
+    data.append("file", audio);
+    data.append("upload_preset", "post-audio");
     data.append("cloud_name", process.env.CLOUD_NAME);
     fetch("https://api.cloudinary.com/v1_1/creative-square/video/upload", {
       method: "post",
@@ -35,8 +34,31 @@ const AddVideoPost = (postMediaType) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        loadingBar.style.visibility="hidden"
-        setVideoUrl(data.secure_url);
+        loadingBar.style.visibility = "hidden";
+        setAudioUrl(data.secure_url);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const [image, setImage] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
+
+  const postImageDetails = () => {
+    const loadingBar = document.getElementById("loadingBar");
+    loadingBar.style.visibility = "visible";
+    const data = new FormData();
+    data.append("file", image);
+    data.append("upload_preset", "post-image");
+    fetch("https://api.cloudinary.com/v1_1/creative-square/image/upload", {
+      method: "post",
+      body: data,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        loadingBar.style.visibility = "hidden";
+        setImageUrl(data.secure_url);
       })
       .catch((err) => {
         console.log(err);
@@ -65,8 +87,8 @@ const AddVideoPost = (postMediaType) => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setVideoFormState({
-      ...videoFormState,
+    setAudioFormState({
+      ...audioFormState,
       [name]: value,
     });
   };
@@ -78,11 +100,12 @@ const AddVideoPost = (postMediaType) => {
       // add post to database
       await addPost({
         variables: {
-          ...videoFormState,
-          postPrimaryMedia: videoUrl,
+          ...audioFormState,
+          postPrimaryMedia: audioUrl,
+          postSecondaryMedia: imageUrl,
         },
       });
-      
+
       return history.push("/homefeed");
     } catch (err) {
       console.error(err);
@@ -96,7 +119,7 @@ const AddVideoPost = (postMediaType) => {
           <h2 className="text-2xl text-center">Create a Post!</h2>
           <div className="w-full">
             <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
-              <span className="text-red-400 mr-1">*</span> Upload Video
+              <span className="text-red-400 mr-1">*</span> Upload Audio File
             </div>
             <div className="my-2 p-1 flex rounded">
               {" "}
@@ -104,28 +127,59 @@ const AddVideoPost = (postMediaType) => {
                 className="p-1 appearance-none outline-none w-full text-gray-800"
                 name="postPrimaryMedia"
                 type="file"
-                onChange={(e) => setVideo(e.target.files[0])}
+                onChange={(e) => setAudio(e.target.files[0])}
               />{" "}
               <button
                 className="btn bg-green-900 rounded text-gray-200 px-3"
                 type="submit"
-                onClick={() => postVideoDetails()}
+                onClick={() => postAudioDetails()}
               >
                 Upload
               </button>
             </div>
-            {videoUrl !== "" ? (
-              <iframe
-                className=""
-                alt="profile-pic-preview"
-                height="200px"
-                width="200px"
-                src={videoUrl}
-                autoplay
-                muted
-              />
-            ):(<div id="loadingBar" style={{visibility:"hidden"}}><ReactLoading type={"bars"} color={"grey"} /></div>)}
+            {audioUrl !== "" ? (
+              <audio controls>
+                <source alt="audio-preview" src={audioUrl} type="audio/mpeg" />
+              </audio>
+            ) : (
+              <div id="loadingBar" style={{ visibility: "hidden" }}>
+                <ReactLoading type={"bars"} color={"grey"} />
+              </div>
+            )}
           </div>
+          <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+            <span className="text-red-400 mr-1">*</span> Upload Image
+          </div>
+          <div className="my-2 p-1 flex rounded">
+            {" "}
+            <input
+              className="p-1 appearance-none outline-none w-full text-gray-800"
+              name="postPrimaryMedia"
+              type="file"
+              onChange={(e) => setImage(e.target.files[0])}
+            />{" "}
+            <button
+              className="btn bg-green-900 rounded text-gray-200 px-3"
+              type="submit"
+              onClick={() => postImageDetails()}
+            >
+              Upload
+            </button>
+          </div>
+          {imageUrl !== "" ? (
+            <img
+              className="preview-img"
+              alt="profile-pic-preview"
+              height="200px"
+              width="200px"
+              src={imageUrl}
+            />
+          ) : (
+            <div id="loadingBar" style={{ visibility: "hidden" }}>
+              <ReactLoading type={"bars"} color={"grey"} />
+            </div>
+          )}
+
           <form onSubmit={handleFormSubmit}>
             <div className="w-full">
               <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
@@ -137,7 +191,7 @@ const AddVideoPost = (postMediaType) => {
                   className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
                   name="postDescription"
                   type="text"
-                  value={videoFormState.postDescription}
+                  value={audioFormState.postDescription}
                   onChange={handleChange}
                 />{" "}
               </div>
@@ -152,7 +206,7 @@ const AddVideoPost = (postMediaType) => {
                   className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
                   name="postLink"
                   type="text"
-                  value={videoFormState.postLink}
+                  value={audioFormState.postLink}
                   onChange={handleChange}
                 />{" "}
               </div>
@@ -166,7 +220,7 @@ const AddVideoPost = (postMediaType) => {
                 <input
                   name="postPaywall"
                   type="text"
-                  value={videoFormState.postPaywall}
+                  value={audioFormState.postPaywall}
                   onChange={handleChange}
                 />{" "}
               </div>
@@ -194,4 +248,4 @@ const AddVideoPost = (postMediaType) => {
   );
 };
 
-export default AddVideoPost;
+export default AddAudioPost;
