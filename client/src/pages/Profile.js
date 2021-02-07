@@ -5,7 +5,7 @@ import React, { useEffect } from "react";
 
 function Profile({ userData }) {
   // const { loading, data: userData } = useQuery(QUERY_ME_PROFILE);
-  console.log(userData);
+  // console.log(userData);
 
   return (
     <div>

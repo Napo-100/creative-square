@@ -6,10 +6,8 @@ import ReactionPanel from "../components/PostInteraction";
 
 const MasterFeed2 = () => {
   const { loading, data } = useQuery(QUERY_POSTS);
-  console.log(data);
 
   const posts = data?.posts || [];
-  console.log("these are posts ", posts);
 
   return (
     <div className="mt-6">

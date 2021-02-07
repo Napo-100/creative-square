@@ -10,7 +10,6 @@ import { QUERY_ME_PROFILE } from "../../utils/queries";
 
 function SideBar() {
   const { loading, data: userData } = useQuery(QUERY_ME_PROFILE);
-  console.log(userData);
 
   if (loading) {
     return <div>loading...</div>;

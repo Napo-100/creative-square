@@ -41,17 +41,18 @@ const AddImagePost = (postMediaType) => {
       .catch((err) => {
         console.log(err);
       });
-    console.log("hi", imageUrl);
   };
 
   const [addPost, { error }] = useMutation(ADD_POST, {
     update(cache, { data: { addPost } }) {
       try {
         const { posts } = cache.readQuery({ query: QUERY_POSTS });
+        console.log( {posts} )
         cache.writeQuery({
           query: QUERY_POSTS,
           data: { posts: [addPost, ...posts] },
         });
+        
       } catch (err) {
         console.error(err);
       }
@@ -61,11 +62,12 @@ const AddImagePost = (postMediaType) => {
         query: QUERY_ME,
         data: { me: { ...me, posts: [addPost, ...me.posts] } },
       });
+      console.log( { me } )
+      
     },
   });
 
   const handleChange = (event) => {
-    console.log("oh yeas", imageUrl);
     const { name, value } = event.target;
     setimageFormState({
       ...imageFormState,
